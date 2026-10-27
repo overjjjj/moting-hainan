@@ -1,0 +1,948 @@
+<div id="rental-workflow" aria-label="租赁业务联动原型">
+  <div class="wf-preview-bar">
+    <div class="wf-preview-title">业务流程联动预览<span>示例数据 · 扫码模拟</span></div>
+    <div class="wf-mode-controls" aria-label="切换演示视角">
+      <button type="button" data-mode="mini" aria-pressed="true" class="cursor-interaction">手机小程序</button>
+      <button type="button" data-mode="admin" aria-pressed="false" class="cursor-interaction">管理后台</button>
+    </div>
+    <label id="wf-user-label">演示账号<select id="wf-demo-user" aria-label="选择演示用户"></select></label>
+  </div>
+  <div id="wf-progress" aria-label="当前设备流程进度"></div>
+  <section id="wf-mini-section"><div id="inv-mini-stage" class="viz-dotted-background">
+  <div class="im-caption"><span>手机小程序</span><span>交互预览 · 示例数据</span></div>
+  <article id="inv-mini" aria-label="变频器租赁小程序">
+    <div class="im-status"><span>14:32</span><span class="im-status-right"><i data-lucide="signal" aria-hidden="true"></i><span>5G</span><i data-lucide="battery-full" aria-hidden="true"></i></span></div>
+    <header class="im-navbar"><button type="button" id="im-back" aria-label="返回设备列表" hidden><i data-lucide="chevron-left" aria-hidden="true"></i></button><span id="im-navtitle">云控租赁</span><div class="im-capsule" aria-hidden="true"><i data-lucide="ellipsis"></i><span></span><i data-lucide="circle-dot"></i></div></header>
+    <main id="im-content"></main>
+    <nav id="im-bottom" aria-label="小程序导航"><button type="button" data-nav="devices"><i data-lucide="panels-top-left" aria-hidden="true"></i><span>设备</span></button><button type="button" data-nav="messages"><i data-lucide="bell" aria-hidden="true"></i><span>消息</span><b class="im-nav-dot"></b></button><button type="button" data-nav="profile"><i data-lucide="user-round" aria-hidden="true"></i><span>我的</span></button></nav>
+    <div id="im-sheet-layer" hidden></div>
+    <div id="im-toast" role="status" aria-live="polite" hidden></div>
+    <div class="im-home-indicator" aria-hidden="true"></div>
+  </article>
+</div>
+</section>
+  <section id="wf-admin-section" hidden><div id="inv-admin" aria-label="变频器租赁管理后台">
+  <aside class="ia-sidebar">
+    <div class="ia-brand"><span class="ia-brand-mark"><i data-lucide="radio-tower" aria-hidden="true"></i></span><div>云控管理台<small>变频器租赁管理</small></div></div>
+    <div class="ia-side-label">业务管理</div>
+    <nav aria-label="后台导航"><button type="button" data-page="devices"><i data-lucide="boxes" aria-hidden="true"></i><span>设备管理</span></button><button type="button" data-page="leases"><i data-lucide="file-text" aria-hidden="true"></i><span>租赁合同</span></button><button type="button" data-page="reports"><i data-lucide="table-2" aria-hidden="true"></i><span>统计报表</span></button><button type="button" data-page="income"><i data-lucide="wallet" aria-hidden="true"></i><span>收款明细</span></button><button type="button" data-page="backup"><i data-lucide="hard-drive" aria-hidden="true"></i><span>用户数据与备份</span></button><button type="button" data-page="permissions"><i data-lucide="users-round" aria-hidden="true"></i><span>用户授权</span></button><button type="button" data-page="reminders"><i data-lucide="calendar-clock" aria-hidden="true"></i><span>到期与提醒</span></button><button type="button" data-page="logs"><i data-lucide="history" aria-hidden="true"></i><span>操作记录</span></button></nav>
+    <div class="ia-side-bottom"><span class="ia-avatar">管</span><div>租赁管理员<small>管理工作空间</small></div></div>
+  </aside>
+  <div class="ia-workspace"><header class="ia-topbar"><span>业务管理 <span class="ia-divider">/</span> <strong id="ia-breadcrumb">设备管理</strong></span><span class="ia-preview">参考界面 · 示例数据</span></header><main id="ia-main"></main><footer class="ia-footer"><span>云控租赁 · 管理后台</span><span>2026 年 10 月 21 日</span></footer></div>
+  <div id="ia-modal-layer" hidden></div>
+  <div id="ia-toast" role="status" aria-live="polite" hidden></div>
+</div>
+</section>
+  <div id="wf-live" aria-live="polite" class="wf-sr-only"></div>
+</div>
+
+<style>
+
+#inv-mini-stage{padding:24px 12px 30px;background-color:transparent}
+#inv-mini-stage .im-caption{max-width:414px;margin:0 auto 12px;display:flex;justify-content:space-between;gap:10px;font:12px/1.5 'Microsoft YaHei',sans-serif;color:light-dark(#657284,#a5b4c4)}
+#inv-mini{--im-bg:light-dark(#f4f6f8,#141b24);--im-surface:light-dark(#ffffff,#1d2733);--im-ink:light-dark(#17283c,#edf3fa);--im-muted:light-dark(#68778a,#a6b5c8);--im-line:light-dark(#e5eaf0,#344152);--im-brand:light-dark(#165bc0,#79acff);--im-soft:light-dark(#eaf1fc,#253d5d);--im-green:light-dark(#16725e,#73d5b8);--im-green-bg:light-dark(#e7f5ef,#1d3c33);--im-amber:light-dark(#986018,#efbe78);--im-amber-bg:light-dark(#fff2dc,#42341f);--im-red:light-dark(#bb4553,#ff9da8);--im-red-bg:light-dark(#fff0f2,#452b34);--im-gap:12px;max-width:414px;width:100%;margin:auto;position:relative;background:var(--im-bg);color:var(--im-ink);border:1px solid var(--im-line);border-radius:30px;overflow:hidden;box-shadow:0 18px 55px light-dark(#1c35521a,#00000045);font:14px/1.5 'PingFang SC','Microsoft YaHei',sans-serif;letter-spacing:.1px}
+#inv-mini *{box-sizing:border-box}#inv-mini button,#inv-mini input,#inv-mini select{font:inherit}#inv-mini button{color:inherit;border:0;background:none;padding:0;text-align:inherit}#inv-mini button:disabled{opacity:.45;cursor:not-allowed}#inv-mini button:focus-visible,#inv-mini input:focus-visible{outline:3px solid var(--im-brand);outline-offset:3px}#inv-mini button:not(:disabled){cursor:var(--cursor-interaction,pointer)}#inv-mini [hidden]{display:none!important}#inv-mini svg{width:19px;height:19px;flex-shrink:0}#inv-mini .im-status{padding:13px 23px 7px;display:flex;justify-content:space-between;font-size:12px;font-weight:600;background:var(--im-surface)}#inv-mini .im-status-right{display:flex;align-items:center;gap:5px}#inv-mini .im-status svg{width:16px;height:16px}#inv-mini .im-navbar{display:flex;align-items:center;justify-content:center;height:44px;padding:0 17px;background:var(--im-surface);position:relative;font-weight:600}#inv-mini #im-back{position:absolute;left:8px;padding:10px;display:flex}#inv-mini .im-capsule{position:absolute;right:13px;display:flex;gap:11px;border:1px solid var(--im-line);border-radius:20px;padding:5px 10px;align-items:center}#inv-mini .im-capsule svg{width:17px;height:17px}#inv-mini .im-capsule span{height:15px;width:1px;background:var(--im-line)}#inv-mini #im-content{min-height:630px;padding:22px 18px 24px}#inv-mini h1,#inv-mini h2,#inv-mini h3,#inv-mini p{margin:0}#inv-mini h1{font-size:25px;line-height:1.35;font-weight:650;letter-spacing:-.6px}#inv-mini h2{font-size:17px;font-weight:600}#inv-mini h3{font-size:15px;font-weight:600}#inv-mini .im-muted{color:var(--im-muted)}#inv-mini .im-small{font-size:12px}#inv-mini .im-intro{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px}#inv-mini .im-intro p{margin-top:6px;color:var(--im-muted);font-size:12px}#inv-mini .im-scan{width:43px;height:43px;display:grid;place-items:center;background:var(--im-ink);color:var(--im-surface);border-radius:13px}#inv-mini .im-summary{display:grid;grid-template-columns:repeat(3,1fr);margin-bottom:20px;padding:0 2px}#inv-mini .im-summary div+div{border-left:1px solid var(--im-line);padding-left:23px}#inv-mini .im-summary strong{font-size:26px;font-weight:550;font-variant-numeric:tabular-nums;display:block;line-height:1.2;margin-bottom:5px}#inv-mini .im-summary span{font-size:12px;color:var(--im-muted)}#inv-mini .im-search{display:flex;align-items:center;gap:8px;border:1px solid var(--im-line);border-radius:10px;padding:10px 12px;background:var(--im-surface)}#inv-mini .im-search svg{color:var(--im-muted);width:16px;height:16px}#inv-mini .im-search input{width:100%;background:transparent;color:var(--im-ink);border:0;outline:0;font-size:13px;min-width:0}#inv-mini .im-filters{display:flex;gap:22px;margin:15px 0 13px;flex-wrap:wrap}#inv-mini .im-filters button{font-size:13px;color:var(--im-muted);padding:3px 0 7px;border-bottom:2px solid transparent}#inv-mini .im-filters button[aria-pressed=true]{border-color:var(--im-brand);color:var(--im-brand);font-weight:600}#inv-mini .im-devices{display:grid;gap:var(--im-gap)}#inv-mini .im-device{display:block;width:100%;padding:14px;background:var(--im-surface);border:1px solid var(--im-line);border-radius:14px}#inv-mini .im-device:hover{border-color:var(--im-brand)}#inv-mini .im-device-head{display:flex;align-items:center;gap:10px}#inv-mini .im-machine{width:36px;height:40px;background:var(--im-bg);border:1px solid var(--im-line);border-radius:8px;display:grid;place-items:center;color:var(--im-muted)}#inv-mini .im-device-name{flex:1;min-width:0}#inv-mini .im-device-name h3{font-size:14px}#inv-mini .im-device-name p{font-size:11px;color:var(--im-muted);margin-top:3px}#inv-mini .im-state{display:flex;align-items:center;gap:4px;font-size:11px;white-space:nowrap;color:var(--im-green)}#inv-mini .im-state:before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}#inv-mini .im-state.off{color:var(--im-muted)}#inv-mini .im-device-mid{display:flex;justify-content:space-between;align-items:center;margin:11px 0 9px;gap:8px}#inv-mini .im-reading{font-size:21px;line-height:1.1;font-variant-numeric:tabular-nums;font-weight:600}#inv-mini .im-reading small{font-size:11px;font-weight:400;color:var(--im-muted);margin-left:4px}#inv-mini .im-tags{display:flex;gap:5px;flex-wrap:wrap}#inv-mini .im-tag{display:inline-flex;align-items:center;padding:3px 6px;background:var(--im-bg);color:var(--im-muted);border-radius:5px;font-size:11px;line-height:1.4}#inv-mini .im-tag.blue{background:var(--im-soft);color:var(--im-brand)}#inv-mini .im-tag.green{background:var(--im-green-bg);color:var(--im-green)}#inv-mini .im-tag.red{background:var(--im-red-bg);color:var(--im-red)}#inv-mini .im-lease-line{border-top:1px solid var(--im-line);padding-top:8px;display:flex;justify-content:space-between;font-size:11px;color:var(--im-muted);gap:6px}#inv-mini .im-lease-line.warn{color:var(--im-amber)}#inv-mini .im-lease-line.expired{color:var(--im-red)}#inv-mini .im-lease-line svg{width:13px;height:13px}#inv-mini .im-lease-line span:last-child{display:flex;align-items:center;gap:2px;white-space:nowrap}#inv-mini .im-empty{text-align:center;padding:35px 0;color:var(--im-muted)}#inv-mini .im-bottom{display:flex}#inv-mini #im-bottom{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--im-line);background:var(--im-surface);padding:11px 14px 4px}#inv-mini #im-bottom button{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--im-muted);font-size:11px;position:relative;padding:2px 0}#inv-mini #im-bottom button.active{color:var(--im-brand)}#inv-mini #im-bottom button.active svg{fill:var(--im-soft)}#inv-mini .im-nav-dot{position:absolute;left:calc(50% + 8px);top:0;width:5px;height:5px;border-radius:50%;background:var(--im-red)}#inv-mini .im-home-indicator{width:105px;height:4px;border-radius:4px;background:var(--im-ink);margin:12px auto 8px;opacity:.75}#inv-mini .im-detail-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}#inv-mini .im-detail-head p{font-size:12px;color:var(--im-muted);margin-top:5px}#inv-mini .im-banner{padding:11px 12px;border-radius:10px;background:var(--im-amber-bg);color:var(--im-amber);display:flex;gap:8px;align-items:flex-start;font-size:12px;margin-bottom:14px}#inv-mini .im-banner.blue{background:var(--im-soft);color:var(--im-brand)}#inv-mini .im-banner.red{background:var(--im-red-bg);color:var(--im-red)}#inv-mini .im-banner svg{width:16px;height:16px;margin-top:1px}#inv-mini .im-banner p{margin-top:2px;font-size:11px}#inv-mini .im-frequency{background:var(--im-surface);border:1px solid var(--im-line);padding:18px;border-radius:16px;margin-bottom:12px;position:relative;overflow:hidden}#inv-mini .im-frequency-label{display:flex;justify-content:space-between;color:var(--im-muted);font-size:12px}#inv-mini .im-big-number{font-size:54px;font-weight:550;line-height:1.15;letter-spacing:-2px;margin:16px 0 8px;font-variant-numeric:tabular-nums}#inv-mini .im-big-number span{font-size:16px;letter-spacing:0;color:var(--im-muted);margin-left:8px;font-weight:400}#inv-mini .im-meter{height:4px;border-radius:4px;background:var(--im-bg);margin:12px 0 14px}#inv-mini .im-meter i{display:block;height:4px;border-radius:4px;background:var(--im-brand)}#inv-mini .im-set-frequency{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--im-line);font-size:12px}#inv-mini .im-set-frequency button{color:var(--im-brand);display:flex;align-items:center;gap:4px;padding:3px}#inv-mini .im-metrics{display:grid;grid-template-columns:repeat(3,1fr);background:var(--im-surface);border:1px solid var(--im-line);border-radius:12px;padding:14px 6px;margin-bottom:20px}#inv-mini .im-metrics div{text-align:center}#inv-mini .im-metrics div+div{border-left:1px solid var(--im-line)}#inv-mini .im-metrics p{font-size:11px;color:var(--im-muted);margin-bottom:5px}#inv-mini .im-metrics strong{font-size:19px;font-weight:550;font-variant-numeric:tabular-nums}#inv-mini .im-metrics small{font-size:11px;margin-left:3px;color:var(--im-muted)}#inv-mini .im-section-line{display:flex;justify-content:space-between;align-items:center;margin:17px 0 12px}#inv-mini .im-section-line span{font-size:11px;color:var(--im-muted)}#inv-mini .im-command-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#inv-mini .im-command-grid button{border:1px solid var(--im-line);background:var(--im-surface);border-radius:11px;padding:14px 3px;display:flex;align-items:center;flex-direction:column;gap:7px;font-size:12px}#inv-mini .im-command-grid button.start{background:var(--im-brand);border-color:var(--im-brand);color:light-dark(#ffffff,#10223c)}#inv-mini .im-command-grid button.stop{color:var(--im-red)}#inv-mini .im-updated{text-align:center;font-size:11px;color:var(--im-muted);margin:11px 0 20px}#inv-mini .im-links{background:var(--im-surface);border:1px solid var(--im-line);border-radius:12px;padding:0 13px}#inv-mini .im-link{display:flex;align-items:center;justify-content:space-between;width:100%;padding:14px 0;gap:10px;font-size:13px}#inv-mini .im-link+.im-link{border-top:1px solid var(--im-line)}#inv-mini .im-link span{display:flex;align-items:center;gap:9px}#inv-mini .im-link>svg{width:15px;color:var(--im-muted)}#inv-mini .im-link small{color:var(--im-muted);font-size:11px;margin-left:auto}#inv-mini .im-primary,#inv-mini .im-secondary{border-radius:10px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 15px;width:100%;background:var(--im-brand);color:light-dark(#fff,#10223c);font-size:14px;font-weight:500}#inv-mini .im-secondary{background:var(--im-bg);color:var(--im-ink);border:1px solid var(--im-line)}#inv-mini #im-sheet-layer{position:absolute;inset:0;background:light-dark(#10233d65,#00000099);z-index:10;display:flex;align-items:flex-start;padding:118px 12px 20px}#inv-mini .im-sheet{width:100%;background:var(--im-surface);border-radius:20px;padding:22px;box-shadow:0 16px 35px #00000020}#inv-mini .im-sheet-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}#inv-mini .im-sheet-heading button{padding:5px;display:flex}#inv-mini .im-field{display:block;margin:16px 0;color:var(--im-muted);font-size:12px}#inv-mini .im-field input{width:100%;color:var(--im-ink);border:1px solid var(--im-line);background:var(--im-bg);border-radius:9px;padding:12px;margin-top:7px;font-size:16px}#inv-mini .im-field input[type=range]{padding:0;accent-color:var(--im-brand)}#inv-mini .im-sheet-footer{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:23px}#inv-mini .im-sheet .im-hint{font-size:12px;color:var(--im-muted);margin:12px 0}#inv-mini .im-error{font-size:12px;color:var(--im-red);min-height:18px;margin:8px 0}#inv-mini #im-toast{position:absolute;left:20px;right:20px;bottom:90px;background:var(--im-ink);color:var(--im-surface);border-radius:11px;padding:12px 16px;font-size:12px;text-align:center;z-index:12}#inv-mini .im-person{display:flex;align-items:center;gap:14px;margin:5px 0 25px}#inv-mini .im-avatar{display:grid;place-items:center;width:55px;height:55px;background:var(--im-soft);color:var(--im-brand);border-radius:18px;font-size:23px;font-weight:600}#inv-mini .im-person p{margin-top:5px;color:var(--im-muted);font-size:12px}#inv-mini .im-rental-overview{background:var(--im-ink);color:var(--im-surface);border-radius:16px;padding:20px;margin-bottom:22px}#inv-mini .im-rental-overview p{font-size:12px;opacity:.7}#inv-mini .im-rental-overview strong{font-size:34px;font-weight:500;margin-right:6px}#inv-mini .im-rental-overview .im-overview-row{display:flex;justify-content:space-between;align-items:end;margin-top:13px}#inv-mini .im-info-list{background:var(--im-surface);border-radius:13px;padding:4px 15px;border:1px solid var(--im-line);margin:15px 0}#inv-mini .im-info-row{display:flex;justify-content:space-between;gap:14px;padding:13px 0;font-size:12px}#inv-mini .im-info-row+.im-info-row{border-top:1px solid var(--im-line)}#inv-mini .im-info-row span:first-child{color:var(--im-muted)}#inv-mini .im-info-row span:last-child{text-align:right;overflow-wrap:anywhere}#inv-mini .im-message{padding:16px;background:var(--im-surface);border:1px solid var(--im-line);border-radius:13px;margin-bottom:12px}#inv-mini .im-message-head{display:flex;gap:10px;align-items:center;margin-bottom:12px}#inv-mini .im-message-head>span{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--im-amber-bg);color:var(--im-amber);border-radius:9px}#inv-mini .im-message-head small{margin-left:auto;font-size:10px;color:var(--im-muted)}#inv-mini .im-message p{font-size:12px;color:var(--im-muted);margin-bottom:12px;line-height:1.8}#inv-mini .im-message button{font-size:12px;color:var(--im-brand);display:flex;align-items:center;gap:4px}#inv-mini .im-message button svg{width:14px}#inv-mini .im-history-controls{display:flex;justify-content:space-between;gap:8px;margin:17px 0}#inv-mini .im-segment{display:flex;padding:3px;border-radius:8px;background:var(--im-line)}#inv-mini .im-segment button{padding:6px 12px;border-radius:6px;font-size:12px;color:var(--im-muted)}#inv-mini .im-segment button[aria-pressed=true]{background:var(--im-surface);color:var(--im-ink)}#inv-mini .im-chart-panel{border:1px solid var(--im-line);border-radius:14px;background:var(--im-surface);padding:16px 12px}#inv-mini .im-chart-title{display:flex;justify-content:space-between;padding:0 3px;font-size:12px;color:var(--im-muted)}#inv-mini .im-chart{width:100%;height:auto;margin-top:18px;display:block}#inv-mini .im-chart text{font:11px 'Microsoft YaHei',sans-serif;fill:var(--im-muted)}#inv-mini .im-chart .im-gridline{stroke:var(--im-line);stroke-width:1}#inv-mini .im-chart .im-curve{fill:none;stroke:var(--im-brand);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}#inv-mini .im-data-table{width:100%;border-collapse:collapse;font-size:12px}#inv-mini .im-data-table td,#inv-mini .im-data-table th{padding:12px 4px;text-align:right;border-bottom:1px solid var(--im-line);font-weight:400}#inv-mini .im-data-table td:first-child,#inv-mini .im-data-table th:first-child{text-align:left}#inv-mini .im-data-table th{color:var(--im-muted)}#inv-mini.im-compact .im-machine{display:none}#inv-mini.im-compact .im-device{border-radius:8px;padding:11px 13px}#inv-mini.im-compact .im-device-mid{margin:7px 0}#inv-mini.im-compact .im-reading{font-size:18px}#inv-mini .im-timeline{display:grid;gap:15px;margin:20px 0 10px}#inv-mini .im-timeline>div{display:flex;align-items:center;gap:10px;font-size:12px}#inv-mini .im-timeline i{width:8px;height:8px;border-radius:50%;background:var(--im-line)}#inv-mini .im-timeline i.done{background:var(--im-brand)}#inv-mini .im-timeline small{color:var(--im-muted);margin-left:auto;font-size:11px}#inv-mini .im-note{font-size:12px;color:var(--im-muted);line-height:1.8;margin:14px 0}
+@media(max-width:380px){#inv-mini-stage{padding:8px 0 20px}#inv-mini{border-radius:20px}#inv-mini #im-content{padding:18px 13px 22px}#inv-mini .im-device{padding:12px}#inv-mini .im-capsule{right:9px;gap:7px;padding:4px 8px}#inv-mini .im-navbar{justify-content:flex-start;padding-left:20px}#inv-mini .im-navbar:has(#im-back:not([hidden])){padding-left:45px}#inv-mini .im-summary div+div{padding-left:18px}#inv-mini h1{font-size:23px}}
+
+
+#inv-admin{--ia-bg:light-dark(#f5f7fa,#141b24);--ia-surface:light-dark(#ffffff,#1c2633);--ia-ink:light-dark(#1a2c42,#edf2f9);--ia-muted:light-dark(#6e7d90,#a0b1c6);--ia-line:light-dark(#e6ebf1,#344153);--ia-brand:light-dark(#165bc0,#88b6ff);--ia-soft:light-dark(#eaf1fc,#293f5d);--ia-green:light-dark(#16725e,#78dbbd);--ia-green-bg:light-dark(#e8f5ef,#213b34);--ia-amber:light-dark(#96601b,#edc386);--ia-amber-bg:light-dark(#fff3df,#443620);--ia-red:light-dark(#b64555,#ff9da8);--ia-red-bg:light-dark(#fceef1,#442b36);--ia-row-space:16px;display:flex;width:100%;min-height:660px;position:relative;background:var(--ia-bg);color:var(--ia-ink);font:13px/1.5 'PingFang SC','Microsoft YaHei',sans-serif;border:1px solid var(--ia-line);border-radius:13px;overflow:hidden}
+#inv-admin *{box-sizing:border-box}#inv-admin button,#inv-admin input,#inv-admin select{font:inherit}#inv-admin button{background:none;border:0;color:inherit;text-align:inherit;padding:0}#inv-admin button:not(:disabled){cursor:var(--cursor-interaction,pointer)}#inv-admin button:disabled{opacity:.45;cursor:not-allowed}#inv-admin button:focus-visible,#inv-admin input:focus-visible,#inv-admin select:focus-visible{outline:3px solid var(--ia-brand);outline-offset:2px}#inv-admin [hidden]{display:none!important}#inv-admin svg{width:17px;height:17px;flex-shrink:0}#inv-admin h1,#inv-admin h2,#inv-admin h3,#inv-admin p{margin:0}#inv-admin h1{font-size:24px;font-weight:600;letter-spacing:-.5px}#inv-admin h2{font-size:17px;font-weight:600}#inv-admin h3{font-size:14px;font-weight:600}#inv-admin .ia-sidebar{width:176px;flex:0 0 176px;background:var(--ia-surface);border-right:1px solid var(--ia-line);padding:25px 13px 16px;display:flex;flex-direction:column}#inv-admin .ia-brand{display:flex;align-items:center;gap:9px;margin-bottom:38px;font-size:15px;font-weight:650;white-space:nowrap}#inv-admin .ia-brand-mark{width:33px;height:37px;background:var(--ia-ink);color:var(--ia-surface);display:grid;place-items:center;border-radius:9px}#inv-admin .ia-brand-mark svg{width:21px;height:21px}#inv-admin .ia-brand small{display:block;font-size:10px;font-weight:400;color:var(--ia-muted);margin-top:2px;letter-spacing:1px}#inv-admin .ia-side-label{color:var(--ia-muted);font-size:10px;padding:0 10px;margin-bottom:12px;letter-spacing:1px}#inv-admin .ia-sidebar nav{display:grid;gap:6px}#inv-admin .ia-sidebar nav button{display:flex;align-items:center;gap:10px;padding:12px 11px;border-radius:8px;color:var(--ia-muted);font-size:12px}#inv-admin .ia-sidebar nav button.active{color:var(--ia-brand);background:var(--ia-soft);font-weight:550}#inv-admin .ia-sidebar nav button:hover{background:var(--ia-bg)}#inv-admin .ia-side-bottom{margin-top:auto;padding:20px 5px 0;display:flex;gap:10px;align-items:center;font-size:11px}#inv-admin .ia-avatar{height:32px;width:32px;display:grid;place-items:center;background:var(--ia-soft);color:var(--ia-brand);border-radius:50%;flex-shrink:0}#inv-admin .ia-side-bottom small{display:block;font-size:10px;color:var(--ia-muted);margin-top:2px}#inv-admin .ia-workspace{flex:1;min-width:0;display:flex;flex-direction:column}#inv-admin .ia-topbar{padding:16px 24px;border-bottom:1px solid var(--ia-line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--ia-surface);font-size:11px;color:var(--ia-muted)}#inv-admin .ia-topbar strong{font-weight:400;color:var(--ia-ink)}#inv-admin .ia-divider{padding:0 10px;color:var(--ia-line)}#inv-admin .ia-preview{padding-right:70px;color:var(--ia-muted);font-size:10px}#inv-admin #ia-main{padding:26px 24px 24px;flex:1;min-width:0}#inv-admin .ia-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:23px}#inv-admin .ia-heading p{font-size:12px;color:var(--ia-muted);margin-top:6px}#inv-admin .ia-primary,#inv-admin .ia-secondary{display:inline-flex;justify-content:center;align-items:center;gap:7px;white-space:nowrap;padding:10px 13px;border-radius:8px;background:var(--ia-brand);color:light-dark(#fff,#102640);font-size:12px;font-weight:500}#inv-admin .ia-secondary{background:var(--ia-surface);color:var(--ia-ink);border:1px solid var(--ia-line)}#inv-admin .ia-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}#inv-admin .ia-stat{background:var(--ia-surface);border:1px solid var(--ia-line);border-radius:11px;padding:15px 16px}#inv-admin .ia-stat-label{color:var(--ia-muted);font-size:11px;display:flex;align-items:center;justify-content:space-between;gap:4px}#inv-admin .ia-stat-label svg{width:15px;height:15px}#inv-admin .ia-stat strong{display:block;font-size:29px;font-weight:550;margin-top:7px;font-variant-numeric:tabular-nums;line-height:1.2}#inv-admin .ia-stat small{display:block;font-size:10px;margin-top:6px;color:var(--ia-muted)}#inv-admin .ia-panel{background:var(--ia-surface);border:1px solid var(--ia-line);border-radius:12px;overflow:hidden}#inv-admin .ia-toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:15px 17px;border-bottom:1px solid var(--ia-line)}#inv-admin .ia-tabs{display:flex;align-items:center;gap:18px;flex-wrap:wrap}#inv-admin .ia-tabs button{font-size:12px;color:var(--ia-muted);padding:7px 0;border-bottom:2px solid transparent;white-space:nowrap}#inv-admin .ia-tabs button[aria-pressed=true]{color:var(--ia-brand);border-color:var(--ia-brand);font-weight:550}#inv-admin .ia-search{display:flex;align-items:center;gap:7px;border:1px solid var(--ia-line);background:var(--ia-bg);padding:8px 10px;border-radius:7px;width:210px;max-width:100%}#inv-admin .ia-search svg{width:14px;height:14px;color:var(--ia-muted)}#inv-admin .ia-search input{border:0;background:transparent;color:var(--ia-ink);outline:0;font-size:11px;width:100%;min-width:0}#inv-admin .ia-table-wrap{width:100%;overflow-x:auto}#inv-admin .ia-table{width:100%;border-collapse:collapse;font-size:11px;text-align:left}#inv-admin .ia-table th{color:var(--ia-muted);background:var(--ia-bg);font-weight:400;padding:11px 12px;white-space:nowrap}#inv-admin .ia-table td{padding:var(--ia-row-space) 12px;border-top:1px solid var(--ia-line);vertical-align:middle}#inv-admin .ia-table td:first-child,#inv-admin .ia-table th:first-child{padding-left:18px}#inv-admin .ia-table td:last-child,#inv-admin .ia-table th:last-child{padding-right:18px}#inv-admin .ia-table .ia-device-name{font-size:12px;white-space:nowrap;font-weight:500}#inv-admin .ia-table small{display:block;font-size:10px;color:var(--ia-muted);margin-top:3px;white-space:nowrap}#inv-admin .ia-mono{font-variant-numeric:tabular-nums;font-family:'Cascadia Code','Consolas','Microsoft YaHei',sans-serif}#inv-admin .ia-status{display:inline-flex;align-items:center;gap:4px;padding:3px 6px;border-radius:5px;font-size:10px;white-space:nowrap;background:var(--ia-bg);color:var(--ia-muted)}#inv-admin .ia-status.green{color:var(--ia-green);background:var(--ia-green-bg)}#inv-admin .ia-status.amber{color:var(--ia-amber);background:var(--ia-amber-bg)}#inv-admin .ia-status.red{color:var(--ia-red);background:var(--ia-red-bg)}#inv-admin .ia-status.blue{color:var(--ia-brand);background:var(--ia-soft)}#inv-admin .ia-text-button{color:var(--ia-brand);font-size:11px;padding:4px 0;white-space:nowrap}#inv-admin .ia-table-actions{display:flex;gap:11px;flex-wrap:wrap}#inv-admin .ia-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ia-green);margin-right:4px}#inv-admin .ia-dot.off{background:var(--ia-muted)}#inv-admin .ia-table-foot{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid var(--ia-line);padding:13px 18px;font-size:10px;color:var(--ia-muted)}#inv-admin .ia-note{font-size:11px;color:var(--ia-muted);line-height:1.8;margin-top:16px}#inv-admin .ia-footer{display:flex;justify-content:space-between;padding:12px 24px;font-size:10px;color:var(--ia-muted);gap:10px}#inv-admin .ia-empty{text-align:center;padding:32px!important;color:var(--ia-muted)}#inv-admin #ia-modal-layer{position:absolute;inset:0;z-index:5;background:light-dark(#13274255,#00000099);display:flex;justify-content:center;align-items:flex-start;padding:65px 24px 24px}#inv-admin .ia-modal{width:500px;max-width:100%;background:var(--ia-surface);border-radius:15px;padding:24px;box-shadow:0 22px 55px #00000025;color:var(--ia-ink)}#inv-admin .ia-modal-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}#inv-admin .ia-modal-heading button{display:flex;padding:5px}#inv-admin .ia-modal-subtitle{font-size:12px;color:var(--ia-muted);margin-bottom:20px}#inv-admin .ia-field{display:block;font-size:12px;color:var(--ia-muted);margin:14px 0}#inv-admin .ia-field input,#inv-admin .ia-field select{display:block;width:100%;border:1px solid var(--ia-line);border-radius:8px;background:var(--ia-bg);color:var(--ia-ink);padding:10px 11px;font-size:13px;margin-top:6px;min-width:0}#inv-admin .ia-fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}#inv-admin .ia-fields .ia-field{margin:5px 0}#inv-admin .ia-modal-footer{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}#inv-admin .ia-error{font-size:12px;color:var(--ia-red);margin:8px 0;min-height:18px}#inv-admin .ia-information{display:flex;gap:8px;padding:12px 13px;border-radius:8px;background:var(--ia-soft);color:var(--ia-brand);font-size:11px;line-height:1.7;margin:14px 0}#inv-admin .ia-information svg{width:15px;height:15px;margin-top:2px}#inv-admin .ia-parse-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;background:var(--ia-bg);border:1px solid var(--ia-line);border-radius:9px;margin-top:13px}#inv-admin .ia-parse-grid div:last-child{grid-column:1/-1}#inv-admin .ia-parse-grid small{display:block;color:var(--ia-muted);font-size:10px;margin-bottom:4px}#inv-admin .ia-permission-summary{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:18px;border-bottom:1px solid var(--ia-line)}#inv-admin .ia-permission-summary p{font-size:11px;color:var(--ia-muted);margin-top:5px}#inv-admin .ia-select{border:1px solid var(--ia-line);border-radius:7px;padding:8px;background:var(--ia-surface);color:var(--ia-ink);font-size:12px;max-width:100%}#inv-admin .ia-perm-table th:not(:first-child),#inv-admin .ia-perm-table td:not(:first-child){text-align:center}#inv-admin .ia-perm-check{display:inline-flex;align-items:center;justify-content:center;min-height:32px;min-width:32px}#inv-admin .ia-perm-check input{width:15px;height:15px;accent-color:var(--ia-brand);margin:0}#inv-admin .ia-permission-footer{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--ia-line)}#inv-admin .ia-permission-footer span{font-size:11px;color:var(--ia-muted)}#inv-admin .ia-rental-item{display:grid;grid-template-columns:1fr auto;gap:14px;padding:18px;border-bottom:1px solid var(--ia-line)}#inv-admin .ia-rental-item:last-child{border-bottom:0}#inv-admin .ia-rental-item p{font-size:11px;color:var(--ia-muted);margin:6px 0}#inv-admin .ia-rental-item .ia-timeline{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:13px}#inv-admin .ia-timeline span{padding:5px 8px;border-radius:5px;background:var(--ia-bg);font-size:10px;color:var(--ia-muted)}#inv-admin .ia-timeline span.active{background:var(--ia-amber-bg);color:var(--ia-amber)}#inv-admin .ia-timeline i{height:1px;width:14px;background:var(--ia-line)}#inv-admin #ia-toast{position:absolute;top:65px;left:50%;transform:translateX(-50%);max-width:calc(100% - 24px);width:max-content;border:1px solid var(--ia-line);background:var(--ia-ink);color:var(--ia-surface);padding:11px 18px;border-radius:9px;box-shadow:0 8px 30px #00000018;z-index:7;font-size:12px}#inv-admin .ia-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px}#inv-admin .ia-detail-grid div{padding-bottom:12px;border-bottom:1px solid var(--ia-line);font-size:12px}#inv-admin .ia-detail-grid small{display:block;color:var(--ia-muted);font-size:11px;margin-bottom:5px}#inv-admin .ia-table tr:hover td{background:color-mix(in srgb,var(--ia-bg) 60%,var(--ia-surface))}
+@media(max-width:850px){#inv-admin .ia-sidebar{width:150px;flex-basis:150px;padding:22px 10px 14px}#inv-admin .ia-brand{font-size:13px;gap:6px}#inv-admin #ia-main{padding:22px 16px}#inv-admin .ia-topbar{padding:15px 16px}#inv-admin .ia-preview{padding-right:0}#inv-admin .ia-stat{padding:13px 12px}#inv-admin .ia-table th,#inv-admin .ia-table td{padding-left:10px;padding-right:10px}#inv-admin .ia-stats{gap:8px}}
+@media(max-width:650px){#inv-admin{display:block;border-radius:10px}#inv-admin .ia-sidebar{width:100%;padding:14px 13px;border-right:0;border-bottom:1px solid var(--ia-line)}#inv-admin .ia-brand{margin-bottom:12px}#inv-admin .ia-brand small,#inv-admin .ia-side-label,#inv-admin .ia-side-bottom{display:none}#inv-admin .ia-sidebar nav{display:flex;flex-wrap:wrap;gap:4px}#inv-admin .ia-sidebar nav button{padding:8px;font-size:11px;gap:5px}#inv-admin .ia-sidebar nav svg{width:14px;height:14px}#inv-admin .ia-topbar{padding:12px 14px;flex-wrap:wrap}#inv-admin #ia-main{padding:20px 13px}#inv-admin .ia-heading{align-items:flex-start;margin-bottom:17px}#inv-admin h1{font-size:21px}#inv-admin .ia-heading p{font-size:11px}#inv-admin .ia-stats{grid-template-columns:repeat(2,1fr);margin-bottom:16px}#inv-admin .ia-stat strong{font-size:25px}#inv-admin .ia-stat small{display:none}#inv-admin .ia-toolbar{padding:10px 12px}#inv-admin .ia-search{width:100%}#inv-admin .ia-table{min-width:610px}#inv-admin .ia-perm-table{min-width:500px}#inv-admin .ia-permission-summary{align-items:flex-start;flex-direction:column;padding:15px}#inv-admin .ia-select{width:100%}#inv-admin .ia-permission-footer{align-items:flex-start;flex-direction:column}#inv-admin .ia-footer{padding:12px 14px}#inv-admin #ia-modal-layer{padding:85px 12px 20px}#inv-admin .ia-modal{padding:20px}#inv-admin .ia-fields{grid-template-columns:1fr;gap:0}#inv-admin .ia-rental-item{padding:15px;grid-template-columns:1fr}#inv-admin .ia-tabs{gap:15px}#inv-admin .ia-primary,#inv-admin .ia-secondary{padding:10px;font-size:11px}}
+
+#rental-workflow{color:light-dark(#17283c,#edf3fa);font:13px/1.5 'PingFang SC','Microsoft YaHei',sans-serif}
+#rental-workflow [hidden]{display:none!important}
+#inv-admin .wf-data-boundary{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+#inv-admin .wf-data-boundary section{padding:19px 20px;border:1px solid var(--ia-line);border-radius:12px;background:var(--ia-surface)}
+#inv-admin .wf-data-boundary section>div{display:flex;gap:9px;align-items:center;color:var(--ia-brand)}
+#inv-admin .wf-data-boundary h2{font-size:14px;font-weight:500;color:var(--ia-ink)}
+#inv-admin .wf-data-boundary p{font-size:12px;color:var(--ia-ink);margin:13px 0 9px}
+#inv-admin .wf-data-boundary span{font-size:11px;color:var(--ia-muted)}
+#inv-admin .wf-backup-heading{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap;padding:20px;border-bottom:1px solid var(--ia-line)}
+#inv-admin .wf-backup-heading h2{font-size:15px;font-weight:500;margin-bottom:5px}
+#inv-admin .wf-backup-heading span{font-size:11px;color:var(--ia-muted)}
+#inv-admin .wf-user-table{font-size:12px;min-width:680px}
+#inv-admin .wf-user-table th{white-space:normal}
+#inv-admin .wf-user-table td{vertical-align:top}
+#inv-admin .wf-user-device{min-height:45px;margin-bottom:9px}
+#inv-admin .wf-user-device:last-child{margin-bottom:0}
+#inv-admin .wf-backup-records{margin-top:22px}
+#inv-admin .wf-backup-empty{text-align:center;padding:30px 16px;color:var(--ia-muted)}
+#inv-admin .wf-backup-empty>svg{margin:auto;width:24px;height:24px}
+#inv-admin .wf-backup-empty p{font-size:13px;color:var(--ia-ink);margin:8px 0}
+#inv-admin .wf-backup-empty span{font-size:12px}
+#inv-admin .wf-backup-table{min-width:630px;font-size:12px}
+#inv-admin .wf-backup-table td:first-child{max-width:260px;overflow-wrap:anywhere}
+#inv-admin .wf-backup-targets{border:0;padding:0;margin:16px 0}
+#inv-admin .wf-backup-targets legend{font-size:12px;color:var(--ia-muted);margin-bottom:8px}
+#inv-admin .wf-backup-targets label{display:flex;gap:12px;align-items:center;padding:16px 12px;border:1px solid var(--ia-line);border-radius:9px;margin-bottom:9px;font-size:14px}
+#inv-admin .wf-backup-targets label:has(input:checked){background:var(--ia-soft);border-color:var(--ia-brand)}
+#inv-admin .wf-backup-targets input{width:16px;height:16px;accent-color:var(--ia-brand)}
+#inv-admin .wf-backup-targets small{display:block;font-size:11px;color:var(--ia-muted);margin-top:5px}
+#inv-admin .wf-backup-path{padding:13px;background:var(--ia-soft);color:var(--ia-ink);border-radius:8px;font-size:12px;margin:15px 0;overflow-wrap:anywhere}
+#inv-admin .wf-restore-diffs h3{font-size:13px;font-weight:500;margin:18px 0 10px}
+@media(max-width:650px){#inv-admin .wf-data-boundary{grid-template-columns:1fr;gap:10px}#inv-admin .wf-backup-heading{padding:16px}#inv-admin .wf-data-boundary section{padding:16px}}
+@media(max-width:400px){#inv-admin .ia-modal:has([data-backup-action]) .wf-review-row{display:block}#inv-admin .ia-modal:has([data-backup-action]) .wf-review-row span{display:block;text-align:left}#inv-admin .ia-modal:has([data-backup-action]) .wf-review-row span:last-child{margin-top:6px}}
+#inv-admin .wf-report-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:15px 18px;border-bottom:1px solid var(--ia-line)}
+#inv-admin .wf-report-month{display:flex;align-items:center;gap:9px;color:var(--ia-muted);font-size:12px}
+#inv-admin .wf-report-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 18px;flex-wrap:wrap}
+#inv-admin .wf-report-summary h2{font-size:15px;display:inline;margin-right:12px}
+#inv-admin .wf-report-summary span{color:var(--ia-muted);font-size:11px}
+#inv-admin .wf-report-summary>div:last-child{font-size:12px}
+#inv-admin .wf-report-summary strong{font-size:21px;margin:0 6px;font-weight:500;font-variant-numeric:tabular-nums}
+#inv-admin .wf-report-table{font-size:12px}
+#inv-admin .wf-report-table .wf-number{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+#inv-admin .wf-report-table th{white-space:normal}
+#inv-admin .wf-report-table td:first-child{max-width:180px;overflow-wrap:anywhere}
+#inv-admin .wf-report-table tfoot th{border-top:1px solid var(--ia-line);color:var(--ia-ink);padding-top:15px;padding-bottom:15px;font-weight:500}
+#inv-admin .wf-report-table .ia-text-button{white-space:nowrap}
+#inv-admin .wf-report-drill{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px;font-size:12px;color:var(--ia-muted)}
+@media(max-width:650px){#inv-admin .wf-report-toolbar{padding:14px}#inv-admin .wf-report-month{width:100%}#inv-admin .wf-report-month select{width:auto;flex:1}#inv-admin .wf-report-table{min-width:700px}#inv-admin .wf-report-summary{padding:16px 14px}#inv-admin .wf-report-summary h2{display:block;margin-bottom:5px}#inv-admin .wf-report-toolbar .ia-tabs{gap:18px}}
+#inv-admin .wf-income-filters{display:flex;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+#inv-admin .wf-income-filters label{display:grid;gap:7px;color:var(--ia-muted);font-size:12px;min-width:145px}
+#inv-admin .wf-income-filters>span{margin-left:auto;padding-bottom:9px;color:var(--ia-muted);font-size:12px}
+#inv-admin .wf-income-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+#inv-admin .wf-income-stats strong{font-size:27px;overflow-wrap:anywhere}
+#inv-admin .wf-income-stats small{display:block;font-size:11px}
+#inv-admin .wf-income-count{color:var(--ia-muted);font-size:12px}
+#inv-admin .wf-income-table th{white-space:normal}
+#inv-admin .wf-income-table .wf-money{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+#inv-admin .wf-income-table tfoot th{border-top:1px solid var(--ia-line);padding-top:16px;padding-bottom:16px;color:var(--ia-ink);font-weight:500}
+@media(max-width:650px){#inv-admin .wf-income-stats{grid-template-columns:1fr}#inv-admin .wf-income-filters label{flex:1;min-width:120px}#inv-admin .wf-income-filters>span{margin-left:0}#inv-admin .wf-income-table{min-width:660px}}
+#rental-workflow .wf-preview-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 0 17px;padding-right:70px}
+#rental-workflow .wf-preview-title{font-weight:600;font-size:15px;margin-right:auto}
+#rental-workflow .wf-preview-title span{display:block;font-weight:400;color:light-dark(#68778a,#a6b5c8);font-size:11px;margin-top:3px}
+#rental-workflow .wf-mode-controls{display:flex;background:light-dark(#edf1f7,#253142);border-radius:10px;padding:3px;gap:2px}
+#rental-workflow .wf-mode-controls button{font:inherit;border:0;background:transparent;border-radius:7px;padding:8px 12px;color:light-dark(#63738b,#b8c8de)}
+#rental-workflow .wf-mode-controls button[aria-pressed=true]{background:light-dark(#17283c,#ecf3ff);color:light-dark(#fff,#17283c)}
+#rental-workflow #wf-user-label{font-size:11px;color:light-dark(#68778a,#a6b5c8);display:flex;align-items:center;gap:8px}
+#rental-workflow #wf-demo-user{font:inherit;font-size:12px;padding:8px;border:1px solid light-dark(#dce4ef,#344153);border-radius:8px;background:light-dark(#fff,#1c2633);color:light-dark(#17283c,#edf3fa);max-width:100%}
+#rental-workflow #wf-progress{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 16px;border-top:1px solid light-dark(#e5eaf0,#344153);flex-wrap:wrap}
+#rental-workflow .wf-focus{font-size:12px;color:light-dark(#68778a,#a6b5c8)}
+#rental-workflow .wf-steps{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:light-dark(#8792a2,#8ea1b8)}
+#rental-workflow .wf-steps span{display:flex;align-items:center;gap:5px}
+#rental-workflow .wf-steps b{width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:light-dark(#edf1f7,#253142);font-weight:500;font-size:10px}
+#rental-workflow .wf-steps .done{color:light-dark(#165bc0,#88b6ff)}
+#rental-workflow .wf-steps .done b{background:light-dark(#eaf1fc,#293f5d)}
+#rental-workflow .wf-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#inv-mini #im-bottom{grid-template-columns:repeat(4,1fr)}
+#inv-mini.wf-staff #im-bottom{grid-template-columns:repeat(3,1fr)}
+#inv-mini .wf-staff-mark{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--im-soft);color:var(--im-brand)}
+#inv-mini .wf-mobile-scan{margin-top:12px}
+#inv-mini .wf-mobile-gap{margin-top:10px}
+#inv-mini .wf-stock-heading{display:flex;justify-content:space-between;align-items:center;margin:22px 0 12px;gap:8px}
+#inv-mini .wf-stock-heading h2{font-size:16px}
+#inv-mini .wf-stock-heading>span{color:var(--im-muted);font-size:11px}
+#inv-mini .wf-stock-list{border:1px solid var(--im-line);border-radius:12px;background:var(--im-surface);overflow:hidden}
+#inv-mini .wf-stock-item{display:flex;justify-content:space-between;align-items:center;width:100%;gap:12px;padding:15px;text-align:left;border-bottom:1px solid var(--im-line)}
+#inv-mini .wf-stock-item:last-child{border-bottom:0}
+#inv-mini .wf-stock-item strong{font-size:14px;font-weight:500;overflow-wrap:anywhere}
+#inv-mini .wf-stock-item>div:first-child{min-width:0}
+#inv-mini .wf-stock-item span,#inv-mini .wf-stock-item small{display:block;color:var(--im-muted);font-size:11px;margin-top:5px;overflow-wrap:anywhere}
+#inv-mini .wf-stock-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+#inv-mini .wf-stock-item .wf-stock-tag{padding:3px 6px;border-radius:5px;background:var(--im-bg);margin:0}
+#inv-mini .wf-mobile-steps{display:flex;justify-content:space-between;gap:8px;margin:0 0 20px;color:var(--im-muted);font-size:11px}
+#inv-mini .wf-mobile-steps span{flex:1;padding-bottom:8px;border-bottom:2px solid var(--im-line)}
+#inv-mini .wf-mobile-steps span.active{color:var(--im-brand);border-color:var(--im-brand)}
+#inv-mini .wf-mobile-text{display:flex;justify-content:center;align-items:center;gap:6px;width:100%;padding:14px 0;font-size:12px;color:var(--im-brand)}
+#inv-mini #wf-mobile-error:empty{display:none}
+#inv-mini.wf-staff .im-info-row span:last-child{overflow-wrap:anywhere;min-width:0}
+#inv-mini .wf-scan-entry{width:auto;gap:7px;padding:0 13px;display:flex;font-size:12px;white-space:nowrap}
+#inv-mini .wf-scanner{border-radius:16px;background:light-dark(#17283c,#0f1722);color:#edf3fa;padding:27px 18px;text-align:center;margin:16px 0}
+#inv-mini .wf-viewfinder{position:relative;width:170px;height:170px;margin:0 auto 20px;border:1px solid #c5d6ef55;border-radius:14px;display:flex;justify-content:center;align-items:center}
+#inv-mini .wf-viewfinder:before,#inv-mini .wf-viewfinder:after{content:'';position:absolute;width:29px;height:29px;border-color:#a5c5ff;border-style:solid}
+#inv-mini .wf-viewfinder:before{top:-1px;left:-1px;border-width:3px 0 0 3px;border-radius:14px 0 0 0}
+#inv-mini .wf-viewfinder:after{bottom:-1px;right:-1px;border-width:0 3px 3px 0;border-radius:0 0 14px 0}
+#inv-mini .wf-viewfinder svg{width:58px;height:58px;color:#c1d5f5}
+#inv-mini .wf-scanner p{font-size:12px;margin-top:9px;color:#b6c9e4}
+#inv-mini .wf-select{display:block;width:100%;padding:12px 10px;margin:8px 0 14px;background:var(--im-surface);color:var(--im-ink);border:1px solid var(--im-line);border-radius:9px;font:inherit;font-size:12px}
+#inv-mini .wf-qr-raw{overflow-wrap:anywhere;font:11px/1.6 Consolas,monospace;color:var(--im-muted);padding:9px 10px;background:var(--im-bg);border-radius:7px;margin:12px 0}
+#inv-mini .wf-two-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+#inv-mini .wf-success-icon{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;margin:12px auto 14px;color:var(--im-green);background:var(--im-green-bg)}
+#inv-mini .wf-success-icon svg{width:28px;height:28px}
+#inv-mini .wf-centered{text-align:center}
+#inv-mini .wf-field{display:block;font-size:12px;color:var(--im-muted);margin:12px 0}
+#inv-mini .wf-field input{display:block;width:100%;border:1px solid var(--im-line);background:var(--im-surface);color:var(--im-ink);padding:10px;border-radius:8px;margin-top:6px;font-size:14px}
+#inv-mini .wf-rights{display:flex;flex-wrap:wrap;gap:5px}
+#inv-admin .wf-steps{display:flex;gap:8px;justify-content:space-between;margin:18px 0;color:var(--ia-muted);font-size:11px}
+#inv-admin .wf-steps span{flex:1;border-bottom:2px solid var(--ia-line);padding-bottom:10px}
+#inv-admin .wf-steps span.active{color:var(--ia-brand);border-color:var(--ia-brand)}
+#inv-admin .wf-field-group{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#inv-admin .wf-review{border:1px solid var(--ia-line);border-radius:10px;padding:2px 13px;margin:15px 0}
+#inv-admin .wf-review-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--ia-line);font-size:12px}
+#inv-admin .wf-review-row:last-child{border:0}
+#inv-admin .wf-review-row span:first-child{color:var(--ia-muted)}
+#inv-admin .wf-review-row span:last-child{text-align:right;overflow-wrap:anywhere}
+#inv-admin .wf-success{padding:16px 0;text-align:center}
+#inv-admin .wf-success>span{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--ia-green-bg);color:var(--ia-green);margin:0 auto 14px}
+#inv-admin .wf-success>span svg{width:25px;height:25px}
+#inv-admin .wf-success p{font-size:12px;color:var(--ia-muted);margin:10px 0}
+#inv-admin .wf-check-line{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--ia-ink);margin-top:15px;line-height:1.7}
+#inv-admin .wf-check-line input{width:15px;height:15px;margin-top:3px;accent-color:var(--ia-brand)}
+#inv-admin .wf-lookup{display:flex;align-items:flex-end;gap:8px;margin-bottom:8px}
+#inv-admin .wf-lookup .ia-field{flex:1;margin:0}
+#inv-admin .wf-delta{padding:12px;border:1px solid var(--ia-line);border-radius:8px;margin:10px 0}
+#inv-admin .wf-delta p{font-size:11px;color:var(--ia-muted);margin-top:7px}
+#inv-admin .wf-delta strong{font-weight:500}
+#inv-admin .wf-footer-buttons{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;justify-content:flex-end}
+#inv-admin #ia-modal-layer{padding-top:58px}
+#inv-admin .ia-modal{width:550px}
+#inv-admin .wf-alert-inline{color:var(--ia-red);font-size:11px}
+#inv-admin textarea{width:100%;resize:vertical;min-height:60px;border:1px solid var(--ia-line);background:var(--ia-bg);color:var(--ia-ink);font:inherit;padding:9px;border-radius:8px;margin-top:7px}
+#inv-admin .wf-QR-line{font:11px/1.7 Consolas,monospace;overflow-wrap:anywhere;color:var(--ia-muted)}
+@media(max-width:650px){#rental-workflow .wf-preview-bar{padding-right:0;gap:12px}#rental-workflow .wf-preview-title{width:100%}#rental-workflow #wf-progress{align-items:flex-start}#rental-workflow .wf-steps{gap:8px}#inv-admin .wf-field-group{grid-template-columns:1fr;gap:0}#inv-admin .ia-modal{padding:18px}#inv-admin #ia-modal-layer{padding-top:180px}#inv-admin .wf-review-row{gap:10px}#inv-admin .wf-lookup{flex-wrap:wrap}}
+
+
+/* Unified visual reference: the existing monitoring platform is the design baseline. */
+#inv-admin{color-scheme:dark;--ia-bg:#061a34;--ia-surface:#0b2646;--ia-ink:#edf6ff;--ia-muted:#a9c0d8;--ia-line:#254968;--ia-brand:#27d6ed;--ia-soft:#113e58;--ia-green:#38d9b0;--ia-green-bg:#0c403b;--ia-amber:#ffd17a;--ia-amber-bg:#46391e;--ia-red:#ff8c91;--ia-red-bg:#4b2935}
+#inv-mini{color-scheme:dark;--im-bg:#061a34;--im-surface:#0b2646;--im-ink:#edf6ff;--im-muted:#a9c0d8;--im-line:#254968;--im-brand:#27d6ed;--im-soft:#113e58;--im-green:#38d9b0;--im-green-bg:#0c403b;--im-amber:#ffd17a;--im-amber-bg:#46391e;--im-red:#ff8c91;--im-red-bg:#4b2935}
+#inv-admin .ia-brand-mark{background:var(--ia-soft);color:var(--ia-brand)}
+#inv-admin .ia-brand,#inv-admin .ia-heading h1{color:var(--ia-ink)}
+#inv-admin .ia-sidebar{background:#071e39}
+#inv-admin .ia-topbar{background:#071e39}
+#inv-admin .ia-primary{color:#062039}
+#inv-mini .im-primary{color:#062039;background:var(--im-brand)}
+#inv-mini .im-navbar,#inv-mini .im-status{background:#071e39}
+#inv-admin .ia-panel,#inv-mini .im-card{box-shadow:none}
+
+
+</style>
+<script>
+(function (global) {
+  'use strict';
+  const NOW = '2026-10-21T14:32:00';
+  const fields = ['view', 'control', 'frequency', 'reset'];
+  const viewOnly = () => ({ view: true, control: false, frequency: false, reset: false });
+  const all = () => ({ view: true, control: true, frequency: true, reset: true });
+  const copy = value => JSON.parse(JSON.stringify(value));
+  const epoch = value => Date.parse(value + '+08:00');
+  function fail(message, code = 'INVALID') { const e = new Error(message); e.code = code; throw e; }
+  function seed() {
+    const users = [
+      { id: 'chen', name: '陈先生', phone: '13800002608', registeredAt: '2026-09-20T09:30:00' },
+      { id: 'wang', name: '王师傅', phone: '13600001820', registeredAt: '2026-09-26T10:15:00' },
+      { id: 'li', name: '李先生', phone: '13900000516', registeredAt: '2026-10-18T15:20:00' }
+    ];
+    const devices = [
+      { id: '01', name: '东区 01 号变频器', vendor: 'HN', model: 'VF-22', module: 'DEMO4G001001', online: true, run: true, target: 42, hz: 42, current: 6.7, voltage: 311, bus: 537, place: '东区机房' },
+      { id: '02', name: '西区 02 号变频器', vendor: 'HN', model: 'VF-15', module: 'DEMO4G001002', online: true, run: true, target: 38.5, hz: 38.5, current: 5.2, voltage: 285, bus: 531, place: '西区机房' },
+      { id: '03', name: '北区 03 号变频器', vendor: 'HN', model: 'VF-22', module: 'DEMO4G001003', online: false, run: false, target: 40, hz: 0, current: 0, voltage: 0, bus: 0, place: '北区机房' },
+      { id: '04', name: '备用 04 号变频器', vendor: 'HN', model: 'VF-15', module: 'DEMO4G001004', online: true, run: false, target: 40, hz: 0, current: 0, voltage: 0, bus: 528, place: '备用机房' },
+      { id: '05', name: '库存 05 号变频器', vendor: 'HN', model: 'VF-22', module: 'DEMO4G001005', online: true, run: false, target: 40, hz: 0, current: 0, voltage: 0, bus: 530, place: '海口仓库' }
+    ];
+    const contracts = [
+      { id: 'C01', number: 'ZL-2026-1001', device: '01', owner: 'chen', start: '2026-09-25T00:00', end: '2026-10-24T18:00', rent: 360, paid: 360, reference: 'FK-1001' },
+      { id: 'C02', number: 'ZL-2026-1002', device: '02', owner: 'li', start: '2026-10-19T00:00', end: '2026-11-18T18:00', rent: 280, paid: 280, reference: 'FK-1002' },
+      { id: 'C03', number: 'ZL-2026-1003', device: '03', owner: 'chen', start: '2026-10-06T00:00', end: '2026-11-05T18:00', rent: 360, paid: 360, reference: 'FK-1003' },
+      { id: 'C04', number: 'ZL-2026-1004', device: '04', owner: 'chen', start: '2026-09-21T00:00', end: '2026-10-20T18:00', rent: 280, paid: 280, reference: 'FK-1004' }
+    ];
+    contracts.forEach(c => { c.paidAt = c.start.slice(0, 10); });
+    const state = { version: 3, users, devices, contracts, joins: [
+      { device: '01', user: 'chen', rights: all() }, { device: '01', user: 'wang', rights: viewOnly() },
+      { device: '02', user: 'chen', rights: viewOnly() }, { device: '02', user: 'li', rights: all() },
+      { device: '03', user: 'chen', rights: all() }, { device: '04', user: 'chen', rights: all() }
+    ], logs: [{ id: 'L1', who: '系统', action: '到期停机', device: '04', result: '停机已确认', time: NOW }], next: 6 };
+    ensureAdministrator(state);
+    ensureReceipts(state);
+    return state;
+  }
+  const device = (s, id) => s.devices.find(d => d.id === id);
+  const user = (s, id) => s.users.find(u => u.id === id);
+  const contract = (s, id) => s.contracts.find(c => c.device === id);
+  const join = (s, d, u) => s.joins.find(j => j.device === d && j.user === u);
+  const mask = phone => phone.slice(0, 3) + ' **** ' + phone.slice(-4);
+  function ensureAdministrator(s) {
+    if (!s.users.some(u => u.id === 'admin')) s.users.push({id:'admin',name:'仓库管理员',phone:'13700000001',role:'admin'});
+  }
+  const canInventory = (s, uid) => Boolean(user(s, uid) && user(s, uid).role === 'admin');
+  function addInventoryFor(s, uid, input, source = 'mobile') {
+    if (!canInventory(s, uid)) fail('只有管理员可以扫码入库，普通用户请使用扫码添加。', 'ADMIN_REQUIRED');
+    const d = addInventory(s, input);
+    d.createdAt = NOW;
+    d.createdBy = uid;
+    d.inventorySource = source === 'mobile' ? '手机扫码' : '管理后台';
+    s.logs[0].who = user(s, uid).name;
+    s.logs[0].result = d.inventorySource + '入库；设备档案已建立，尚未登记租赁';
+    return d;
+  }
+  function validatePaidAt(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) fail('请填写实际收款日期。');
+    const parsed = Date.parse(value + 'T00:00:00Z');
+    if (!Number.isFinite(parsed) || new Date(parsed).toISOString().slice(0, 10) !== value || value > NOW.slice(0, 10)) fail('收款日期必须有效，且不能晚于演示当前日期。');
+    return value;
+  }
+  function addReceipt(s, c, kind, paid, paidAt, start, end, reference) {
+    const receipt = { id:'R' + (s.receipts.length + 1), contract:c.id, number:c.number, device:c.device, owner:c.owner, kind, amountCents:Math.round(Number(paid) * 100), paidAt:paidAt || null, start, end, reference:reference || '' };
+    s.receipts.push(receipt);
+    return receipt;
+  }
+  function ensureReceipts(s) {
+    if (Array.isArray(s.receipts)) return;
+    s.receipts = [];
+    s.contracts.forEach(c => {
+      const renewals = c.renewals || [];
+      addReceipt(s, c, 'initial', c.paid, c.paidAt, c.start, renewals.length ? renewals[0].old : c.end, c.reference);
+      renewals.forEach(r => addReceipt(s, c, 'renewal', r.paid, r.paidAt, r.old, r.end, r.reference));
+    });
+  }
+  function incomeReport(s, month = 'all', kind = 'all', scope = null) {
+    ensureReceipts(s);
+    const rows = s.receipts.filter(r => (month === 'all' || (month === 'undated' ? !r.paidAt : r.paidAt && r.paidAt.slice(0, 7) === month)) && (kind === 'all' || r.kind === kind) && (!scope || (scope.dimension === 'device' ? r.device === scope.key : scope.dimension === 'customer' ? r.owner === scope.key : true))).slice().sort((a,b) => (b.paidAt || '').localeCompare(a.paidAt || '') || b.id.localeCompare(a.id, undefined, {numeric:true}));
+    const initialCents = rows.filter(r => r.kind === 'initial').reduce((total,r) => total + r.amountCents, 0);
+    const renewalCents = rows.filter(r => r.kind === 'renewal').reduce((total,r) => total + r.amountCents, 0);
+    return { rows, count:rows.length, totalCents:initialCents + renewalCents, initialCents, renewalCents };
+  }
+  function tableReport(s, dimension = 'device', month = 'all') {
+    const total = incomeReport(s, month), groups = new Map();
+    function group(key) {
+      if (!groups.has(key)) groups.set(key, {key,count:0,initialCents:0,renewalCents:0,totalCents:0,devices:new Set()});
+      return groups.get(key);
+    }
+    if (dimension === 'device') s.devices.forEach(d => group(d.id));
+    if (dimension === 'customer') s.contracts.forEach(c => group(c.owner));
+    total.rows.forEach(r => {
+      const key = dimension === 'device' ? r.device : dimension === 'customer' ? r.owner : r.paidAt ? r.paidAt.slice(0,7) : 'undated';
+      const g = group(key);g.count++;g.devices.add(r.device);g.totalCents += r.amountCents;
+      if (r.kind === 'initial') g.initialCents += r.amountCents;else g.renewalCents += r.amountCents;
+    });
+    const rows = Array.from(groups.values()).map(g => ({key:g.key,count:g.count,initialCents:g.initialCents,renewalCents:g.renewalCents,totalCents:g.totalCents,deviceCount:g.devices.size,contractDeviceCount:new Set(s.contracts.filter(c=>c.owner===g.key).map(c=>c.device)).size}));
+    rows.sort((a,b)=>dimension === 'month' ? a.key === 'undated' ? 1 : b.key === 'undated' ? -1 : b.key.localeCompare(a.key) : a.key.localeCompare(b.key,undefined,{numeric:true}));
+    return {rows,total};
+  }
+  const days = c => Math.ceil((epoch(c.end) - epoch(NOW)) / 86400000);
+  function leaseStatus(s, id) {
+    const c = contract(s, id);
+    if (!c) return 'stock';
+    if (epoch(c.end) <= epoch(NOW)) return 'expired';
+    if (epoch(c.start) > epoch(NOW)) return 'future';
+    return days(c) <= 7 ? 'near' : 'active';
+  }
+  function log(s, who, action, id, result) {
+    s.logs.unshift({ id: 'L' + Date.now() + '-' + s.logs.length, who, action, device: id, result, time: NOW });
+    s.logs = s.logs.slice(0, 18);
+  }
+  function parseQR(raw) {
+    if (typeof raw !== 'string' || raw.length > 180) fail('二维码内容无效，请重新扫码。', 'INVALID_QR');
+    const parts = raw.trim().split(/[|+]/).map(x => x.trim());
+    if (parts.length !== 3 || parts.some(x => !/^[A-Za-z0-9_-]{2,40}$/.test(x))) fail('二维码格式不正确，需要厂商代号、变频器型号和 4G 模块 ID。', 'INVALID_QR');
+    return { vendor: parts[0], model: parts[1], module: parts[2] };
+  }
+  const qr = d => [d.vendor, d.model, d.module].join('|');
+  function inspectInventory(s, raw) {
+    const p = parseQR(raw);
+    if (s.devices.some(d => d.module === p.module)) fail('该 4G 模块已经入库，请查看已有设备，不能重复入库。', 'DUPLICATE_DEVICE');
+    return p;
+  }
+  function addInventory(s, input) {
+    const p = inspectInventory(s, input.raw);
+    const name = String(input.name || '').trim();
+    if (!name || name.length > 30) fail('请填写 1–30 个字符的设备名称。');
+    const id = String(s.next++).padStart(2, '0');
+    const d = { id, name, ...p, place: String(input.place || '').trim().slice(0, 60), online: true, run: false, target: 40, hz: 0, current: 0, voltage: 0, bus: 530 };
+    s.devices.push(d);
+    log(s, '管理员', '设备入库', id, '设备档案已建立，尚未登记租赁');
+    return d;
+  }
+  function inspectScan(s, uid, raw) {
+    if (!user(s, uid)) fail('请先使用微信绑定手机号登录。', 'LOGIN_REQUIRED');
+    const p = parseQR(raw);
+    const d = s.devices.find(x => x.module === p.module);
+    if (!d) fail('设备尚未入库，请联系管理员完成入库。扫码不会创建设备档案。', 'NOT_INVENTORIED');
+    if (d.vendor !== p.vendor || d.model !== p.model) fail('二维码厂商或型号与设备档案不一致，请联系管理员核对。', 'QR_MISMATCH');
+    const j = join(s, d.id, uid);
+    if (j && !j.rights.view) fail('管理员已收回此设备的访问权限，请联系管理员重新授权。扫码不能恢复已收回的权限。', 'ACCESS_REVOKED');
+    return { device: d, added: Boolean(j), rights: j ? copy(j.rights) : viewOnly() };
+  }
+  function addByScan(s, uid, raw) {
+    const result = inspectScan(s, uid, raw);
+    if (!result.added) {
+      s.joins.push({ device: result.device.id, user: uid, rights: viewOnly() });
+      log(s, user(s, uid).name, '扫码添加', result.device.id, '默认仅查看，未改变第一所有人');
+    }
+    return result.device;
+  }
+  function validateContract(s, input) {
+    if (!device(s, input.device)) fail('请选择已入库设备。');
+    if (contract(s, input.device)) fail('该设备已有租赁记录，请通过续租处理，不能重复登记。', 'LEASE_EXISTS');
+    const owner = s.users.find(u => u.phone === String(input.phone || '').trim());
+    if (!owner) fail('未找到已绑定微信的手机号，请先让用户完成手机号绑定。', 'USER_NOT_FOUND');
+    const number = String(input.number || '').trim();
+    if (!/^[A-Za-z0-9_-]{3,40}$/.test(number)) fail('请填写 3–40 位合同编号，可使用字母、数字、横线和下划线。');
+    if (s.contracts.some(c => c.number === number)) fail('合同编号已存在，请核对后重新填写。', 'DUPLICATE_CONTRACT');
+    const rent = Number(input.rent), paid = Number(input.paid);
+    if (!Number.isFinite(rent) || rent <= 0 || rent > 1000000 || !/^\d+(\.\d{1,2})?$/.test(String(input.rent))) fail('请填写有效月租金额，最多两位小数。');
+    if (!Number.isFinite(paid) || paid <= 0 || paid > 1000000 || !/^\d+(\.\d{1,2})?$/.test(String(input.paid))) fail('请填写已确认收到的本期金额，最多两位小数。');
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(input.start || '') || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(input.end || '') || !Number.isFinite(epoch(input.start)) || !Number.isFinite(epoch(input.end)) || epoch(input.end) <= epoch(input.start)) fail('请填写有效租期，到期时间必须晚于起租时间。');
+    if (epoch(input.end) <= epoch(NOW)) fail('新租赁合同的到期时间必须晚于演示当前时间。');
+    const paidAt = validatePaidAt(input.paidAt === undefined ? NOW.slice(0, 10) : input.paidAt);
+    return { device: input.device, number, owner: owner.id, start: input.start, end: input.end, rent, paid, paidAt, reference: String(input.reference || '').trim().slice(0, 60) };
+  }
+  function registerContract(s, input) {
+    const validated = validateContract(s, input);
+    if (input.confirmed !== true) fail('请核对合同签约人与付款记录后确认登记。');
+    ensureReceipts(s);
+    const c = { ...validated, id: 'C' + (s.contracts.length + 1) };
+    s.contracts.push(c);
+    addReceipt(s, c, 'initial', c.paid, c.paidAt, c.start, c.end, c.reference);
+    log(s, '管理员', '合同登记', c.device, '第一所有人：' + user(s, c.owner).name + '；控制权限未改变');
+    return c;
+  }
+  function normalizeRights(value) {
+    const r = {}; fields.forEach(k => { r[k] = Boolean(value[k]); });
+    if (!r.view) fields.slice(1).forEach(k => { r[k] = false; });
+    return r;
+  }
+  function permissionChanges(s, did, draft) {
+    const changes = [];
+    Object.keys(draft).forEach(uid => {
+      const j = join(s, did, uid);
+      if (!j) fail('用户尚未扫码添加此设备，不能保存此用户的授权。', 'NOT_ASSOCIATED');
+      const next = normalizeRights(draft[uid]);
+      const diff = fields.filter(k => Boolean(j.rights[k]) !== next[k]);
+      if (diff.length) changes.push({ uid, next, before: copy(j.rights), fields: diff });
+    });
+    return changes;
+  }
+  function grant(s, did, draft, reason = '') {
+    if (!device(s, did)) fail('设备不存在。');
+    const changes = permissionChanges(s, did, draft);
+    if (!changes.length) fail('没有需要保存的权限变更。');
+    changes.forEach(c => { join(s, did, c.uid).rights = c.next; });
+    log(s, '管理员', '权限变更', did, changes.map(c => user(s, c.uid).name + '：' + (c.next.view ? fields.filter(k => c.next[k]).map(k => ({ view:'查看',control:'启停',frequency:'调频',reset:'复位' })[k]).join('、') : '已收回全部权限')).join('；') + (reason ? '。' + reason.slice(0, 100) : ''));
+    return changes;
+  }
+  function can(s, did, uid, action) {
+    const d = device(s, did), j = join(s, did, uid);
+    if (!d || !j || !j.rights.view) return { ok: false, reason: '当前无权访问此设备。' };
+    if (action === 'view') return { ok: true };
+    const permission = ['start', 'stop'].includes(action) ? 'control' : action;
+    if (!j.rights[permission]) return { ok: false, reason: '此项操作尚未获得管理员授权。' };
+    if (!d.online) return { ok: false, reason: '设备离线，暂时无法下发控制指令。' };
+    const status = leaseStatus(s, did);
+    if (action !== 'stop' && !['near', 'active'].includes(status)) return { ok:false, reason: status === 'expired' ? '租赁已到期，续租后恢复控制。' : '设备尚无生效中的租赁合同。' };
+    return { ok:true };
+  }
+  function command(s, did, uid, action, value) {
+    const access = can(s, did, uid, action); if (!access.ok) fail(access.reason, 'CONTROL_DENIED');
+    const d = device(s, did);
+    if (action === 'frequency') {
+      if (value === '' || !Number.isFinite(Number(value)) || Number(value) < 0 || Number(value) > 80) fail('示例频率范围为 0–80 Hz。');
+      d.target = Math.round(Number(value) * 10) / 10;
+      if (d.run) d.hz = d.target;
+    } else if (action === 'start') { d.run = true; d.hz = d.target; d.current = 6.7; d.voltage = 311; }
+    else if (action === 'stop') { d.run = false; d.hz = 0; d.current = 0; d.voltage = 0; }
+    log(s, user(s, uid).name, ({ start:'启动',stop:'停止',frequency:'频率设定',reset:'故障复位' })[action], did, '模拟设备已确认' + (action === 'frequency' ? '：' + d.target.toFixed(1) + ' Hz' : ''));
+  }
+  function renew(s, did, end, paid, confirmed, paidAt = NOW.slice(0, 10), reference = '') {
+    const c = contract(s, did);
+    if (!c || !confirmed || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(end) || !Number.isFinite(epoch(end)) || epoch(end) <= Math.max(epoch(c.end), epoch(NOW)) || !/^\d+(\.\d{1,2})?$/.test(String(paid)) || Number(paid) <= 0) fail('请填写新的有效到期时间、付款金额，并确认已核对付款。');
+    validatePaidAt(paidAt);
+    if (Number(paid) > 1000000) fail('付款金额不能超过 1,000,000 元。');
+    ensureReceipts(s);
+    const old = c.end; c.end = end;
+    const ref = String(reference).trim().slice(0, 60);
+    c.renewals = (c.renewals || []).concat({ old, end, paid:Number(paid), paidAt, reference:ref }).slice(-4);
+    addReceipt(s, c, 'renewal', paid, paidAt, old, end, ref);
+    log(s, '管理员', '续租登记', did, old.replace('T',' ') + ' → ' + end.replace('T',' ') + '，设备未自动启动');
+    return c;
+  }
+  const api = { NOW, fields, seed, copy, epoch, device, user, contract, join, mask, days, leaseStatus, parseQR, qr, inspectInventory, addInventory, inspectScan, addByScan, validateContract, registerContract, normalizeRights, permissionChanges, grant, can, command, renew, validatePaidAt, ensureReceipts, incomeReport, ensureAdministrator, canInventory, addInventoryFor, tableReport };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api; else global.RentalPrototype = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+(function (global) {
+  'use strict';
+  const fields = ['view', 'control', 'frequency', 'reset'];
+  const profileFields = ['name', 'phone', 'registeredAt'];
+  const leaseFields = ['owner', 'start', 'end'];
+  const copy = value => JSON.parse(JSON.stringify(value));
+  const pick = (value, keys) => Object.fromEntries(keys.map(key => [key, value[key] == null ? null : value[key]]));
+  const rights = value => Object.fromEntries(fields.map(key => [key, Boolean(value && value[key])]));
+  const sorted = list => list.sort((a, b) => a.id.localeCompare(b.id));
+
+  // Explicit allowlist: motor state, history, alarms, commands and receipts never enter the archive.
+  function snapshot(store, createdAt) {
+    const users = sorted(store.users.filter(u => u.role !== 'admin').map(u => pick(u, ['id', ...profileFields])));
+    const userIds = new Set(users.map(u => u.id));
+    const leases = sorted(store.contracts.filter(c => userIds.has(c.owner)).map(c => pick(c, ['id', 'number', 'device', ...leaseFields])));
+    const access = store.joins.filter(j => userIds.has(j.user)).map(j => ({ user: j.user, device: j.device, rights: rights(j.rights) })).sort((a, b) => (a.user + '/' + a.device).localeCompare(b.user + '/' + b.device));
+    const deviceIds = new Set([...leases.map(c => c.device), ...access.map(j => j.device)]);
+    const devices = sorted(store.devices.filter(d => deviceIds.has(d.id)).map(d => pick(d, ['id', 'name', 'vendor', 'model', 'module'])));
+    return { schema: 'rental-user-archive-v1', scope: 'users-only', createdAt, users, devices, leases, access };
+  }
+
+  function userRows(store) {
+    const data = snapshot(store, null);
+    return data.users.map(u => ({ ...u, devices: data.devices.filter(d => data.leases.some(c => c.device === d.id && c.owner === u.id) || data.access.some(j => j.device === d.id && j.user === u.id)).map(d => {
+      const c = data.leases.find(c => c.device === d.id), j = data.access.find(j => j.device === d.id && j.user === u.id);
+      return { ...d, owner: Boolean(c && c.owner === u.id), end: c ? c.end : null, rights: rights(j && j.rights) };
+    }) }));
+  }
+
+  function preview(store, archive) {
+    const changes = [], conflicts = [];
+    if (!archive || archive.schema !== 'rental-user-archive-v1' || archive.scope !== 'users-only' || !['users', 'devices', 'leases', 'access'].every(k => Array.isArray(archive[k]))) return { changes, conflicts: ['备份格式或数据范围不匹配。'] };
+    const push = (label, field, before, after) => { if (JSON.stringify(before) !== JSON.stringify(after)) changes.push({ label, field, before, after }); };
+    const userIds = new Set(archive.users.map(u => u.id));
+    const leaseIds = new Set(archive.leases.map(c => c.id));
+    archive.devices.forEach(d => {
+      const current = store.devices.find(x => x.id === d.id);
+      if (!current || ['vendor', 'model', 'module'].some(key => current[key] !== d[key])) conflicts.push('设备 INV-' + d.id + ' 缺失或身份不一致，请先核对设备档案。');
+    });
+    archive.users.forEach(u => {
+      const current = store.users.find(x => x.id === u.id && x.role !== 'admin');
+      if (!current) { conflicts.push('用户 ' + u.name + ' 不在当前档案中，请先核对身份。'); return; }
+      if (store.users.some(x => x.id !== u.id && x.phone === u.phone)) conflicts.push('用户 ' + u.name + ' 的备份手机号与当前其他用户冲突。');
+      profileFields.forEach(key => push(u.name, key, current[key] == null ? null : current[key], u[key]));
+    });
+    archive.leases.forEach(c => {
+      const current = store.contracts.find(x => x.id === c.id && x.device === c.device && x.number === c.number);
+      if (!current || !userIds.has(c.owner)) { conflicts.push('合同 ' + c.number + ' 无法与当前档案匹配。'); return; }
+      leaseFields.forEach(key => push(c.number, key, current[key], c[key]));
+    });
+    store.contracts.filter(c => userIds.has(c.owner) && !leaseIds.has(c.id)).forEach(c => conflicts.push('合同 ' + c.number + ' 不在此备份中，请核对新增合同后再恢复。'));
+    const previous = store.joins.filter(j => userIds.has(j.user));
+    const keys = new Set([...previous, ...archive.access].map(j => j.user + '/' + j.device));
+    keys.forEach(key => {
+      const before = previous.find(j => j.user + '/' + j.device === key);
+      const after = archive.access.find(j => j.user + '/' + j.device === key);
+      const entry = after || before;
+      if (after && (!userIds.has(after.user) || !archive.devices.some(d => d.id === after.device))) conflicts.push('关联记录 ' + key + ' 缺少用户或设备引用。');
+      const u = archive.users.find(u => u.id === entry.user);
+      push((u ? u.name : entry.user) + ' / INV-' + entry.device, 'access', before ? rights(before.rights) : null, after ? rights(after.rights) : null);
+    });
+    return { changes, conflicts };
+  }
+
+  // Used only for the clickable simulation. Never replays device commands or writes to physical media.
+  function restoreDemo(store, archive, confirmed) {
+    if (confirmed !== true) throw new Error('请先核对恢复范围并勾选确认。');
+    const result = preview(store, archive);
+    if (result.conflicts.length) throw new Error(result.conflicts.join(' '));
+    archive.users.forEach(u => Object.assign(store.users.find(x => x.id === u.id), pick(u, profileFields)));
+    archive.leases.forEach(c => Object.assign(store.contracts.find(x => x.id === c.id), pick(c, leaseFields)));
+    const ids = new Set(archive.users.map(u => u.id));
+    store.joins = store.joins.filter(j => !ids.has(j.user)).concat(archive.access.map(j => ({ user: j.user, device: j.device, rights: rights(j.rights) })));
+    return copy(result);
+  }
+  const api = { snapshot, userRows, preview, restoreDemo };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api; else global.UserBackupPrototype = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+(function () {
+  'use strict';
+  const M = globalThis.RentalPrototype;
+  const root = document.getElementById('rental-workflow');
+  const mini = root.querySelector('#inv-mini'), admin = root.querySelector('#inv-admin');
+  const content = mini.querySelector('#im-content'), main = admin.querySelector('#ia-main');
+  const mLayer = mini.querySelector('#im-sheet-layer'), aLayer = admin.querySelector('#ia-modal-layer');
+  const names = { view:'查看', control:'启停', frequency:'调频', reset:'复位' };
+  const pages = { devices:'设备管理', leases:'租赁合同', reports:'统计报表', income:'收款明细', backup:'用户数据与备份', permissions:'用户授权', reminders:'到期与提醒', logs:'操作记录' };
+  let store = M.seed();
+  let ui = { mode:'admin', user:'admin', screen:'devices', page:'backup', selected:'05', filter:'all', query:'', adminFilter:'all', adminQuery:'', scanRaw:'HN|VF-22|DEMO4G001005', historyView:'chart', metric:'frequency', density:16, incomeMonth:'2026-10', incomeKind:'all', incomeAvailable:true, mobileInventoryAvailable:true, reportsAvailable:true, userBackupAvailable:true, reportDimension:'device', reportMonth:'all', incomeScope:null, incomeFromReport:false };
+  let scanResult = null, scanError = '', scanAdded = false, inventoryDraft = null, contractDraft = null, permissionDraft = null, permissionDevice = null, pendingLeave = null;
+  let toastTimer, commandBusy = false, renewDevice = null;
+  const stateWriter = Date.now().toString(36) + Math.random().toString(36).slice(2);
+  let stateRevision = 0;
+  const icon = name => '<i data-lucide="' + name + '" aria-hidden="true"></i>';
+  const esc = value => String(value == null ? '' : value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const dNow = () => M.device(store, ui.selected) || store.devices[0];
+  const uNow = () => M.user(store, ui.user) || store.users[0];
+  const cFor = d => M.contract(store, d.id);
+  const rFor = d => { const j = M.join(store,d.id,ui.user); return j ? j.rights : {view:false,control:false,frequency:false,reset:false}; };
+  const rightsText = r => M.fields.filter(k => r[k]).map(k => names[k]).join('、') || '无访问权限';
+  const dateText = value => String(value || '').replace('T',' ');
+  function restore(snapshot) {
+    const p = snapshot && snapshot.privateContent;
+    if (p && p.schema === 'rental-flow-v3' && p.store && p.store.version === 3) {
+      if (Array.isArray(p.store.devices) && Array.isArray(p.store.joins) && Array.isArray(p.store.contracts) && Array.isArray(p.store.users) && Array.isArray(p.store.logs)) store = M.copy(p.store);
+      if (p.ui) ui = Object.assign(ui,p.ui);
+      if (!p.ui || !p.ui.incomeAvailable) { ui.mode='admin'; ui.page='income'; ui.incomeAvailable=true; }
+      M.ensureAdministrator(store);
+      if (!p.ui || !p.ui.mobileInventoryAvailable) { ui.mode='mini'; ui.user='admin'; ui.screen='devices'; ui.mobileInventoryAvailable=true; }
+      if (!p.ui || !p.ui.reportsAvailable) { ui.mode='admin'; ui.page='reports'; ui.reportsAvailable=true; }
+      if (!p.ui || !p.ui.userBackupAvailable) { ui.mode='admin'; ui.page='backup'; ui.userBackupAvailable=true; }
+      if (!M.user(store,ui.user)) ui.user = 'chen';
+      if (!M.device(store,ui.selected)) ui.selected = '05';
+      if (!['mini','admin'].includes(ui.mode)) ui.mode = 'mini';
+      if (!pages[ui.page]) ui.page = 'devices';
+      if (!['devices','detail','scan','history','rental','profile','messages','sms','inventory'].includes(ui.screen)) ui.screen = 'devices';
+    }
+  }
+  function save() {
+    const snapshot = { schema:'rental-flow-v3', writer:stateWriter, revision:++stateRevision, store:M.copy(store), ui:M.copy(ui) };
+    const payload = {modelContent:{preview:'租赁流程联动原型',mode:ui.mode==='mini'?'用户小程序':'管理后台',user:uNow().name,screen:ui.mode==='mini'?ui.screen:pages[ui.page],device:dNow().name,deviceCount:store.devices.length,contractCount:store.contracts.length,lastAction:store.logs[0]&&store.logs[0].action},privateContent:snapshot};
+    const bytes = () => new TextEncoder().encode(JSON.stringify(payload)).length;
+    while (bytes() > 16000 && snapshot.store.logs.length > 0) snapshot.store.logs.pop();
+    if (bytes() <= 16000 && window.openai && window.openai.setWidgetState) window.openai.setWidgetState(payload).catch(function(){});
+  }
+  restore(window.openai && window.openai.widgetState);
+  M.ensureReceipts(store);
+  window.addEventListener('openai:set_globals',function(e){if(e.detail&&e.detail.globals&&e.detail.globals.widgetState){const state=e.detail.globals.widgetState,p=state.privateContent;if(p&&p.writer===stateWriter&&p.revision<=stateRevision)return;restore(state);permissionDraft=null;permissionDevice=null;render();}});
+  function icons(){if(globalThis.lucide)globalThis.lucide.createIcons({attrs:{width:18,height:18}});}
+  function toast(text){const el=ui.mode==='mini'?mini.querySelector('#im-toast'):admin.querySelector('#ia-toast');mini.querySelector('#im-toast').hidden=true;admin.querySelector('#ia-toast').hidden=true;el.textContent=text;el.hidden=false;root.querySelector('#wf-live').textContent=text;clearTimeout(toastTimer);toastTimer=setTimeout(()=>{el.hidden=true;},3300);}
+  function closeModal(){mLayer.hidden=true;aLayer.hidden=true;mLayer.innerHTML='';aLayer.innerHTML='';admin.style.minHeight='';mini.style.minHeight='';pendingLeave=null;}
+  function fitModal(){requestAnimationFrame(()=>{[[admin,aLayer],[mini,mLayer]].forEach(([host,layer])=>{if(!layer.hidden){const dialog=layer.firstElementChild;if(dialog){const needed=dialog.offsetHeight+parseFloat(getComputedStyle(layer).paddingTop)+28;if(needed>host.offsetHeight)host.style.minHeight=needed+'px';}}});});}
+  function modal(mode,title,subtitle,body){closeModal();const isMini=mode==='mini',layer=isMini?mLayer:aLayer;layer.innerHTML='<section class="'+(isMini?'im-sheet':'ia-modal')+'" role="dialog" aria-modal="true" aria-label="'+esc(title)+'"><div class="'+(isMini?'im-sheet-heading':'ia-modal-heading')+'"><h2>'+esc(title)+'</h2><button type="button" data-action="close" aria-label="关闭">'+icon('x')+'</button></div>'+(subtitle?'<p class="'+(isMini?'im-hint':'ia-modal-subtitle')+'">'+esc(subtitle)+'</p>':'')+body+'</section>';layer.hidden=false;icons();fitModal();const focus=layer.querySelector('input,select,button[data-action]:not([data-action="close"])');if(focus)focus.focus();}
+  function row(label,value){return '<div class="wf-review-row"><span>'+esc(label)+'</span><span>'+esc(value)+'</span></div>';}
+  function mRows(rows){return '<div class="im-info-list">'+rows.map(r=>'<div class="im-info-row"><span>'+esc(r[0])+'</span><span>'+esc(r[1])+'</span></div>').join('')+'</div>';}
+  function aFooter(back,next,label){return '<div class="ia-modal-footer"><button type="button" class="ia-secondary" data-action="'+back+'">'+(back==='close'?'取消':'上一步')+'</button><button type="button" class="ia-primary" data-action="'+next+'">'+label+'</button></div>';}
+  function errorBox(){return '<p id="wf-error" class="ia-error" role="alert"></p>';}
+  function showError(error){const box=root.querySelector('#wf-error');if(box){box.textContent=error.message||String(error);fitModal();}else toast(error.message||String(error));}
+  function clearFormError(e){if(e.target.matches('input,select,textarea')){const dialog=e.target.closest('[role="dialog"]');const box=dialog&&dialog.querySelector('#wf-error');if(box)box.textContent='';}}
+  root.addEventListener('input',clearFormError);
+  root.addEventListener('change',clearFormError);
+  function dirtyPermissions(){if(ui.page!=='permissions'||!permissionDraft||permissionDevice!==ui.selected)return false;try{return M.permissionChanges(store,ui.selected,permissionDraft).length>0;}catch(e){return false;}}
+  function leave(action){if(dirtyPermissions()){modal('admin','离开授权编辑？','当前权限修改还没有保存。','<p class="ia-note">离开将放弃这次修改，已生效的权限保持不变。</p><div class="ia-modal-footer"><button type="button" class="ia-secondary" data-action="close">继续编辑</button><button type="button" class="ia-primary" data-action="discard-leave">放弃修改并离开</button></div>');pendingLeave=action;}else action();}
+  function navigate(mode,page,id){closeModal();if(id)ui.selected=id;ui.mode=mode;if(mode==='mini')ui.screen=page;else ui.page=page;permissionDraft=null;permissionDevice=null;render();save();}
+  function progress(){const d=dNow(),c=cFor(d),j=M.join(store,d.id,ui.user);const checks=[true,Boolean(c),Boolean(j),Boolean(j&&M.fields.slice(1).some(k=>j.rights[k]))];root.querySelector('#wf-progress').innerHTML='<span class="wf-focus">当前演示：'+esc(d.name)+'</span><div class="wf-steps">'+['设备入库','合同登记','用户扫码','管理员授权'].map((s,i)=>'<span class="'+(checks[i]?'done':'')+'"><b>'+(checks[i]?'✓':i+1)+'</b>'+s+'</span>').join('')+'</div>';}
+  function render(){root.querySelector('#wf-mini-section').hidden=ui.mode!=='mini';root.querySelector('#wf-admin-section').hidden=ui.mode!=='admin';root.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===ui.mode));root.querySelector('#wf-user-label').hidden=ui.mode!=='mini';root.querySelector('#wf-demo-user').innerHTML=store.users.map(u=>'<option value="'+u.id+'" '+(u.id===ui.user?'selected':'')+'>'+u.name+' · '+M.mask(u.phone)+'</option>').join('');progress();if(ui.mode==='mini')renderMini();else renderAdmin();icons();}
+  function miniBanner(d){const c=cFor(d),rights=rFor(d),status=M.leaseStatus(store,d.id);if(status==='expired')return '<div class="im-banner red">'+icon('circle-alert')+'<div>租赁已到期'+(d.online&&!d.run?' · 停机已确认':' · 停机待确认')+'<p>续租后可恢复已授予的控制权限。</p></div></div>';if(!d.online)return '<div class="im-banner">'+icon('wifi-off')+'<div>设备离线，状态待更新<p>最后连接：今天 13:18，控制暂不可用。</p></div></div>';if(!rights.control&&!rights.frequency&&!rights.reset)return '<div class="im-banner blue">'+icon('lock-keyhole')+'<div>当前权限：仅查看<p>控制权限需要管理员单独授予。</p></div></div>';if(!c||status==='future')return '<div class="im-banner">'+icon('file-clock')+'<div>租赁合同尚未生效<p>当前仅可查看，控制需有有效租期。</p></div></div>';if(status==='near')return '<button type="button" class="im-banner" style="width:100%" data-action="rental">'+icon('calendar-clock')+'<div>租期剩余 '+M.days(c)+' 天<p>'+dateText(c.end)+' 到期，未续租将自动停机。</p></div></button>';return '';}
+  function visibleDevices(){return store.devices.filter(d=>{const j=M.join(store,d.id,ui.user);return j&&j.rights.view;});}
+  function miniCard(d){const c=cFor(d),r=rFor(d),status=M.leaseStatus(store,d.id),control=M.fields.slice(1).some(k=>r[k]);return '<button type="button" class="im-device" data-device="'+d.id+'"><div class="im-device-head"><div class="im-machine">'+icon('cpu')+'</div><div class="im-device-name"><h3>'+esc(d.name)+'</h3><p>'+esc(d.model)+' · '+esc(d.module.slice(-6))+'</p></div><span class="im-state '+(d.online?'':'off')+'">'+(d.online?'在线':'离线')+'</span></div><div class="im-device-mid"><span class="im-reading">'+(d.online?d.hz.toFixed(1):'—')+'<small>Hz</small></span><div class="im-tags"><span class="im-tag '+(d.run?'green':'')+'">'+(!d.online?'状态待更新':d.run?'运行中':'已停机')+'</span><span class="im-tag '+(status==='expired'?'red':control?'blue':'')+'">'+(status==='expired'?'租赁到期':control?'已授权控制':'仅查看')+'</span></div></div><div class="im-lease-line '+(status==='expired'?'expired':status==='near'?'warn':'')+'"><span>'+(c?c.end.slice(0,10)+' 到期':'尚未登记租赁合同')+'</span><span>'+(status==='near'?'剩余 '+M.days(c)+' 天':c?(c.owner===ui.user?'第一所有人':'关联设备'):'待登记')+icon('chevron-right')+'</span></div></button>';}
+  function drawMiniList(){const box=content.querySelector('.im-devices');if(!box)return;const ds=visibleDevices().filter(d=>{const r=rFor(d),has=M.fields.slice(1).some(k=>r[k]);return (!ui.query||(d.name+d.model+d.module).toLowerCase().includes(ui.query.toLowerCase()))&&(ui.filter==='all'||ui.filter==='control'&&has||ui.filter==='view'&&!has);});box.innerHTML=ds.length?ds.map(miniCard).join(''):'<div class="im-empty">'+icon('scan-line')+'<p>暂无设备，扫码后可添加查看</p><button type="button" class="im-primary" style="margin-top:18px" data-action="scan">扫一扫，添加设备</button></div>';icons();}
+  function miniDevices(){const ds=visibleDevices();content.innerHTML='<div class="im-intro"><div><h1>我的设备</h1><p>'+uNow().name+' · '+M.mask(uNow().phone)+'</p></div><button type="button" class="im-scan wf-scan-entry" data-action="scan">'+icon('scan-line')+'扫一扫</button></div><div class="im-summary">'+[[ds.length,'关联设备'],[ds.filter(d=>d.online).length,'当前在线'],[ds.filter(d=>M.leaseStatus(store,d.id)==='near').length,'即将到期']].map(a=>'<div><strong>'+a[0]+'</strong><span>'+a[1]+'</span></div>').join('')+'</div><label class="im-search">'+icon('search')+'<input id="wf-mini-search" placeholder="搜索设备名称 / 编号" aria-label="搜索设备名称或编号" value="'+esc(ui.query)+'"></label><div class="im-filters">'+[['all','全部设备'],['control','已授权控制'],['view','仅查看']].map(x=>'<button type="button" data-mini-filter="'+x[0]+'" aria-pressed="'+(ui.filter===x[0])+'">'+x[1]+'</button>').join('')+'</div><div class="im-devices"></div>';drawMiniList();}
+  function miniDetail(){const d=dNow();if(!M.can(store,d.id,ui.user,'view').ok){content.innerHTML='<h1>访问权限已收回</h1><p class="im-note">请联系管理员重新授权。扫码不会恢复已收回的权限。</p><button type="button" class="im-primary" data-action="mini-list">返回设备列表</button>';return;}const c=cFor(d),r=rFor(d);content.innerHTML='<div class="im-detail-head"><div><h2>'+esc(d.name)+'</h2><p>'+esc(d.model)+' · 第一所有人：'+(c?M.user(store,c.owner).name:'待登记')+'</p></div><span class="im-state '+(d.online?'':'off')+'">'+(d.online?'在线':'离线')+'</span></div>'+miniBanner(d)+'<section class="im-frequency"><div class="im-frequency-label"><span>实际运行频率</span><span class="im-tag '+(d.run?'green':'')+'">'+(!d.online?'待更新':d.run?'运行中':'已停机')+'</span></div><div class="im-big-number">'+(d.online?d.hz.toFixed(1):'—')+'<span>Hz</span></div><div class="im-meter"><i style="width:'+(d.online?d.hz/80*100:0)+'%"></i></div><div class="im-set-frequency"><span>设定频率 <strong>'+d.target.toFixed(1)+' Hz</strong></span><button type="button" data-action="frequency" '+(M.can(store,d.id,ui.user,'frequency').ok?'':'disabled')+'>'+icon('sliders-horizontal')+'调整</button></div></section><div class="im-metrics">'+[['输出电流',d.current.toFixed(1),'A'],['输出电压',d.voltage,'V'],['母线电压',d.bus,'V']].map(v=>'<div><p>'+v[0]+'</p><strong>'+(d.online?v[1]:'—')+'</strong><small>'+v[2]+'</small></div>').join('')+'</div><div class="im-section-line"><h3>设备控制</h3><span>逐项授权</span></div><div class="im-command-grid">'+[['start','启动','play'],['stop','停止','square'],['reset','故障复位','rotate-ccw']].map(a=>'<button type="button" class="'+a[0]+'" data-command="'+a[0]+'" '+(M.can(store,d.id,ui.user,a[0]).ok&&(a[0]!=='start'||!d.run)&&(a[0]!=='stop'||d.run)?'':'disabled')+'>'+icon(a[2])+a[1]+'</button>').join('')+'</div><p class="im-updated">'+(d.online?'示例数据更新于 14:32:08':'离线数据不代表设备当前状态')+'</p><div class="wf-rights">'+M.fields.map(k=>'<span class="im-tag '+(r[k]?'blue':'')+'">'+names[k]+' '+(r[k]?'✓':'未授权')+'</span>').join('')+'</div><div class="im-links" style="margin-top:18px"><button type="button" class="im-link" data-action="history"><span>'+icon('chart-no-axes-combined')+'历史运行数据</span>'+icon('chevron-right')+'</button><button type="button" class="im-link" data-action="rental"><span>'+icon('file-text')+'租赁与权限信息</span>'+icon('chevron-right')+'</button></div>';}
+  function scanOptions(){const options=store.devices.map(d=>[M.qr(d),d.name]).concat([['HN|VF-22|NOT_IN_STOCK','未入库二维码'],['INVALID','无效二维码'],['OTHER|VF-99|DEMO4G001001','档案不一致']]);if(!options.some(x=>x[0]===ui.scanRaw))options.unshift([ui.scanRaw,'自定义识别内容']);return options.map(x=>'<option value="'+esc(x[0])+'" '+(ui.scanRaw===x[0]?'selected':'')+'>'+esc(x[1])+'</option>').join('');}
+  function miniScan(){if(scanResult){const d=scanResult.device,c=cFor(d);content.innerHTML='<div class="wf-success-icon">'+icon(scanAdded?'check':'scan-line')+'</div><div class="wf-centered"><h2>'+(scanAdded?'设备已添加':scanResult.added?'此设备已在列表中':'已识别设备')+'</h2><p class="im-note">'+esc(d.name)+'</p></div>'+mRows([['厂商代号',d.vendor],['变频器型号',d.model],['4G 模块 ID',d.module],['第一所有人',c?M.user(store,c.owner).name:'尚未登记合同'],['添加后的权限',scanResult.added?rightsText(scanResult.rights):'仅查看']])+'<div class="im-banner blue">'+icon('shield-check')+'<div>扫码不会改变第一所有人<p>启停、调频和复位需要管理员授权。</p></div></div><button type="button" class="im-primary" data-action="'+(scanAdded||scanResult.added?'scan-open':'scan-confirm')+'">'+(scanAdded||scanResult.added?'查看设备':'确认添加 · 仅查看')+'</button><button type="button" class="im-secondary" style="margin-top:10px" data-action="scan-again">继续扫码</button>';return;}content.innerHTML='<h1>扫一扫</h1><p class="im-note">扫描设备二维码，添加后默认仅查看</p><div class="wf-scanner"><div class="wf-viewfinder">'+icon('scan-line')+'</div><span>将设备二维码放入框内</span><p>原型扫码演示 · 不调用真实相机</p></div><label class="wf-field">选择演示二维码<select class="wf-select" id="wf-scan-select" aria-label="选择演示二维码">'+scanOptions()+'</select></label><label class="wf-field">二维码识别内容<input id="wf-scan-raw" value="'+esc(ui.scanRaw)+'" aria-label="二维码识别内容"></label>'+(scanError?'<div class="im-banner red" role="alert">'+icon('circle-alert')+'<div>'+esc(scanError)+'</div></div>':'')+'<button type="button" class="im-primary" data-action="scan-identify">'+icon('scan-line')+'演示相机扫码</button><div class="wf-two-actions"><button type="button" class="im-secondary" data-action="scan-album">'+icon('image')+'相册识别演示</button><button type="button" class="im-secondary" data-action="scan-cancel">取消扫码</button></div>';}
+  function miniRental(){const d=dNow(),c=cFor(d);if(!M.can(store,d.id,ui.user,'view').ok){miniDetail();return;}content.innerHTML='<h1>租赁与权限</h1><p class="im-note">'+esc(d.name)+'</p>'+mRows([['第一所有人',c?M.user(store,c.owner).name:'待登记'],['合同编号',c?c.number:'待登记'],['绑定手机号',c?M.mask(M.user(store,c.owner).phone):'待登记'],['租赁方式','按月租赁'],['租期开始',c?dateText(c.start):'待登记'],['租期结束',c?dateText(c.end):'待登记'],['我的权限',rightsText(rFor(d))]])+'<h3 style="margin-top:20px">设备档案</h3>'+mRows([['厂商 / 型号',d.vendor+' / '+d.model],['4G 模块 ID',d.module],['位置',d.place||'未填写']])+'<p class="im-note">租期及第一所有人以管理员登记为准。控制权限需要单独授权。</p>';}
+  function miniHistory(){if(!M.can(store,ui.selected,ui.user,'view').ok){miniDetail();return;}const current=ui.metric==='current';content.innerHTML='<h1>历史数据</h1><p class="im-note">'+esc(dNow().name)+' · 2026-10-21</p><div class="im-history-controls"><div class="im-segment">'+[['frequency','频率'],['current','电流']].map(x=>'<button type="button" data-metric="'+x[0]+'" aria-pressed="'+(ui.metric===x[0])+'">'+x[1]+'</button>').join('')+'</div><div class="im-segment">'+[['chart','曲线'],['table','表格']].map(x=>'<button type="button" data-history="'+x[0]+'" aria-pressed="'+(ui.historyView===x[0])+'">'+x[1]+'</button>').join('')+'</div></div><div class="im-chart-panel"><div class="im-chart-title"><span>'+(current?'输出电流 / A':'实际频率 / Hz')+'</span><span>示例记录</span></div>'+(ui.historyView==='table'?'<table class="im-data-table"><thead><tr><th>时间</th><th>'+(current?'电流 / A':'频率 / Hz')+'</th></tr></thead><tbody>'+['00:00','06:00','08:00','10:00','12:00','14:30'].map((t,i)=>'<tr><td>'+t+'</td><td>'+([2,3].includes(i)?'0.0':current?'6.7':'42.0')+'</td></tr>').join('')+'</tbody></table>':'<svg class="im-chart" viewBox="0 0 320 210" role="img" aria-label="示例历史曲线，八点至十点停机"><path class="im-gridline" d="M35 20H302M35 60H302M35 100H302M35 140H302M35 180H302"/><text x="7" y="24">'+(current?'8':'50')+'</text><text x="7" y="104">'+(current?'4':'25')+'</text><text x="15" y="184">0</text><text x="35" y="205">00:00</text><text x="116" y="205">06:00</text><text x="198" y="205">12:00</text><text x="270" y="205">18:00</text><path class="im-curve" d="M35 48L90 47L140 48L141 180L181 180L182 48L242 47L302 46"/></svg>')+'</div>';}
+  function miniMessages(){const events=store.logs.filter(l=>M.can(store,l.device,ui.user,'view').ok);content.innerHTML='<h1>消息</h1><p class="im-note">租赁与授权动态</p>'+events.slice(0,8).map(l=>'<article class="im-message"><div class="im-message-head"><span>'+icon('bell')+'</span><h3>'+esc(l.action)+'</h3><small>示例记录</small></div><p>'+esc(M.device(store,l.device).name)+'<br>'+esc(l.result)+'</p><button type="button" data-device="'+l.device+'">查看设备'+icon('chevron-right')+'</button></article>').join('')+(events.length?'':'<p class="im-empty">暂无消息</p>');}
+  function miniProfile(){const u=uNow(),owned=store.contracts.filter(c=>c.owner===u.id);content.innerHTML='<div class="im-person"><div class="im-avatar">'+u.name[0]+'</div><div><h2>'+u.name+'</h2><p>'+M.mask(u.phone)+' · 微信绑定手机号</p></div></div><div class="im-rental-overview"><p>我的承租设备</p><div class="im-overview-row"><div><strong>'+owned.length+'</strong><span>台</span></div><span class="im-small">以合同登记为准</span></div></div><div class="im-links"><button type="button" class="im-link" data-action="scan"><span>'+icon('scan-line')+'扫码添加设备</span>'+icon('chevron-right')+'</button><button type="button" class="im-link" data-action="sms"><span>'+icon('message-square')+'短信提醒服务</span><small>暂未开放</small>'+icon('chevron-right')+'</button></div><p class="im-note">扫码仅建立查看关联，第一所有人由管理员按合同登记。</p>';}
+  function miniSms(){content.innerHTML='<h1>短信提醒</h1><p class="im-note">到期前 7 天、3 天、1 天提醒</p><div class="im-rental-overview"><p>短信服务余额</p><div class="im-overview-row"><div><strong>—</strong></div><span>服务待开通</span></div></div>'+mRows([['计费方式','充值余额，按条扣费'],['接收手机号',M.mask(uNow().phone)],['短信单价','待确定'],['充值状态','暂未开放']])+'<button type="button" class="im-primary" disabled>充值暂未开放</button><p class="im-note">短信费用与设备租金分别管理。当前仅预留接口，不提供充值或发信。</p>';}
+  let mobileDraft = null;
+  function freshMobileDraft(){return {step:1,raw:'HN|VF-22|DEMO4G001'+String(store.next).padStart(3,'0'),name:'',place:'海口仓库',error:'',duplicate:null};}
+  function requireInventory(){if(!M.canInventory(store,ui.user))throw new Error('只有管理员可以扫码入库。');}
+  function startMobileInventory(){requireInventory();mobileDraft=freshMobileDraft();navigate('mini','inventory');}
+  function staffHome(){
+    content.innerHTML='<div class="im-intro"><div><h1>设备入库</h1><p>'+esc(uNow().name)+' · 管理员</p></div><span class="wf-staff-mark">'+icon('shield-check')+'</span></div>'+
+      '<button type="button" class="im-primary wf-mobile-scan" data-mobile-action="start">'+icon('scan-line')+'扫码入库</button><p class="im-note">扫描设备标签，识别后确认入库</p>'+
+      '<div class="im-summary">'+[[store.devices.length,'在册设备'],[store.devices.filter(d=>!cFor(d)).length,'待出租'],[store.devices.filter(d=>d.createdAt&&d.createdAt.slice(0,10)===M.NOW.slice(0,10)).length,'今日入库']].map(v=>'<div><strong>'+v[0]+'</strong><span>'+v[1]+'</span></div>').join('')+'</div>'+
+      '<div class="wf-stock-heading"><h2>设备档案</h2><span>与管理后台同步</span></div><div class="wf-stock-list">'+store.devices.slice().reverse().map(d=>'<button type="button" class="wf-stock-item" data-mobile-device="'+d.id+'"><div><strong>'+esc(d.name)+'</strong><span>'+esc(d.model)+' · INV-'+d.id+'</span><small>'+esc(d.place||'未填写位置')+'</small></div><div class="wf-stock-right"><span class="wf-stock-tag">'+(cFor(d)?'已登记合同':'待出租')+'</span>'+icon('chevron-right')+'</div></button>').join('')+'</div>';
+  }
+  function staffProfile(){
+    content.innerHTML='<div class="im-person"><div class="im-avatar">管</div><div><h2>'+esc(uNow().name)+'</h2><p>'+M.mask(uNow().phone)+' · 微信绑定手机号</p></div></div><div class="im-banner blue">'+icon('shield-check')+'<div>管理员账号<p>可以扫码创建设备档案。</p></div></div><div class="im-links"><button type="button" class="im-link" data-mobile-action="start"><span>'+icon('scan-line')+'扫码入库</span>'+icon('chevron-right')+'</button><button type="button" class="im-link" data-mobile-action="home"><span>'+icon('boxes')+'查看设备档案</span>'+icon('chevron-right')+'</button></div>';
+  }
+  function mobileError(){return '<p id="wf-mobile-error" class="im-error" role="alert">'+esc(mobileDraft.error)+'</p>';}
+  function staffInventory(){
+    if(!mobileDraft)mobileDraft=freshMobileDraft();
+    const draft=mobileDraft;
+    let body='<div class="wf-mobile-steps">'+['扫码识别','确认档案','入库完成'].map((label,i)=>'<span class="'+(draft.step===i+1?'active':'')+'">'+(i+1)+' · '+label+'</span>').join('')+'</div>';
+    if(draft.step===1){
+      const next='HN|VF-22|DEMO4G001'+String(store.next).padStart(3,'0');
+      const options=[[next,'新设备 · 可入库'],[M.qr(store.devices[0]),'已有设备 · 重复入库'],['INVALID','无效二维码']];
+      if(!options.some(o=>o[0]===draft.raw))options.unshift([draft.raw,'手动输入的识别内容']);
+      body+='<h1>扫码入库</h1><p class="im-note">识别厂商、变频器型号和 4G 模块 ID</p><div class="wf-scanner"><div class="wf-viewfinder">'+icon('scan-line')+'</div><span>对准设备标签上的二维码</span><p>原型扫码演示 · 不调用真实相机</p></div><label class="wf-field">选择演示二维码<select class="wf-select" id="wf-mobile-qr-select">'+options.map(o=>'<option value="'+esc(o[0])+'" '+(draft.raw===o[0]?'selected':'')+'>'+o[1]+'</option>').join('')+'</select></label><label class="wf-field">二维码识别内容<input id="wf-mobile-qr" value="'+esc(draft.raw)+'" autocomplete="off"></label>'+mobileError()+
+        (draft.duplicate?'<button type="button" class="im-secondary" data-mobile-device="'+draft.duplicate+'">查看已入库设备</button>':'')+
+        '<button type="button" class="im-primary wf-mobile-scan" data-mobile-action="parse">'+icon('scan-line')+'演示相机扫码</button><div class="wf-two-actions"><button type="button" class="im-secondary" data-mobile-action="album">'+icon('image')+'相册演示</button><button type="button" class="im-secondary" data-mobile-action="cancel">取消</button></div>';
+    }
+    if(draft.step===2){
+      body+='<h1>确认设备档案</h1><p class="im-note">二维码已识别，请补充设备名称与位置</p>'+mRows([['厂商代号',draft.parsed.vendor],['变频器型号',draft.parsed.model],['4G 模块 ID',draft.parsed.module]])+
+        '<label class="wf-field">设备名称 *<input id="wf-mobile-name" maxlength="30" value="'+esc(draft.name)+'" placeholder="例如：东区 06 号变频器"></label><label class="wf-field">存放位置<input id="wf-mobile-place" maxlength="60" value="'+esc(draft.place)+'" placeholder="例如：海口仓库 A 区"></label><div class="im-banner blue">'+icon('info')+'<div>入库后状态为“待出租”<p>第一所有人和控制权限在合同及授权流程中登记。</p></div></div>'+mobileError()+
+        '<button type="button" class="im-primary" data-mobile-action="save">确认入库</button><div class="wf-two-actions"><button type="button" class="im-secondary" data-mobile-action="back">重新扫码</button><button type="button" class="im-secondary" data-mobile-action="cancel">取消入库</button></div>';
+    }
+    if(draft.step===3){
+      const d=M.device(store,draft.device);
+      body+='<div class="wf-success-icon">'+icon('check')+'</div><div class="wf-centered"><h1>设备已入库</h1><p class="im-note">手机与管理后台已同步（示例）</p></div>'+mRows([['设备名称',d.name],['设备编号','INV-'+d.id],['4G 模块 ID',d.module],['存放位置',d.place||'未填写'],['设备状态','待出租'],['入库人',uNow().name]])+
+        '<button type="button" class="im-primary" data-mobile-action="start">继续扫码入库</button><button type="button" class="im-secondary wf-mobile-gap" data-mobile-action="home">查看设备档案</button><button type="button" class="wf-mobile-text" data-mobile-contract="'+d.id+'">去后台登记合同'+icon('arrow-up-right')+'</button>';
+    }
+    content.innerHTML=body;
+  }
+  function mobileDeviceDetails(id){
+    requireInventory();const d=M.device(store,id);if(!d)return;const c=cFor(d);
+    modal('mini','设备档案',d.name,mRows([['厂商 / 型号',d.vendor+' / '+d.model],['4G 模块 ID',d.module],['存放位置',d.place||'未填写'],['状态',c?'已登记合同':'待出租'],['第一所有人',c?M.user(store,c.owner).name:'尚未登记合同'],['入库方式',d.inventorySource||'历史档案'],['入库时间',d.createdAt?dateText(d.createdAt):'未登记']])+'<button type="button" class="im-primary" data-mobile-contract="'+id+'">'+(c?'去后台查看合同':'去后台登记合同')+'</button>');
+  }
+  function renderStaffMini(){
+    mini.classList.add('wf-staff');
+    if(!['devices','profile','inventory'].includes(ui.screen))ui.screen='devices';
+    const sub=ui.screen==='inventory';
+    mini.querySelector('#im-back').hidden=!sub;
+    mini.querySelector('#im-navtitle').textContent=sub?'扫码入库':'云控租赁';
+    const nav=mini.querySelector('#im-bottom');nav.hidden=sub;
+    nav.innerHTML=[['home','设备档案','boxes'],['start','扫码入库','scan-line'],['profile','我的','user-round']].map(v=>'<button type="button" data-mobile-action="'+v[0]+'" class="'+((v[0]==='home'&&ui.screen==='devices')||(v[0]==='profile'&&ui.screen==='profile')?'active':'')+'">'+icon(v[2])+'<span>'+v[1]+'</span></button>').join('');
+    if(sub)staffInventory();else if(ui.screen==='profile')staffProfile();else staffHome();
+  }
+  function readMobileFields(){if(!mobileDraft)return;const name=content.querySelector('#wf-mobile-name'),place=content.querySelector('#wf-mobile-place');if(name)mobileDraft.name=name.value;if(place)mobileDraft.place=place.value;}
+  function cancelMobileInventory(){
+    if(mobileDraft&&mobileDraft.step===2){readMobileFields();modal('mini','取消本次入库？','设备尚未入库，取消会放弃本次填写。','<div class="wf-two-actions"><button type="button" class="im-secondary" data-action="close">继续填写</button><button type="button" class="im-primary" data-mobile-action="discard">放弃入库</button></div>');}
+    else{mobileDraft=null;navigate('mini','devices');}
+  }
+  root.addEventListener('change',function(e){if(e.target.id==='wf-mobile-qr-select'&&mobileDraft){mobileDraft.raw=e.target.value;mobileDraft.error='';mobileDraft.duplicate=null;render();}});
+  root.addEventListener('input',function(e){if(e.target.id==='wf-mobile-qr'&&mobileDraft)mobileDraft.raw=e.target.value;if(e.target.id.startsWith('wf-mobile-')&&mobileDraft){mobileDraft.error='';const el=content.querySelector('#wf-mobile-error');if(el)el.textContent='';}});
+  root.addEventListener('click',function(e){
+    const button=e.target.closest('button');if(!button||button.disabled)return;
+    const data=button.dataset,isBack=button.id==='im-back'&&ui.mode==='mini'&&M.canInventory(store,ui.user)&&ui.screen==='inventory';
+    if(!data.mobileAction&&!data.mobileDevice&&!data.mobileContract&&!isBack)return;
+    e.stopImmediatePropagation();
+    try{
+      requireInventory();
+      if(data.mobileDevice){mobileDeviceDetails(data.mobileDevice);return;}
+      if(data.mobileContract){const id=data.mobileContract;navigate('admin','leases',id);if(M.contract(store,id))contractDetails(id);else startContract(id);return;}
+      const action=isBack?'back':data.mobileAction;
+      if(action==='start'){startMobileInventory();return;}
+      if(action==='home'||action==='profile'){navigate('mini',action==='home'?'devices':'profile');return;}
+      if(action==='cancel'){cancelMobileInventory();return;}
+      if(action==='discard'){mobileDraft=null;navigate('mini','devices');return;}
+      if(action==='back'){
+        if(mobileDraft&&mobileDraft.step===2){readMobileFields();mobileDraft.step=1;mobileDraft.error='';render();}
+        else{mobileDraft=null;navigate('mini','devices');}return;
+      }
+      if(!mobileDraft)return;
+      if(action==='parse'||action==='album'){
+        mobileDraft.raw=content.querySelector('#wf-mobile-qr').value;mobileDraft.duplicate=null;
+        try{
+          const parsed=M.inspectInventory(store,mobileDraft.raw);
+          if(!mobileDraft.parsed||mobileDraft.parsed.module!==parsed.module)mobileDraft.name='新入库 '+String(store.next).padStart(2,'0')+' 号变频器';
+          mobileDraft.parsed=parsed;mobileDraft.step=2;mobileDraft.error='';
+        }catch(error){mobileDraft.error=error.message;if(error.code==='DUPLICATE_DEVICE')mobileDraft.duplicate=store.devices.find(d=>d.module===M.parseQR(mobileDraft.raw).module).id;}
+        render();return;
+      }
+      if(action==='save'&&mobileDraft.step===2){
+        readMobileFields();const d=M.addInventoryFor(store,ui.user,mobileDraft,'mobile');
+        ui.selected=d.id;ui.scanRaw=M.qr(d);ui.adminQuery='';ui.adminFilter='all';mobileDraft.device=d.id;mobileDraft.step=3;mobileDraft.error='';render();save();
+      }
+    }catch(error){if(mobileDraft&&ui.mode==='mini'&&ui.screen==='inventory'){mobileDraft.error=error.message;render();}else toast(error.message);}
+  });
+
+  function renderMini(){if(M.canInventory(store,ui.user)){renderStaffMini();return;}mini.classList.remove("wf-staff");const sub=!['devices','messages','profile'].includes(ui.screen);mini.querySelector('#im-back').hidden=!sub;mini.querySelector('#im-back').setAttribute('aria-label','返回');mini.querySelector('#im-bottom').hidden=sub;mini.querySelector('#im-navtitle').textContent=({detail:'设备详情',scan:'扫码添加',rental:'租赁信息',history:'历史数据',sms:'短信服务'})[ui.screen]||'云控租赁';mini.querySelector('#im-bottom').innerHTML=[['devices','设备','panels-top-left'],['scan','扫一扫','scan-line'],['messages','消息','bell'],['profile','我的','user-round']].map(v=>'<button type="button" data-mini-nav="'+v[0]+'" class="'+(ui.screen===v[0]?'active':'')+'">'+icon(v[2])+'<span>'+v[1]+'</span></button>').join('');({devices:miniDevices,detail:miniDetail,scan:miniScan,rental:miniRental,history:miniHistory,messages:miniMessages,profile:miniProfile,sms:miniSms}[ui.screen]||miniDevices)();}
+  function aHeading(title,subtitle,action,label,ic){return '<div class="ia-heading"><div><h1>'+title+'</h1><p>'+subtitle+'</p></div>'+(action?'<button type="button" class="ia-primary" data-action="'+action+'">'+icon(ic||'plus')+label+'</button>':'')+'</div>';}
+  function badge(d){const s=M.leaseStatus(store,d.id);return '<span class="ia-status '+({active:'green',near:'amber',expired:'red',future:'blue',stock:''})[s]+'">'+({active:'租赁中',near:'即将到期',expired:'已到期',future:'待起租',stock:'待出租'})[s]+'</span>';}
+  function ownerCell(d){const c=cFor(d),u=c&&M.user(store,c.owner);return u?esc(u.name)+'<small>'+M.mask(u.phone)+'</small>':'<span style="color:var(--ia-muted)">未登记</span>';}
+  function filteredAdmin(){return store.devices.filter(d=>{const c=cFor(d),s=M.leaseStatus(store,d.id);return (!ui.adminQuery||(d.name+d.module+d.model+(c?M.user(store,c.owner).phone:'')).toLowerCase().includes(ui.adminQuery.toLowerCase()))&&(ui.adminFilter==='all'||ui.adminFilter==='stock'&&!c||ui.adminFilter==='rented'&&c&&s!=='expired'||ui.adminFilter==='expired'&&s==='expired');});}
+  function drawAdminRows(){const ds=filteredAdmin();main.querySelector('#wf-device-rows').innerHTML=ds.length?ds.map(d=>{const c=cFor(d);return '<tr><td><div class="ia-device-name">'+esc(d.name)+'</div><small>'+esc(d.model)+' · '+esc(d.module.slice(-6))+'</small></td><td>'+ownerCell(d)+'</td><td>'+badge(d)+'<small><i class="ia-dot '+(d.online?'':'off')+'"></i>'+(d.online?(d.run?'在线 · 运行中':'在线 · 已停机'):'离线 · 待更新')+'</small></td><td>'+ (c?c.end.slice(0,10)+'<small>'+c.end.slice(11)+' 到期</small>':'待登记租期')+'</td><td><div class="ia-table-actions"><button type="button" class="ia-text-button" data-lease-device="'+d.id+'">'+(c?'合同':'登记合同')+'</button><button type="button" class="ia-text-button" data-authorize="'+d.id+'">授权</button><button type="button" class="ia-text-button" data-info="'+d.id+'">详情</button></div></td></tr>';}).join(''):'<tr><td colspan="5" class="ia-empty">没有找到相关设备</td></tr>';main.querySelector('#wf-device-count').textContent='共 '+ds.length+' 台设备';}
+  function adminDevices(){const counts=[store.devices.length,store.devices.filter(d=>['active','near','future'].includes(M.leaseStatus(store,d.id))).length,store.devices.filter(d=>M.leaseStatus(store,d.id)==='near').length,store.devices.filter(d=>M.leaseStatus(store,d.id)==='expired').length];main.innerHTML=aHeading('设备管理','扫码入库、登记租赁，再按用户授予权限','inventory','扫码入库','scan-line')+'<div class="ia-stats">'+[['全部设备','boxes'],['已登记租赁','file-text'],['7 天内到期','calendar-clock'],['租赁已到期','circle-alert']].map((v,i)=>'<div class="ia-stat"><div class="ia-stat-label">'+v[0]+icon(v[1])+'</div><strong>'+counts[i]+'</strong><small>'+['设备档案','合同与付款已登记','跟进续租','查看停机结果'][i]+'</small></div>').join('')+'</div><section class="ia-panel"><div class="ia-toolbar"><div class="ia-tabs">'+[['all','全部设备'],['rented','租赁中'],['stock','待出租'],['expired','已到期']].map(v=>'<button type="button" data-admin-filter="'+v[0]+'" aria-pressed="'+(ui.adminFilter===v[0])+'">'+v[1]+'</button>').join('')+'</div><label class="ia-search">'+icon('search')+'<input id="wf-admin-search" placeholder="设备名称 / 模块 ID / 手机号" aria-label="搜索设备或手机号" value="'+esc(ui.adminQuery)+'"></label></div><div class="ia-table-wrap"><table class="ia-table"><thead><tr><th>设备名称 / 型号</th><th>第一所有人</th><th>租赁 / 运行状态</th><th>租赁到期时间</th><th>操作</th></tr></thead><tbody id="wf-device-rows"></tbody></table></div><div class="ia-table-foot"><span id="wf-device-count"></span><span>已显示全部结果</span></div></section><p class="ia-note">用户扫码后默认仅查看；合同登记不自动开通控制权限。设备、合同及授权在两个演示视角中实时联动。</p>';drawAdminRows();}
+  function adminLeases(){main.innerHTML=aHeading('租赁合同','合同签约人作为第一所有人，付款与租期单独登记','new-contract','登记合同','file-plus-2')+'<section class="ia-panel"><div class="ia-table-wrap"><table class="ia-table"><thead><tr><th>合同 / 设备</th><th>第一所有人</th><th>月租 / 首次实收</th><th>租期至</th><th>操作</th></tr></thead><tbody>'+store.contracts.map(c=>{const d=M.device(store,c.device);return '<tr><td>'+esc(c.number)+'<small>'+esc(d.name)+'</small></td><td>'+ownerCell(d)+'</td><td>¥ '+c.rent.toFixed(2)+'<small>首次实收 ¥ '+c.paid.toFixed(2)+'</small></td><td>'+c.end.slice(0,10)+'<small>'+c.end.slice(11)+' '+(M.leaseStatus(store,d.id)==='expired'?'已到期':'')+'</small></td><td><div class="ia-table-actions"><button type="button" class="ia-text-button" data-contract-details="'+d.id+'">详情</button><button type="button" class="ia-text-button" data-renew="'+d.id+'">续租</button></div></td></tr>';}).join('')+'</tbody></table></div></section><p class="ia-note">时间均为北京时间。示例合同金额不代表实际报价；登记只改变租赁归属，不改变用户操作权限。</p>';}
+  function adminPermissions(){const d=dNow(),c=cFor(d),joins=store.joins.filter(j=>j.device===d.id);if(!permissionDraft||permissionDevice!==d.id){permissionDevice=d.id;permissionDraft={};joins.forEach(j=>{permissionDraft[j.user]=M.copy(j.rights);});}main.innerHTML=aHeading('用户授权','同一设备可关联多人，每位用户的权限分别生效')+'<section class="ia-panel"><div class="ia-permission-summary"><div><h3>'+esc(d.name)+'</h3><p>第一所有人：'+(c?M.user(store,c.owner).name+' · '+M.mask(M.user(store,c.owner).phone):'待合同登记')+'</p></div><select id="wf-perm-device" class="ia-select" aria-label="选择授权设备">'+store.devices.map(x=>'<option value="'+x.id+'" '+(d.id===x.id?'selected':'')+'>'+esc(x.name)+'</option>').join('')+'</select></div><div class="ia-table-wrap"><table class="ia-table ia-perm-table"><thead><tr><th>已扫码关联的用户</th><th>查看</th><th>启动 / 停止</th><th>修改频率</th><th>故障复位</th></tr></thead><tbody>'+(joins.length?joins.map(j=>{const u=M.user(store,j.user),r=permissionDraft[u.id];return '<tr><td>'+esc(u.name)+' <span class="ia-status '+(c&&c.owner===u.id?'blue':'')+'">'+(c&&c.owner===u.id?'第一所有人':'关联用户')+'</span><small>'+M.mask(u.phone)+'</small></td>'+M.fields.map(k=>'<td><label class="ia-perm-check"><input type="checkbox" data-perm="'+k+'" data-perm-user="'+u.id+'" aria-label="'+u.name+' '+names[k]+'" '+(r[k]?'checked':'')+'></label></td>').join('')+'</tr>';}).join(''):'<tr><td class="ia-empty" colspan="5">还没有用户扫码添加此设备。</td></tr>')+'</tbody></table></div><div class="ia-permission-footer"><span id="wf-permission-hint">扫码默认仅查看，控制权限需要单独授予。</span><button type="button" class="ia-primary" data-action="review-permissions" disabled>'+icon('check')+'保存授权</button></div></section>'+(c&&!M.join(store,d.id,c.owner)?'<div class="ia-information">'+icon('scan-line')+'<span>合同签约人 '+M.user(store,c.owner).name+' 尚未扫码添加，请先完成扫码关联。</span></div>':'')+'<p class="ia-note">收回查看权限会同时关闭该用户的控制权限。再次扫码不会自动恢复已收回的权限，第一所有人不会随授权变更。</p>';updatePermissionButton();}
+  function updatePermissionButton(){const b=main.querySelector('[data-action="review-permissions"]');if(!b)return;const changes=M.permissionChanges(store,ui.selected,permissionDraft);b.disabled=changes.length===0;main.querySelector('#wf-permission-hint').textContent=changes.length?'有 '+changes.length+' 位用户的权限待保存':'当前权限已保存';}
+  function adminReminders(){const ds=store.devices.filter(d=>['near','expired'].includes(M.leaseStatus(store,d.id)));main.innerHTML=aHeading('到期与提醒','提前 7 / 3 / 1 天提醒，到期未续租自动停机')+'<section class="ia-panel">'+ds.map(d=>{const c=cFor(d),expired=M.leaseStatus(store,d.id)==='expired';return '<article class="ia-rental-item"><div><h3>'+esc(d.name)+' '+badge(d)+'</h3><p>第一所有人：'+M.user(store,c.owner).name+' · '+M.mask(M.user(store,c.owner).phone)+'</p><p>到期时间：'+dateText(c.end)+'</p>'+(expired?'<span class="ia-status '+(d.online&&!d.run?'green':'amber')+'">'+(d.online&&!d.run?'设备停机已确认':'停机结果待确认')+'</span>':'<div class="ia-timeline">'+[7,3,1].map(n=>'<span>'+new Date(M.epoch(c.end)-n*86400000+8*3600000).toISOString().slice(5,10)+' · 提前 '+n+' 天</span>').join('<i></i>')+'</div>')+'</div><button type="button" class="ia-secondary" style="align-self:start" data-renew="'+d.id+'">登记续租</button></article>';}).join('')+'</section><section class="ia-panel" style="margin-top:22px"><div class="ia-toolbar"><h3>短信服务</h3><span class="ia-status">仅预留接口</span></div><div style="padding:18px"><p class="ia-note" style="margin:0">充值余额、按条扣费。余额查询、充值及消费记录接口预留，当前不发信、不扣费、不充值。</p><button type="button" class="ia-secondary" style="margin-top:14px" disabled>充值渠道待确定</button></div></section>';}
+  function adminLogs(){main.innerHTML=aHeading('操作记录','追溯入库、扫码、合同、授权及控制结果')+'<section class="ia-panel"><div class="ia-table-wrap"><table class="ia-table"><thead><tr><th>时间 / 操作人</th><th>操作</th><th>设备</th><th>结果</th></tr></thead><tbody>'+store.logs.map(l=>'<tr><td>10-21 14:32<small>'+esc(l.who)+'</small></td><td>'+esc(l.action)+'</td><td>'+esc((M.device(store,l.device)||{}).name)+'</td><td style="max-width:280px">'+esc(l.result)+'</td></tr>').join('')+'</tbody></table></div></section>';}
+  const money = cents => (cents / 100).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  function adminIncome(){
+    const report=M.incomeReport(store,ui.incomeMonth,ui.incomeKind,ui.incomeScope);
+    const months=[...new Set([M.NOW.slice(0,7),...store.receipts.filter(r=>r.paidAt).map(r=>r.paidAt.slice(0,7))])].sort().reverse();
+    const monthOptions=[['all','全部月份'],...months.map(m=>[m,m.replace('-',' 年 ')+' 月'])];
+    if(store.receipts.some(r=>!r.paidAt))monthOptions.push(['undated','未登记日期']);
+    const period=monthOptions.find(m=>m[0]===ui.incomeMonth);
+    const kindName=ui.incomeKind==='all'?'全部租金':ui.incomeKind==='initial'?'首次登记':'续租收入';
+    main.innerHTML=aHeading('收款明细','逐笔核对合同及续租收款，金额单位：元')+
+      (ui.incomeFromReport?'<div class="wf-report-drill"><button type="button" class="ia-secondary" data-report-back>'+icon('arrow-left')+'返回统计报表</button><span>'+esc(ui.incomeScope?ui.incomeScope.label:'按所选月份查看收款')+'</span></div>':'')+
+      '<div class="wf-income-filters"><label>收款月份<select id="wf-income-month" class="ia-select">'+monthOptions.map(m=>'<option value="'+m[0]+'" '+(m[0]===ui.incomeMonth?'selected':'')+'>'+m[1]+'</option>').join('')+'</select></label><label>收入类型<select id="wf-income-kind" class="ia-select">'+[['all','全部租金'],['initial','首次登记'],['renewal','续租收入']].map(k=>'<option value="'+k[0]+'" '+(k[0]===ui.incomeKind?'selected':'')+'>'+k[1]+'</option>').join('')+'</select></label><span>'+esc(period?period[1]:'全部月份')+' · '+kindName+'</span></div>'+
+      '<div class="ia-stats wf-income-stats" aria-live="polite">'+[
+        ['实收租金','wallet',report.totalCents,report.count+' 笔已登记收款','total'],
+        ['首次登记','file-plus-2',report.initialCents,report.rows.filter(r=>r.kind==='initial').length+' 笔首次收款','initial'],
+        ['续租收入','calendar-check',report.renewalCents,report.rows.filter(r=>r.kind==='renewal').length+' 笔续租收款','renewal']
+      ].map(v=>'<div class="ia-stat"><div class="ia-stat-label">'+v[0]+' / 元'+icon(v[1])+'</div><strong data-income-total="'+v[4]+'">'+money(v[2])+'</strong><small>'+v[3]+'</small></div>').join('')+'</div>'+
+      '<section class="ia-panel"><div class="ia-toolbar"><h3>租金收款明细</h3><span class="wf-income-count">共 '+report.count+' 笔</span></div><div class="ia-table-wrap"><table class="ia-table wf-income-table" aria-label="租金收入统计表"><thead><tr><th>收款日期</th><th>合同 / 设备</th><th>承租人</th><th>收款类型</th><th class="wf-money">实收金额 / 元</th><th>操作</th></tr></thead><tbody>'+(
+      report.rows.length?report.rows.map(r=>{const d=M.device(store,r.device),u=M.user(store,r.owner);return '<tr><td>'+esc(r.paidAt||'未登记日期')+'</td><td>'+esc(r.number)+'<small>'+esc(d?d.name:'历史设备')+'</small></td><td>'+esc(u?u.name:'历史用户')+'<small>'+esc(u?M.mask(u.phone):'')+'</small></td><td><span class="ia-status '+(r.kind==='renewal'?'green':'')+'">'+(r.kind==='renewal'?'续租':'首次登记')+'</span></td><td class="wf-money">'+money(r.amountCents)+'</td><td><button type="button" class="ia-text-button" data-receipt="'+r.id+'">明细</button></td></tr>';}).join(''):'<tr><td colspan="6" class="ia-empty">当前筛选下暂无收款记录</td></tr>')+
+      '</tbody><tfoot><tr><th colspan="4">筛选合计 · '+report.count+' 笔</th><th class="wf-money" data-income-sum>'+money(report.totalCents)+'</th><th></th></tr></tfoot></table></div></section>'+
+      '<p class="ia-note">只统计已确认登记的租金收款；合同登记、续租登记后自动更新。短信充值仅预留接口，不计入本表。</p>'+
+      (store.receipts.some(r=>!r.paidAt)?'<p class="ia-note">旧版演示记录未保存收款日期，保留在“全部月份 / 未登记日期”中，不计入具体月份。</p>':'');
+  }
+  function receiptDetails(id){
+    const r=store.receipts.find(x=>x.id===id);if(!r)return;
+    const d=M.device(store,r.device),u=M.user(store,r.owner);
+    modal('admin','收款明细',(r.kind==='renewal'?'续租收款':'首次登记收款')+' · '+r.id,
+      '<div class="wf-review">'+[
+        ['实收金额','¥ '+money(r.amountCents)],['收款日期',r.paidAt||'未登记日期'],['承租人',u.name+' · '+M.mask(u.phone)],['合同编号',r.number],['设备',d.name],['本次登记租期',dateText(r.start)+' 至 '+dateText(r.end)],['付款记录编号',r.reference||'未填写'],['登记状态','已确认登记（示例）']
+      ].map(v=>row(v[0],v[1])).join('')+'</div><div class="wf-footer-buttons"><button type="button" class="ia-secondary" data-action="close">关闭</button><button type="button" class="ia-primary" data-contract-details="'+r.device+'">查看合同</button></div>');
+  }
+  root.addEventListener('change',function(e){
+    if(e.target.id==='wf-income-month'||e.target.id==='wf-income-kind'){
+      if(e.target.id==='wf-income-month')ui.incomeMonth=e.target.value;else ui.incomeKind=e.target.value;
+      render();save();
+    }
+  });
+  root.addEventListener('click',function(e){const button=e.target.closest('button[data-receipt]');if(button)receiptDetails(button.dataset.receipt);});
+
+  const reportNames={device:'设备台账',month:'月度收入',customer:'客户汇总'};
+  function reportMonthText(value){return value==='all'?'全部月份':value==='undated'?'未登记日期':value.replace('-',' 年 ')+' 月';}
+  function adminReports(){
+    if(!reportNames[ui.reportDimension])ui.reportDimension='device';
+    const dimension=ui.reportDimension,report=M.tableReport(store,dimension,ui.reportMonth);
+    const months=[...new Set([M.NOW.slice(0,7),...store.receipts.filter(r=>r.paidAt).map(r=>r.paidAt.slice(0,7))])].sort().reverse();
+    const options=['all',...months];if(store.receipts.some(r=>!r.paidAt))options.push('undated');
+    const columns=dimension==='device'?['设备 / 型号','第一所有人','当前租赁状态','到期日期','收款笔数','实收租金 / 元','操作']:dimension==='month'?['收款月份','收款设备数','收款笔数','首次收款 / 元','续租收款 / 元','实收合计 / 元','操作']:['合同签约客户','合同设备数','收款笔数','首次收款 / 元','续租收款 / 元','实收合计 / 元','操作'];
+    main.innerHTML=aHeading('统计报表','集中查看设备租赁、月度收入和客户收款')+
+      '<section class="ia-panel wf-report-panel"><div class="wf-report-toolbar"><div class="ia-tabs" aria-label="统计表类型">'+Object.entries(reportNames).map(([key,label])=>'<button type="button" data-report-dimension="'+key+'" aria-pressed="'+(dimension===key)+'">'+label+'</button>').join('')+'</div><label class="wf-report-month">收款月份<select class="ia-select" id="wf-report-month">'+options.map(m=>'<option value="'+m+'" '+(ui.reportMonth===m?'selected':'')+'>'+reportMonthText(m)+'</option>').join('')+'</select></label></div>'+
+      '<div class="wf-report-summary" aria-live="polite"><div><h2>'+reportNames[dimension]+'</h2><span>'+reportMonthText(ui.reportMonth)+' · '+report.rows.length+(dimension==='device'?' 台设备':dimension==='customer'?' 位客户':' 个月份分组')+'</span></div><div>实收合计 <strong data-report-total>'+money(report.total.totalCents)+'</strong><span>元 · '+report.total.count+' 笔收款</span></div></div>'+
+      '<div class="ia-table-wrap"><table class="ia-table wf-report-table" aria-label="'+reportNames[dimension]+'统计表"><thead><tr>'+columns.map((c,i)=>'<th'+((dimension==='device'?[4,5]:[1,2,3,4,5]).includes(i)?' class="wf-number"':'')+'>'+c+'</th>').join('')+'</tr></thead><tbody>'+
+      (report.rows.length?report.rows.map(g=>reportTableRow(dimension,g)).join(''):'<tr><td colspan="7" class="ia-empty">当前月份暂无收款记录</td></tr>')+
+      '</tbody><tfoot><tr><th colspan="5">合计 · '+report.total.count+' 笔收款</th><th class="wf-number" data-report-footer>'+money(report.total.totalCents)+'</th><th></th></tr></tfoot></table></div></section>'+
+      '<p class="ia-note">收入按实际收款日期统计；首次收款与续租分别记录。短信充值仍仅预留接口，不计入报表。</p>'+
+      (dimension==='device'?'<p class="ia-note">设备所属人、租赁状态和到期日期显示当前档案；月份筛选仅影响收款数据，未收款设备也会保留。</p>':'')+
+      (store.receipts.some(r=>!r.paidAt)?'<p class="ia-note">缺少收款日期的旧演示记录单独归入“未登记日期”，不计入具体月份。</p>':'');
+  }
+  function reportTableRow(dimension,g){
+    const action='<td><button type="button" class="ia-text-button" data-report-open="'+esc(g.key)+'">收款明细</button></td>';
+    const amount=value=>'<td class="wf-number">'+money(value)+'</td>';
+    const count=value=>'<td class="wf-number">'+value+'</td>';
+    let cells='';
+    if(dimension==='device'){
+      const d=M.device(store,g.key),c=M.contract(store,g.key),u=c&&M.user(store,c.owner);
+      cells='<td>'+esc(d?d.name:'历史设备')+'<small>'+esc(d?d.model+' · INV-'+d.id:g.key)+'</small></td><td>'+esc(u?u.name:'尚未登记')+(u?'<small>'+M.mask(u.phone)+'</small>':'')+'</td><td>'+(d?badge(d):'—')+'</td><td>'+(c?c.end.slice(0,10)+'<small>'+c.end.slice(11)+'</small>':'—')+'</td>'+count(g.count)+amount(g.totalCents);
+    }else{
+      const u=M.user(store,g.key);
+      cells='<td>'+(dimension==='month'?reportMonthText(g.key):esc(u?u.name:'历史客户')+(u?'<small>'+M.mask(u.phone)+'</small>':''))+'</td>'+count(dimension==='month'?g.deviceCount:g.contractDeviceCount)+count(g.count)+amount(g.initialCents)+amount(g.renewalCents)+amount(g.totalCents);
+    }
+    return '<tr data-report-row="'+esc(g.key)+'">'+cells+action+'</tr>';
+  }
+  root.addEventListener('change',function(e){if(e.target.id==='wf-report-month'){ui.reportMonth=e.target.value;render();save();}});
+  root.addEventListener('click',function(e){
+    const b=e.target.closest('button');if(!b||b.disabled)return;
+    if(b.dataset.reportDimension){ui.reportDimension=b.dataset.reportDimension;render();save();return;}
+    if(b.hasAttribute('data-report-back')){navigate('admin','reports');return;}
+    if(b.hasAttribute('data-report-open')){
+      const key=b.dataset.reportOpen,dimension=ui.reportDimension;
+      ui.incomeMonth=dimension==='month'?key:ui.reportMonth;ui.incomeKind='all';ui.incomeScope=null;ui.incomeFromReport=true;
+      if(dimension==='device')ui.incomeScope={dimension,key,label:'设备：'+((M.device(store,key)||{}).name||key)};
+      if(dimension==='customer')ui.incomeScope={dimension,key,label:'客户：'+((M.user(store,key)||{}).name||key)};
+      navigate('admin','income');
+    }
+  });
+
+  const UB = globalThis.UserBackupPrototype;
+  const backupTargets = { computer:'本机文件夹', usb:'U盘', disc:'光盘' };
+  const backupFieldNames = { name:'姓名', phone:'手机号', registeredAt:'登记时间', owner:'第一所有人', start:'起租时间', end:'到期时间', access:'设备关联与权限' };
+  let backupDraft = null, backupRecords = [], restoreRecord = null;
+  function adminUserBackup(){
+    const rows = UB.userRows(store);
+    main.innerHTML = aHeading('用户数据与备份','用户资料以本地主数据为准，云端和小程序同步副本') +
+      '<div class="wf-data-boundary"><section><div>'+icon('hard-drive')+'<h2>本地 · 用户主数据</h2></div><p>姓名、手机号、登记时间、设备归属、租期、权限</p><span>本地确认 → 云端副本 → 小程序</span></section><section><div>'+icon('cloud')+'<h2>云端 · 运行数据</h2></div><p>电机状态、运行历史、频率、电流、告警</p><span>4G设备 → 云服务器</span></section></div>'+
+      '<section class="ia-panel"><div class="wf-backup-heading"><div><h2>用户档案</h2><span>'+rows.length+' 位客户 · 登记时间未知的旧记录保留“未登记”</span></div><button type="button" class="ia-primary" data-backup-action="export">'+icon('download')+'备份用户数据</button></div><div class="ia-table-wrap"><table class="ia-table wf-user-table" aria-label="本地用户档案"><thead><tr><th>姓名 / 手机号</th><th>登记时间</th><th>全部关联设备</th><th>设备到期时间</th><th>操作</th></tr></thead><tbody>'+
+      rows.map(u=>'<tr data-backup-user-row="'+esc(u.id)+'"><td>'+esc(u.name)+'<small>'+M.mask(u.phone)+'</small></td><td>'+esc(u.registeredAt?dateText(u.registeredAt).slice(0,16):'未登记')+'</td><td>'+u.devices.map(d=>'<div class="wf-user-device">'+esc(d.name)+'<small>'+(d.owner?'第一所有人':'共享用户')+' · '+esc(rightsText(d.rights))+'</small></div>').join('')+'</td><td>'+u.devices.map(d=>'<div class="wf-user-device">'+esc(d.end?dateText(d.end):'未登记租赁')+'<small>INV-'+esc(d.id)+'</small></div>').join('')+'</td><td><button type="button" class="ia-text-button" data-backup-user="'+esc(u.id)+'">查看档案</button></td></tr>').join('')+
+      '</tbody></table></div></section>'+
+      '<section class="ia-panel wf-backup-records"><div class="wf-backup-heading"><div><h2>备份记录</h2><span>仅为当前演示会话记录，未写入真实存储介质</span></div></div>'+
+      (backupRecords.length?'<div class="ia-table-wrap"><table class="ia-table wf-backup-table" aria-label="备份演示记录"><thead><tr><th>文件名 / 范围</th><th>目标介质</th><th>演示状态</th><th>操作</th></tr></thead><tbody>'+backupRecords.map(r=>'<tr><td>'+esc(r.filename)+'<small>'+r.archive.users.length+' 位客户 · '+r.archive.devices.length+' 台关联设备</small></td><td>'+backupTargets[r.target]+'</td><td>'+(r.target==='disc'?'文件准备演示 · 未刻录':'导出流程演示 · 未写入')+'</td><td><button type="button" class="ia-text-button" data-backup-restore="'+r.id+'">预览恢复</button></td></tr>').join('')+'</tbody></table></div>':'<div class="wf-backup-empty">'+icon('archive')+'<p>暂无演示备份</p><span>选择本机、U盘或光盘，预览用户数据备份流程。</span></div>')+'</section>'+
+      '<p class="ia-note">原型演示：本地数据库、文件加密、实际导出、光盘刻录与云端同步待接入。运行数据和收款流水不包含在用户备份中。</p>';
+  }
+  function backupUserDetail(id){
+    const u = UB.userRows(store).find(u=>u.id===id); if(!u)return;
+    modal('admin','用户档案','本地主数据 · 示例账号', '<div class="wf-review">'+row('姓名',u.name)+row('微信绑定手机号',u.phone)+row('登记时间',u.registeredAt?dateText(u.registeredAt):'未登记')+'</div>'+u.devices.map(d=>'<div class="wf-delta"><strong>'+esc(d.name)+'</strong><p>'+esc(d.model+' · '+d.module)+'</p>'+row('身份',d.owner?'第一所有人（合同签约人）':'共享用户')+row('到期时间',d.end?dateText(d.end):'未登记租赁')+row('管理员授予权限',rightsText(d.rights))+'</div>').join('')+'<div class="ia-modal-footer"><button type="button" class="ia-secondary" data-action="close">关闭</button></div>');
+  }
+  function startBackup(){
+    backupDraft = {target:'usb'};
+    modal('admin','备份用户数据','第 1 步 · 选择保存介质',
+      '<fieldset class="wf-backup-targets"><legend>保存到</legend>'+Object.entries(backupTargets).map(([key,label])=>'<label><input type="radio" name="wf-backup-target" value="'+key+'" '+(key==='usb'?'checked':'')+'><span>'+label+'<small>'+({computer:'选择本地电脑的备份文件夹',usb:'插入U盘后选择保存位置',disc:'先生成文件，再由电脑刻录到光盘'})[key]+'</small></span></label>').join('')+'</fieldset><p class="ia-note">本次只演示流程，不读取磁盘、不写入U盘，也不执行光盘刻录。</p><div class="ia-modal-footer"><button type="button" class="ia-secondary" data-action="close">取消</button><button type="button" class="ia-primary" data-backup-action="review-export">预览备份内容</button></div>');
+  }
+  function reviewBackup(){
+    backupDraft.target = aLayer.querySelector('input[name="wf-backup-target"]:checked').value;
+    backupDraft.archive = UB.snapshot(store,M.NOW);
+    backupDraft.filename = '用户数据_20261021_143200_'+String(backupRecords.length+1).padStart(3,'0')+'.json';
+    const data = backupDraft.archive;
+    modal('admin','核对备份内容','第 2 步 · 仅备份用户资料与关联关系',
+      '<div class="wf-review">'+row('目标介质',backupTargets[backupDraft.target])+row('拟用文件名',backupDraft.filename)+row('用户资料',data.users.length+' 位 · 姓名 / 完整手机号 / 登记时间')+row('关联设备',data.devices.length+' 台 · 厂商 / 型号 / 4G模块ID')+row('设备归属与租期',data.leases.length+' 份 · 合同编号 / 第一所有人 / 起止时间')+row('用户权限',data.access.length+' 条 · 查看 / 启停 / 调频 / 复位')+'</div><p class="ia-note">不包含电机实时状态、运行历史、告警、控制指令或收款流水。</p>'+
+      (backupDraft.target==='disc'?'<div class="wf-backup-path">生成文件 → 打开电脑刻录工具 → 刻录到光盘 → 校验</div>':'<div class="wf-backup-path">生成文件 → 选择'+backupTargets[backupDraft.target]+'位置 → 写入并校验</div>')+
+      '<p class="ia-note">真实系统需要加密备份与完整性校验；当前仅保存内存中的演示快照。</p><div class="ia-modal-footer"><button type="button" class="ia-secondary" data-backup-action="export">重新选择</button><button type="button" class="ia-primary" data-backup-action="commit-export">模拟'+(backupDraft.target==='disc'?'生成待刻录文件':'导出')+'</button></div>');
+  }
+  function commitBackup(){
+    if(!backupDraft||!backupDraft.archive)return;
+    const record={...backupDraft,id:'B'+(backupRecords.length+1)};
+    backupRecords.unshift(record);backupDraft=null;render();
+    modal('admin','备份流程演示完成','第 3 步 · 未创建真实备份文件',
+      '<div class="wf-success"><span>'+icon('check')+'</span><h3>'+(record.target==='disc'?'已演示准备待刻录文件':'已完成'+backupTargets[record.target]+'导出流程演示')+'</h3><p>'+esc(record.filename)+'</p></div><p class="ia-note">'+(record.target==='disc'?'正式接入后，需在电脑上选择刻录设备并完成刻录校验。':'正式接入后，需选择实际保存位置并完成写入校验。')+'当前记录仅用于预览恢复，刷新后不保证保留。</p><div class="ia-modal-footer"><button type="button" class="ia-secondary" data-action="close">返回档案</button><button type="button" class="ia-primary" data-backup-restore="'+record.id+'">预览恢复</button></div>');
+  }
+  function backupValue(field,value){
+    if(value==null)return '无记录';
+    if(field==='access')return rightsText(value);
+    if(field==='owner'){const u=M.user(store,value);return u?u.name:String(value);}
+    return dateText(value);
+  }
+  function previewBackupRestore(id){
+    const record=backupRecords.find(r=>r.id===id);if(!record)return;
+    restoreRecord=record;
+    const result=UB.preview(store,record.archive);
+    modal('admin','恢复用户数据','预览差异后确认 · 当前仅修改演示数据',
+      '<div class="wf-review">'+row('备份来源',backupTargets[record.target])+row('文件',record.filename)+row('恢复范围',record.archive.users.length+' 位客户及其设备归属、租期、权限')+row('处理规则','备份内用户按备份恢复；其他用户保留')+'</div>'+
+      (result.conflicts.length?'<div class="ia-error" role="alert">'+result.conflicts.map(esc).join('<br>')+'</div>':'')+
+      '<div class="wf-restore-diffs"><h3>与当前档案的差异 · '+result.changes.length+' 项</h3>'+(result.changes.length?result.changes.map(c=>'<div class="wf-delta"><strong>'+esc(c.label)+' · '+backupFieldNames[c.field]+'</strong><p>当前：'+esc(backupValue(c.field,c.before))+'</p><p>备份：'+esc(backupValue(c.field,c.after))+'</p></div>').join(''):'<p class="ia-note">用户数据一致，无字段需要更改。</p>')+'</div>'+
+      '<p class="ia-note">不回滚云端运行数据，不恢复收款流水，也不重放启停指令。恢复旧租期或权限可能改变用户后续操作资格，须核对差异。</p>'+errorBox()+
+      '<label class="wf-check-line"><input type="checkbox" id="wf-restore-confirm"><span>已核对范围与差异，确认以这份备份中的用户数据为准。</span></label><div class="ia-modal-footer"><button type="button" class="ia-secondary" data-action="close">取消</button><button type="button" class="ia-primary" data-backup-action="commit-restore" '+(result.conflicts.length?'disabled':'')+'>模拟恢复用户数据</button></div>');
+  }
+  function commitBackupRestore(){
+    if(!restoreRecord)return;
+    const result=UB.restoreDemo(store,restoreRecord.archive,Boolean(aLayer.querySelector('#wf-restore-confirm').checked));
+    store.logs.unshift({id:'BU'+Date.now(),who:'管理员',action:'模拟恢复用户数据',device:'',result:result.changes.length+' 项差异已应用；运行数据与收款流水未修改',time:M.NOW});
+    store.logs=store.logs.slice(0,18);permissionDraft=null;permissionDevice=null;
+    closeModal();render();save();toast('用户数据模拟恢复完成 · 云端运行数据保持当前状态');
+  }
+  root.addEventListener('click',function(e){
+    const b=e.target.closest('button');if(!b||b.disabled)return;
+    if(!b.dataset.backupAction&&!b.dataset.backupUser&&!b.dataset.backupRestore)return;
+    e.stopImmediatePropagation();
+    try{
+      if(b.dataset.backupUser){backupUserDetail(b.dataset.backupUser);return;}
+      if(b.dataset.backupRestore){previewBackupRestore(b.dataset.backupRestore);return;}
+      ({export:startBackup,'review-export':reviewBackup,'commit-export':commitBackup,'commit-restore':commitBackupRestore})[b.dataset.backupAction]();
+    }catch(error){showError(error);}
+  });
+
+  function renderAdmin(){admin.style.setProperty('--ia-row-space',ui.density+'px');admin.querySelector('#ia-breadcrumb').textContent=pages[ui.page];admin.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===ui.page));({devices:adminDevices,leases:adminLeases,income:adminIncome,reports:adminReports,backup:adminUserBackup,permissions:adminPermissions,reminders:adminReminders,logs:adminLogs}[ui.page]||adminDevices)();}
+  function startInventory(){inventoryDraft={raw:'HN|VF-22|DEMO4G001'+String(store.next).padStart(3,'0'),name:'',place:'海口仓库'};inventoryStep(1);}
+  function inventoryStep(step){const labels=['识别二维码','确认设备档案','入库完成'];let body='<div class="wf-steps">'+labels.map((x,i)=>'<span class="'+(i===step-1?'active':'')+'">'+(i+1)+'. '+x+'</span>').join('')+'</div>';if(step===1){body+='<label class="ia-field">二维码内容（原型示例）<input id="wf-inventory-qr" value="'+esc(inventoryDraft.raw)+'" autocomplete="off"></label><p class="ia-note">厂商代号 + 变频器型号 + 4G 模块 ID。演示使用 | 分隔。</p>'+errorBox()+aFooter('close','inventory-parse','演示扫码并解析');}if(step===2){body+='<div class="wf-review">'+row('厂商代号',inventoryDraft.parsed.vendor)+row('变频器型号',inventoryDraft.parsed.model)+row('4G 模块 ID',inventoryDraft.parsed.module)+'</div><label class="ia-field">设备名称 *<input id="wf-inventory-name" maxlength="30" value="'+esc(inventoryDraft.name||'新入库 '+String(store.next).padStart(2,'0')+' 号变频器')+'"></label><label class="ia-field">存放位置<input id="wf-inventory-place" maxlength="60" value="'+esc(inventoryDraft.place)+'"></label>'+errorBox()+aFooter('inventory-back','inventory-save','确认入库');}if(step===3){const d=dNow();body+='<div class="wf-success"><span>'+icon('check')+'</span><h2>设备已入库</h2><p>'+esc(d.name)+' · 待出租</p></div><div class="wf-review">'+row('设备编号','INV-'+d.id)+row('4G 模块 ID',d.module)+'</div><p class="ia-note">尚未登记第一所有人，也未向任何用户授予权限。</p><div class="wf-footer-buttons"><button type="button" class="ia-secondary" data-action="close">返回设备列表</button><button type="button" class="ia-primary" data-contract-start="'+d.id+'">下一步：登记合同</button></div>';}modal('admin','设备扫码入库','识别与登记均为原型演示。',body);}
+  function startContract(id){const ds=store.devices.filter(d=>!cFor(d));if(!ds.length){toast('当前没有待出租设备，请先扫码入库。');return;}contractDraft={device:ds.some(d=>d.id===id)?id:ds[0].id,phone:'',number:'ZL-2026-'+String(1000+store.contracts.length+1),rent:'',paid:'',paidAt:M.NOW.slice(0,10),reference:'',start:'2026-10-21T00:00',end:'2026-11-21T18:00'};contractStep(1);}
+  function readContract(){['device','phone','number','rent','paid','paidAt','reference','start','end'].forEach(k=>{const e=root.querySelector('#wf-contract-'+k);if(e)contractDraft[k]=e.value;});}
+  function contractStep(step){let body='<div class="wf-steps">'+['填写合同','核对登记','完成'].map((s,i)=>'<span class="'+(step===i+1?'active':'')+'">'+(i+1)+'. '+s+'</span>').join('')+'</div>';if(step===1){body+='<label class="ia-field">出租设备 *<select id="wf-contract-device">'+store.devices.filter(d=>!cFor(d)).map(d=>'<option value="'+d.id+'" '+(contractDraft.device===d.id?'selected':'')+'>'+esc(d.name)+'</option>').join('')+'</select></label><div class="wf-lookup"><label class="ia-field">合同签约人的微信绑定手机号 *<input id="wf-contract-phone" inputmode="tel" list="wf-customer-list" value="'+esc(contractDraft.phone)+'" placeholder="输入或选择已登记手机号"></label><button type="button" class="ia-secondary" data-action="lookup-owner">查询用户</button></div><datalist id="wf-customer-list">'+store.users.map(u=>'<option value="'+u.phone+'">'+u.name+'（示例）</option>').join('')+'</datalist><div id="wf-owner-result" class="ia-note" style="margin:0">可体验：陈先生 13800002608 / 王师傅 13600001820</div><div class="wf-field-group"><label class="ia-field">合同编号 *<input id="wf-contract-number" value="'+esc(contractDraft.number)+'"></label><label class="ia-field">月租金额 / 元 *<input id="wf-contract-rent" type="number" min="0.01" step="0.01" value="'+esc(contractDraft.rent)+'"></label><label class="ia-field">起租时间（北京时间）*<input id="wf-contract-start" type="datetime-local" value="'+esc(contractDraft.start)+'"></label><label class="ia-field">到期时间（北京时间）*<input id="wf-contract-end" type="datetime-local" value="'+esc(contractDraft.end)+'"></label><label class="ia-field">本期实收金额 / 元 *<input id="wf-contract-paid" type="number" min="0.01" step="0.01" value="'+esc(contractDraft.paid)+'"></label><label class="ia-field">实际收款日期 *<input id="wf-contract-paidAt" type="date" max="'+M.NOW.slice(0,10)+'" value="'+esc(contractDraft.paidAt)+'"></label><label class="ia-field">付款记录编号<input id="wf-contract-reference" value="'+esc(contractDraft.reference)+'" placeholder="选填"></label></div>'+errorBox()+aFooter('close','contract-review','下一步：核对');}if(step===2){const v=M.validateContract(store,contractDraft),u=M.user(store,v.owner);body+='<div class="wf-review">'+[['设备',M.device(store,v.device).name],['合同编号',v.number],['第一所有人',u.name+' · '+M.mask(u.phone)],['租期开始',dateText(v.start)],['租期结束',dateText(v.end)],['月租金额','¥ '+v.rent.toFixed(2)],['本期实收','¥ '+v.paid.toFixed(2)],['实际收款日期',v.paidAt],['付款记录',v.reference||'未填写']].map(r=>row(r[0],r[1])).join('')+'</div><div class="ia-information">'+icon('shield-check')+'<span>登记只确认租赁归属，不自动开通控制权限。用户扫码后默认仅查看。</span></div><label class="wf-check-line"><input id="wf-contract-confirmed" type="checkbox"><span>已核对合同签约人、租期及实际付款记录</span></label>'+errorBox()+aFooter('contract-back','contract-save','确认登记');}if(step===3){const d=dNow(),c=cFor(d),u=M.user(store,c.owner);body+='<div class="wf-success"><span>'+icon('check')+'</span><h2>合同登记完成</h2><p>'+esc(d.name)+' · 第一所有人 '+u.name+'</p></div><div class="wf-review">'+row('合同编号',c.number)+row('租期至',dateText(c.end))+row('控制权限','未自动开通')+'</div><div class="wf-footer-buttons"><button type="button" class="ia-secondary" data-authorize="'+d.id+'">查看授权名单</button><button type="button" class="ia-primary" data-owner-scan="'+d.id+'">体验所属人扫码添加</button></div>';}modal('admin','合同与付款登记','第一所有人以签约用户的微信绑定手机号为准。',body);}
+  function contractDetails(id){const d=M.device(store,id),c=cFor(d),u=M.user(store,c.owner);modal('admin','合同详情',d.name,'<div class="wf-review">'+[['合同编号',c.number],['第一所有人',u.name+' · '+M.mask(u.phone)],['起租时间',dateText(c.start)],['到期时间',dateText(c.end)],['月租金额','¥ '+c.rent.toFixed(2)],['首次登记实收','¥ '+c.paid.toFixed(2)],['首次收款日期',c.paidAt||'未登记日期'],['付款记录',c.reference||'未填写']].map(r=>row(r[0],r[1])).join('')+'</div><div class="wf-footer-buttons"><button type="button" class="ia-secondary" data-authorize="'+id+'">管理授权</button><button type="button" class="ia-primary" data-renew="'+id+'">登记续租</button></div>');}
+  function deviceInfo(id){const d=M.device(store,id);modal('admin','设备档案',d.name,'<div class="wf-review">'+[['设备编号','INV-'+d.id],['厂商 / 型号',d.vendor+' / '+d.model],['4G 模块 ID',d.module],['位置',d.place||'未填写'],['第一所有人',cFor(d)?M.user(store,cFor(d).owner).name:'待合同登记']].map(r=>row(r[0],r[1])).join('')+'</div><p class="wf-QR-line">'+esc(M.qr(d))+'</p><div class="wf-footer-buttons"><button type="button" class="ia-secondary" data-user-scan="'+id+'">在用户端演示扫码</button><button type="button" class="ia-primary" data-authorize="'+id+'">管理授权</button></div>');}
+  function reviewPermissions(){const changes=M.permissionChanges(store,ui.selected,permissionDraft);if(!changes.length)return;modal('admin','确认权限变更',dNow().name+' · '+changes.length+' 位用户',changes.map(c=>'<div class="wf-delta"><strong>'+M.user(store,c.uid).name+' · '+M.mask(M.user(store,c.uid).phone)+'</strong><p>当前：'+rightsText(c.before)+'</p><p>变更后：'+rightsText(c.next)+'</p></div>').join('')+'<label class="ia-field">变更说明（选填）<textarea id="wf-permission-reason" maxlength="100" placeholder="例如：授权现场操作人员"></textarea></label>'+errorBox()+'<div class="ia-modal-footer"><button type="button" class="ia-secondary" data-action="close">返回编辑</button><button type="button" class="ia-primary" data-action="apply-permissions">确认生效</button></div>');}
+  function renewal(id){renewDevice=id;const d=M.device(store,id),c=cFor(d);let end=c.end.slice(0,4)+'-11-'+c.end.slice(8);if(M.epoch(end)<=M.epoch(c.end))end='2026-12-21T18:00';modal('admin','登记续租',d.name+' · 第一所有人 '+M.user(store,c.owner).name,'<div class="wf-review">'+row('原到期时间',dateText(c.end))+'</div><label class="ia-field">新的到期时间（北京时间）<input id="wf-renew-end" type="datetime-local" value="'+end+'"></label><label class="ia-field">本次实收金额 / 元<input id="wf-renew-paid" type="number" min="0.01" step="0.01" value="'+c.rent+'"></label><label class="ia-field">实际收款日期<input id="wf-renew-paidAt" type="date" max="'+M.NOW.slice(0,10)+'" value="'+M.NOW.slice(0,10)+'"></label><label class="ia-field">付款记录编号<input id="wf-renew-reference" placeholder="选填"></label><label class="wf-check-line"><input id="wf-renew-confirmed" type="checkbox">已核对续租及付款记录</label><p class="ia-note">更新提醒和停机计划，保留已有授权，设备不会自动启动。</p>'+errorBox()+aFooter('close','renew-save','确认续租'));}
+  function openFrequency(){const d=dNow();if(!M.can(store,d.id,ui.user,'frequency').ok)return;modal('mini','调整运行频率',d.name,'<label class="im-field">目标频率 / Hz<input id="wf-frequency" type="number" min="0" max="80" step="0.1" value="'+d.target+'"></label><p class="im-hint">示例允许范围 0–80 Hz</p><p id="wf-error" class="im-error" role="alert"></p><div class="im-sheet-footer"><button type="button" class="im-secondary" data-action="close">取消</button><button type="button" class="im-primary" data-action="frequency-save">确认调整</button></div>');}
+  function openCommand(action){const d=dNow();if(!M.can(store,d.id,ui.user,action).ok)return;const label=({start:'启动',stop:'停止',reset:'故障复位'})[action];modal('mini','确认'+label,d.name,'<p class="im-hint">'+(action==='start'?'按设定频率 '+d.target.toFixed(1)+' Hz 启动。':action==='stop'?'停止当前设备运行。':'向设备下发故障复位指令。')+'</p><div class="im-sheet-footer"><button type="button" class="im-secondary" data-action="close">取消</button><button type="button" class="im-primary" data-confirm-command="'+action+'">确认'+label+'</button></div>');}
+  function executeCommand(action,value,button){if(commandBusy)return;const did=ui.selected,uid=ui.user;commandBusy=true;if(button){button.disabled=true;button.textContent='等待设备反馈…';}setTimeout(()=>{commandBusy=false;try{M.command(store,did,uid,action,value);closeModal();render();save();toast('模拟设备已确认 · '+({start:'启动成功',stop:'已停机',frequency:'频率已更新',reset:'复位完成'})[action]);}catch(e){if(button&&button.isConnected){button.disabled=false;button.textContent='重新确认';}showError(e);}},450);}
+  function startScan(id,uid){if(uid)ui.user=uid;if(id){ui.selected=id;ui.scanRaw=M.qr(M.device(store,id));}scanResult=null;scanError='';scanAdded=false;navigate('mini','scan');}
+  function identifyScan(){ui.scanRaw=content.querySelector('#wf-scan-raw').value;try{scanResult=M.inspectScan(store,ui.user,ui.scanRaw);ui.selected=scanResult.device.id;scanError='';}catch(e){scanError=e.message;scanResult=null;}render();save();}
+  root.addEventListener('input',function(e){const id=e.target.id;if(id==='wf-mini-search'){ui.query=e.target.value;drawMiniList();}if(id==='wf-admin-search'){ui.adminQuery=e.target.value;drawAdminRows();}if(id==='wf-scan-raw'){ui.scanRaw=e.target.value;}if(id==='wf-contract-phone'){const r=root.querySelector('#wf-owner-result');if(r)r.textContent='手机号已修改，请重新核对用户。';}});
+  root.addEventListener('change',function(e){const id=e.target.id;if(id==='wf-demo-user'){ui.user=e.target.value;ui.screen='devices';scanResult=null;scanError='';closeModal();render();save();}if(id==='wf-scan-select'){ui.scanRaw=e.target.value;content.querySelector('#wf-scan-raw').value=ui.scanRaw;}if(id==='wf-perm-device'){const target=e.target.value;e.target.value=ui.selected;leave(()=>navigate('admin','permissions',target));}if(e.target.dataset.perm){const uid=e.target.dataset.permUser,k=e.target.dataset.perm;permissionDraft[uid][k]=e.target.checked;if(k==='view'&&!e.target.checked)M.fields.slice(1).forEach(x=>permissionDraft[uid][x]=false);if(k!=='view'&&e.target.checked)permissionDraft[uid].view=true;M.fields.forEach(x=>{main.querySelector('[data-perm-user="'+uid+'"][data-perm="'+x+'"]').checked=permissionDraft[uid][x];});updatePermissionButton();}});
+  root.addEventListener('click',function(e){const b=e.target.closest('button');if(!b||b.disabled)return;const data=b.dataset;try{
+    if(data.mode){leave(()=>{closeModal();ui.mode=data.mode;render();save();});return;}
+    if(data.page){leave(()=>{if(data.page==='income'){ui.incomeScope=null;ui.incomeFromReport=false;}navigate('admin',data.page);});return;}
+    if(data.miniNav){if(data.miniNav==='scan')startScan();else navigate('mini',data.miniNav);return;}
+    if(b.id==='im-back'){navigate('mini',['rental','history'].includes(ui.screen)?'detail':ui.screen==='sms'?'profile':'devices');return;}
+    if(data.device){navigate('mini','detail',data.device);return;}
+    if(data.miniFilter){ui.filter=data.miniFilter;render();save();return;}
+    if(data.adminFilter){ui.adminFilter=data.adminFilter;render();save();return;}
+    if(data.authorize){leave(()=>navigate('admin','permissions',data.authorize));return;}
+    if(data.info){ui.selected=data.info;progress();deviceInfo(data.info);return;}
+    if(data.leaseDevice){ui.selected=data.leaseDevice;progress();if(cFor(dNow()))contractDetails(data.leaseDevice);else startContract(data.leaseDevice);return;}
+    if(data.contractStart){startContract(data.contractStart);return;}
+    if(data.contractDetails){contractDetails(data.contractDetails);return;}
+    if(data.renew){renewal(data.renew);return;}
+    if(data.ownerScan){const c=M.contract(store,data.ownerScan);startScan(data.ownerScan,c.owner);return;}
+    if(data.userScan){startScan(data.userScan);return;}
+    if(data.metric){ui.metric=data.metric;render();save();return;}
+    if(data.history){ui.historyView=data.history;render();save();return;}
+    if(data.command){openCommand(data.command);return;}
+    if(data.confirmCommand){executeCommand(data.confirmCommand,undefined,b);return;}
+    const a=data.action;
+    if(a==='close'){closeModal();return;}
+    if(a==='discard-leave'){const action=pendingLeave;permissionDraft=null;permissionDevice=null;closeModal();if(action)action();return;}
+    if(a==='scan'){startScan();return;}
+    if(a==='scan-identify'||a==='scan-album'){identifyScan();return;}
+    if(a==='scan-cancel'||a==='mini-list'){navigate('mini','devices');return;}
+    if(a==='scan-again'){scanResult=null;scanError='';scanAdded=false;render();save();return;}
+    if(a==='scan-confirm'){const d=M.addByScan(store,ui.user,ui.scanRaw);ui.selected=d.id;scanAdded=true;scanResult=M.inspectScan(store,ui.user,ui.scanRaw);render();save();return;}
+    if(a==='scan-open'){navigate('mini','detail',scanResult.device.id);return;}
+    if(['rental','history','sms'].includes(a)){navigate('mini',a);return;}
+    if(a==='frequency'){openFrequency();return;}
+    if(a==='frequency-save'){const v=root.querySelector('#wf-frequency').value;if(v.trim()===''||!Number.isFinite(Number(v))||Number(v)<0||Number(v)>80)throw new Error('请输入 0–80 之间的频率。');executeCommand('frequency',v,b);return;}
+    if(a==='inventory'){startInventory();return;}
+    if(a==='inventory-parse'){inventoryDraft.raw=root.querySelector('#wf-inventory-qr').value;inventoryDraft.parsed=M.inspectInventory(store,inventoryDraft.raw);inventoryStep(2);return;}
+    if(a==='inventory-back'){inventoryDraft.name=root.querySelector('#wf-inventory-name').value;inventoryDraft.place=root.querySelector('#wf-inventory-place').value;inventoryStep(1);return;}
+    if(a==='inventory-save'){inventoryDraft.name=root.querySelector('#wf-inventory-name').value;inventoryDraft.place=root.querySelector('#wf-inventory-place').value;const d=M.addInventoryFor(store,'admin',inventoryDraft,'desktop');ui.selected=d.id;ui.scanRaw=M.qr(d);ui.adminFilter='all';ui.adminQuery='';render();save();inventoryStep(3);return;}
+    if(a==='new-contract'){startContract();return;}
+    if(a==='lookup-owner'){readContract();const u=store.users.find(x=>x.phone===contractDraft.phone.trim());root.querySelector('#wf-owner-result').textContent=u?'已找到：'+u.name+' · '+M.mask(u.phone)+'（微信已绑定）':'未找到已绑定用户，请核对手机号。';fitModal();return;}
+    if(a==='contract-review'){readContract();M.validateContract(store,contractDraft);contractStep(2);return;}
+    if(a==='contract-back'){contractStep(1);return;}
+    if(a==='contract-save'){const c=M.registerContract(store,Object.assign({},contractDraft,{confirmed:root.querySelector('#wf-contract-confirmed').checked}));ui.selected=c.device;render();save();contractStep(3);return;}
+    if(a==='review-permissions'){reviewPermissions();return;}
+    if(a==='apply-permissions'){const changes=M.grant(store,ui.selected,permissionDraft,root.querySelector('#wf-permission-reason').value);permissionDraft=null;permissionDevice=null;closeModal();render();save();const u=M.user(store,changes[0].uid);modal('admin','授权已生效',dNow().name,'<div class="wf-success"><span>'+icon('shield-check')+'</span><h2>已更新 '+changes.length+' 位用户的权限</h2><p>第一所有人及租赁合同保持不变。</p></div><div class="wf-footer-buttons"><button type="button" class="ia-secondary" data-action="close">返回授权列表</button><button type="button" class="ia-primary" data-preview-user="'+u.id+'">查看 '+u.name+' 的小程序</button></div>');return;}
+    if(data.previewUser){ui.user=data.previewUser;navigate('mini',M.can(store,ui.selected,ui.user,'view').ok?'detail':'devices');return;}
+    if(a==='renew-save'){M.renew(store,renewDevice,root.querySelector('#wf-renew-end').value,root.querySelector('#wf-renew-paid').value,root.querySelector('#wf-renew-confirmed').checked,root.querySelector('#wf-renew-paidAt').value,root.querySelector('#wf-renew-reference').value);closeModal();render();save();toast('续租已登记，提醒计划已更新，设备不会自动启动。');return;}
+  }catch(error){showError(error);}});
+  root.addEventListener('keydown',function(e){const layer=!aLayer.hidden?aLayer:!mLayer.hidden?mLayer:null;if(!layer)return;if(e.key==='Escape'){closeModal();return;}if(e.key==='Tab'){const f=Array.from(layer.querySelectorAll('button:not(:disabled),input,select,textarea'));if(e.shiftKey&&document.activeElement===f[0]){e.preventDefault();f[f.length-1].focus();}else if(!e.shiftKey&&document.activeElement===f[f.length-1]){e.preventDefault();f[0].focus();}}});
+  const resize=new ResizeObserver(()=>fitModal());resize.observe(root);
+  render();
+  if(globalThis.Tweak){const tweak=new Tweak({container:admin,onChange:()=>{admin.style.setProperty('--ia-row-space',ui.density+'px');save();}});tweak.addSlider(ui,'density',{label:'后台表格行间距',min:10,max:22,step:2,unit:'px'});}
+})();
+
+</script>

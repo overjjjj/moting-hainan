@@ -1,0 +1,20 @@
+{
+  "name": "moting-hainan",
+  "version": "1.2.0",
+  "private": true,
+  "description": "Local three-view inverter rental and monitoring prototype, design assets and tests",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node demo/server.cjs",
+    "test": "node tools/run-tests.cjs all",
+    "test:demo": "node tools/run-tests.cjs demo",
+    "test:model": "node tools/run-tests.cjs model",
+    "test:prototype": "node tools/run-tests.cjs prototype",
+    "test:browser": "node tools/run-tests.cjs browser"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

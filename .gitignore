@@ -1,0 +1,46 @@
+# Dependencies and caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Credentials and local data
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.sqlite
+*.sqlite3
+*.db
+*.backup
+*.backup.json
+*user-backup*.json
+*用户备份*.json
+backups/
+local-data/
+secrets/
+credentials/
+
+# Machine/site configuration
+.openai/
+.sites-runtime/
+.codex/
+.agents/
+
+# Reproducible temporary output
+output/document-tools/
+output/docx-render/
+output/design-spec-qa*/
+output/design-spec-final-qa/
+output/qa-v2/
+output/*.zip
+output/document-write-probe.txt

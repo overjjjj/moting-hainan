@@ -1,0 +1,14 @@
+<div id="rental-workflow" aria-label="租赁业务联动原型">
+  <div class="wf-preview-bar">
+    <div class="wf-preview-title">业务流程联动预览<span>示例数据 · 扫码模拟</span></div>
+    <div class="wf-mode-controls" aria-label="切换演示视角">
+      <button type="button" data-mode="mini" aria-pressed="true" class="cursor-interaction">手机小程序</button>
+      <button type="button" data-mode="admin" aria-pressed="false" class="cursor-interaction">管理后台</button>
+    </div>
+    <label id="wf-user-label">演示账号<select id="wf-demo-user" aria-label="选择演示用户"></select></label>
+  </div>
+  <div id="wf-progress" aria-label="当前设备流程进度"></div>
+  <section id="wf-mini-section"><!-- MINI_MARKUP --></section>
+  <section id="wf-admin-section" hidden><!-- ADMIN_MARKUP --></section>
+  <div id="wf-live" aria-live="polite" class="wf-sr-only"></div>
+</div>

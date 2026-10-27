@@ -1,0 +1,16 @@
+{
+  "status": "reserved_only",
+  "implemented": false,
+  "billingRule": "prepaid_balance_per_message",
+  "reminderDays": [7, 3, 1],
+  "rechargeChannel": null,
+  "unitPrice": null,
+  "deductionTiming": null,
+  "operations": [
+    {"method":"GET","path":"/api/v1/sms/wallet","purpose":"查询当前用户短信余额"},
+    {"method":"GET","path":"/api/v1/sms/transactions","purpose":"查询充值及按条扣费记录"},
+    {"method":"POST","path":"/api/v1/sms/recharge-orders","purpose":"预留充值订单创建，当前不可调用","unavailableCode":"SMS_RECHARGE_NOT_ENABLED"},
+    {"method":"GET","path":"/api/v1/sms/recharge-orders/{id}","purpose":"预留充值结果查询"}
+  ],
+  "notes": ["仅为原型阶段接口契约，无真实请求、发信、扣款或充值实现", "充值渠道和到账规则后续确认", "短信服务不改变租期及到期停机规则"]
+}

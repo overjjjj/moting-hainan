@@ -1,0 +1,5 @@
+qa/*.png
+.sites-runtime/
+.openai/
+node_modules/
+*.log

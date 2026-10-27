@@ -1,0 +1,13 @@
+
+/* Unified visual reference: the existing monitoring platform is the design baseline. */
+#inv-admin{color-scheme:dark;--ia-bg:#061a34;--ia-surface:#0b2646;--ia-ink:#edf6ff;--ia-muted:#a9c0d8;--ia-line:#254968;--ia-brand:#27d6ed;--ia-soft:#113e58;--ia-green:#38d9b0;--ia-green-bg:#0c403b;--ia-amber:#ffd17a;--ia-amber-bg:#46391e;--ia-red:#ff8c91;--ia-red-bg:#4b2935}
+#inv-mini{color-scheme:dark;--im-bg:#061a34;--im-surface:#0b2646;--im-ink:#edf6ff;--im-muted:#a9c0d8;--im-line:#254968;--im-brand:#27d6ed;--im-soft:#113e58;--im-green:#38d9b0;--im-green-bg:#0c403b;--im-amber:#ffd17a;--im-amber-bg:#46391e;--im-red:#ff8c91;--im-red-bg:#4b2935}
+#inv-admin .ia-brand-mark{background:var(--ia-soft);color:var(--ia-brand)}
+#inv-admin .ia-brand,#inv-admin .ia-heading h1{color:var(--ia-ink)}
+#inv-admin .ia-sidebar{background:#071e39}
+#inv-admin .ia-topbar{background:#071e39}
+#inv-admin .ia-primary{color:#062039}
+#inv-mini .im-primary{color:#062039;background:var(--im-brand)}
+#inv-mini .im-navbar,#inv-mini .im-status{background:#071e39}
+#inv-admin .ia-panel,#inv-mini .im-card{box-shadow:none}
+

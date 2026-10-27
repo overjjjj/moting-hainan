@@ -1,0 +1,1512 @@
+{
+  "date": "2026-10-28",
+  "version": "1.2.0",
+  "normalization": "Explicit text extensions in .gitattributes: CRLF -> LF",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "canonical_bytes": 335,
+      "sha256": "c3abd8b01ffc5e1f6f441d69a12c0a0a5d4bed0d7c811b8323b144f31453b821"
+    },
+    {
+      "path": ".gitignore",
+      "canonical_bytes": 603,
+      "sha256": "92d85f7e2bf5700fb8f9ff9faa2cffae020829987d26c4bc26476d250168d202"
+    },
+    {
+      "path": "README.md",
+      "canonical_bytes": 3695,
+      "sha256": "d67bcdfb4fd8160d182cbfceb5647116525ae1c2b867834350d57a383d640932"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "canonical_bytes": 1779,
+      "sha256": "008f62cef2cd707eb3a754345f763612847b2d77bb0d185bdd065e7458c7d5b1"
+    },
+    {
+      "path": "build_complete_plan.py",
+      "canonical_bytes": 32017,
+      "sha256": "3dc35ada57d59b6e96e7ecb955a9c8a1d39665f798a57e2375945800f7d98005"
+    },
+    {
+      "path": "build_design_spec.py",
+      "canonical_bytes": 60472,
+      "sha256": "73419a1e74ea15072802a993c1b5282f9a84e4f72c593eb11afa9a75bbd999a8"
+    },
+    {
+      "path": "build_plan_doc.py",
+      "canonical_bytes": 19284,
+      "sha256": "15dd8d8ba7e7d2766a4962ebe867cd7f0e4cbd14e993beee8f4e9b31d5cb8fce"
+    },
+    {
+      "path": "capture_design_references.cjs",
+      "canonical_bytes": 2022,
+      "sha256": "99f86c26019b8f3c5e38024752e7f0936b476a615f2b456d7dfb55575e96a7c5"
+    },
+    {
+      "path": "demo/.gitignore",
+      "canonical_bytes": 55,
+      "sha256": "dec9d4e18ee1e0c19d67e095e8e1b2d194274c1f82781eadc32a13e80da66093"
+    },
+    {
+      "path": "demo/API.md",
+      "canonical_bytes": 7937,
+      "sha256": "f57baee881e9514f0018f3b6d9ac3068d837c21e00d64d36125d260faaf5f036"
+    },
+    {
+      "path": "demo/LUCIDE-LICENSE",
+      "canonical_bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    {
+      "path": "demo/MAP-SOURCE.md",
+      "canonical_bytes": 3747,
+      "sha256": "caee43150c7082fa9db962bf363ec6304610a2455105e335c350781b2caf9acc"
+    },
+    {
+      "path": "demo/README.md",
+      "canonical_bytes": 7530,
+      "sha256": "ef4e80f4831c5426fe51a9d2ab11ff92c5119f5f7d0d840167e7a7efc0ead99b"
+    },
+    {
+      "path": "demo/Start-Demo.cmd",
+      "canonical_bytes": 89,
+      "sha256": "c26135d72c2ce40d88ce6d78f1673c3b72c52037e6b1abd693b32372f02576a8"
+    },
+    {
+      "path": "demo/Start-Demo.ps1",
+      "canonical_bytes": 1367,
+      "sha256": "7e92dd5620f17d137c4ca13b1858d289dc14febe5cd580bdc7ddd0f895512e90"
+    },
+    {
+      "path": "demo/dist/admin.js",
+      "canonical_bytes": 48147,
+      "sha256": "4cf4f39fef34c86e88736e9f85f48c341f2ef39b2470938a96c915f48e411c22"
+    },
+    {
+      "path": "demo/dist/app.js",
+      "canonical_bytes": 21949,
+      "sha256": "d2b5363ebfddf6388c707f93f3225f4581fec1f39b1cff5d4f94db8f7f5800f2"
+    },
+    {
+      "path": "demo/dist/demo.js",
+      "canonical_bytes": 38409,
+      "sha256": "db57000f939367ab0c246bc5a9eef2fdd879670f7fcd99569a38788607e8fc45"
+    },
+    {
+      "path": "demo/dist/index.html",
+      "canonical_bytes": 1069,
+      "sha256": "d49b49bf64c87aa1825bbcb759fe88a9b714252b09c63a4c81082561bc6aac6b"
+    },
+    {
+      "path": "demo/dist/lucide.min.js",
+      "canonical_bytes": 397450,
+      "sha256": "ab85225ecc1daa2033607856f03dd2dabcbc08e2d260a5b97e17c690aa929766"
+    },
+    {
+      "path": "demo/dist/map-data.js",
+      "canonical_bytes": 17909,
+      "sha256": "960236a107fd38356bf5e7a9f6b8214e6feff271091014d242f6093e3aee08e4"
+    },
+    {
+      "path": "demo/dist/map-levels.js",
+      "canonical_bytes": 60240,
+      "sha256": "ce42ce1498a536c12956ca35331e78221064b9851dbbe35b05839c2f06d379b4"
+    },
+    {
+      "path": "demo/dist/mini.css",
+      "canonical_bytes": 23083,
+      "sha256": "1b4e19257e40925bb8f7099dcd833f9fe53c7b6144a8186b1ad0598c303542f9"
+    },
+    {
+      "path": "demo/dist/mini.js",
+      "canonical_bytes": 28612,
+      "sha256": "45a44670d6b1fc44e409256b16d00a67d18c283117e1ae7ca16527452f2acd3f"
+    },
+    {
+      "path": "demo/dist/monitor-map.css",
+      "canonical_bytes": 14708,
+      "sha256": "0594897ce0b91f989d3c4b5edf3b1a627cdb6965bf6803214f403ac9d60d2b87"
+    },
+    {
+      "path": "demo/dist/monitor-map.js",
+      "canonical_bytes": 14876,
+      "sha256": "f5130dd69f091cc485829a7f67bf406db4223a189d358e0a14fc2a190f2b9802"
+    },
+    {
+      "path": "demo/dist/monitor-pages.css",
+      "canonical_bytes": 30889,
+      "sha256": "db0546b221653069bb7dc096fd9fbd63910a798ab11ea8c928b7525dbfc1e1d1"
+    },
+    {
+      "path": "demo/dist/monitor-pages.js",
+      "canonical_bytes": 23538,
+      "sha256": "0fe0a04b2d5c235e3768742d0378d0b42c6ecc807232eb8724b667f77d5cf6ca"
+    },
+    {
+      "path": "demo/dist/monitor.css",
+      "canonical_bytes": 16822,
+      "sha256": "e29b6040da7504af8c10a09a09ba2396be58bbcbe0604c87ae76436d12227345"
+    },
+    {
+      "path": "demo/dist/monitor.js",
+      "canonical_bytes": 17402,
+      "sha256": "872cbdbee406791879105d508fda17f0a396f50ae9612a55877b056ae0620aea"
+    },
+    {
+      "path": "demo/dist/style.css",
+      "canonical_bytes": 14853,
+      "sha256": "cfc10391aee24a4b7f7f910c904db49a65df2861e92da10414f626ecc7d418be"
+    },
+    {
+      "path": "demo/qa/build-map-levels.py",
+      "canonical_bytes": 10076,
+      "sha256": "f3a57aae002e60ede65193491a1e78b8588aec9ac7372db050dd412f7657c781"
+    },
+    {
+      "path": "demo/qa/capture-monitor-v11.cjs",
+      "canonical_bytes": 983,
+      "sha256": "6960a8ec6bf296cf391ac4e2c9c4f24defac3b203061866806451e65677bae72"
+    },
+    {
+      "path": "demo/qa/hainan-source.json",
+      "canonical_bytes": 34123,
+      "sha256": "ae44b392cf32ff7f7df5466ca16fa7f1b70b9fb9c36f00f54d6f142d011c65e4"
+    },
+    {
+      "path": "demo/qa/packaging-check.cjs",
+      "canonical_bytes": 1537,
+      "sha256": "d0a52b146b2fd34107a7f628424e353adfd945cd3eacaa83e3c613ed39d27e0d"
+    },
+    {
+      "path": "demo/server.cjs",
+      "canonical_bytes": 1299,
+      "sha256": "6bded3fdc0bd4dac813d544fe8c5936306b3499d4cbf2026ddb4583159e79fec"
+    },
+    {
+      "path": "demo/tests/admin-flow.cjs",
+      "canonical_bytes": 12896,
+      "sha256": "50a67c37ee06f498ceedb30ca3498945742e04a5f00cee743e6e33389d4ef090"
+    },
+    {
+      "path": "demo/tests/app-smoke.cjs",
+      "canonical_bytes": 12878,
+      "sha256": "7216566386808c9cf21e71fb9d01b2bde9c2b848df7a20fdcf5ed979516a36c5"
+    },
+    {
+      "path": "demo/tests/map-drilldown.cjs",
+      "canonical_bytes": 15095,
+      "sha256": "7b84bc5feedd55af230cbd11b4620a45abee60d7e96e9eed6037608d484c108a"
+    },
+    {
+      "path": "demo/tests/model.test.cjs",
+      "canonical_bytes": 20295,
+      "sha256": "cd2e1bac33e78e1f9ca95b013a86d001763b3aaa2507a9056191edfa3e76688f"
+    },
+    {
+      "path": "demo/tests/monitor-ui.cjs",
+      "canonical_bytes": 15260,
+      "sha256": "025d8af918b8afcf8cf987e8f2c61ae63af46abcaa30a915d1a5e0985fed2ea6"
+    },
+    {
+      "path": "design/README.md",
+      "canonical_bytes": 2082,
+      "sha256": "0fdaaab807c31007e0430d96e5ccd5419428d799b1c3b12d4e2251371d433b93"
+    },
+    {
+      "path": "design/monitor-initial.png",
+      "canonical_bytes": 1709787,
+      "sha256": "d45a6d8f0e6416f3ac91a1cb6b70e506a0a59dfa1af3299cc94a17ebdeb3339b"
+    },
+    {
+      "path": "design/monitor-original.png",
+      "canonical_bytes": 1723249,
+      "sha256": "f6d37d1c6b52eb1d60e92e924c5653f3c0256c3f70ad4577af218f8729c3137c"
+    },
+    {
+      "path": "design/monitor-review-historical.png",
+      "canonical_bytes": 1225179,
+      "sha256": "fb20498b5c7427fe7c1d06467f77cc21a8ee2c52e6029e16a783b88fbf7e0aa7"
+    },
+    {
+      "path": "design/validation/admin-backup-differences.png",
+      "canonical_bytes": 180350,
+      "sha256": "15117acfa282711160eba086463759ede439defc398c597f52efea71fa4bef3e"
+    },
+    {
+      "path": "design/validation/admin-overview.png",
+      "canonical_bytes": 197217,
+      "sha256": "4d8a3542576f35f7f2e4cd1af817d5e672aed450f9dc9eb7aa93b67a71e5251c"
+    },
+    {
+      "path": "design/validation/admin-reports.png",
+      "canonical_bytes": 152817,
+      "sha256": "50ec2b4bc5da7d1e73e13ee0e3dc2d9a67e5d886d6ffb492c2fb094904b6a81e"
+    },
+    {
+      "path": "design/validation/map-haikou-1920.png",
+      "canonical_bytes": 1219423,
+      "sha256": "5e48ce1a63170fde7edccd1ab360da221a08a0db94672be3ff7d3ebbb948a2d1"
+    },
+    {
+      "path": "design/validation/map-haikou-390.png",
+      "canonical_bytes": 423126,
+      "sha256": "f2a63ac1c0164a5d6f694b750afb8a8645247f75c5ab1ac1cfb3f5ad2e55346c"
+    },
+    {
+      "path": "design/validation/map-xiuying-1920.png",
+      "canonical_bytes": 1200817,
+      "sha256": "94e9eb1bbfa9ae8aea226533ec36d7bffbc4cf607204570fe41f71e4bd15fa0f"
+    },
+    {
+      "path": "design/validation/mini-file-mobile.png",
+      "canonical_bytes": 109598,
+      "sha256": "164d030ff0128e513b2d6a49ca540195648c1199d89ec655d95fa3fb00df3300"
+    },
+    {
+      "path": "design/validation/monitor-final-alarms-1920.png",
+      "canonical_bytes": 799602,
+      "sha256": "6f46f5f7e6a77d95c43125a1d85be8cc1ac6949ec86e1114d0ba904174ca880e"
+    },
+    {
+      "path": "design/validation/monitor-final-detail-1920.png",
+      "canonical_bytes": 1069436,
+      "sha256": "1a48c5f8e00d21bc72f09f827df566d2145f06755f9a981ffd1b4adc59bb9b6d"
+    },
+    {
+      "path": "design/validation/monitor-final-offline-1920.png",
+      "canonical_bytes": 1096636,
+      "sha256": "6005333bdc9a24e016aa50c953d6a469b25100ae316562fdfc5a2677cda2c6ba"
+    },
+    {
+      "path": "design/validation/monitor-final-region-1920.png",
+      "canonical_bytes": 1096483,
+      "sha256": "3835fdb442b62835499a10d980bebbff82213aa413ac1e3fb39ef27353dda9c8"
+    },
+    {
+      "path": "design/validation/monitor-v11-1920.png",
+      "canonical_bytes": 1207523,
+      "sha256": "93c4e37193ffa379f3f1bfffcfbf158f0c71238c410d60d4ffbca30c3f3b8fcf"
+    },
+    {
+      "path": "docs/DEVELOPMENT.md",
+      "canonical_bytes": 4042,
+      "sha256": "c40490737cbb06a633aa963e41a1959da09711892334bad46d09778bd395fe49"
+    },
+    {
+      "path": "docs/INVENTORY.md",
+      "canonical_bytes": 1877,
+      "sha256": "4d201a77f641143d1a3610df4c6ddbb4689c0a0e02d38e11cbca6b4f72efa2cd"
+    },
+    {
+      "path": "inspect_design_spec.py",
+      "canonical_bytes": 788,
+      "sha256": "02462eef5c08dfbced36e91800dbf199132e03f6d86114a037d57f40cfa25b6b"
+    },
+    {
+      "path": "inspect_design_spec_final.py",
+      "canonical_bytes": 789,
+      "sha256": "a5043495a6c1bd78c2598b180b7e10195dddc8ab59f25b39f2b7836d6b6fe665"
+    },
+    {
+      "path": "output/admin-dark-preview.png",
+      "canonical_bytes": 98022,
+      "sha256": "d10ef365ad0340e92036f68f8b34cfac0d0c4f0234cd0b70a569817a66418694"
+    },
+    {
+      "path": "output/admin-devices-preview.png",
+      "canonical_bytes": 83945,
+      "sha256": "feb49e2ba0fcc5f2a5334d5da792df0999b2eddb43eb8bc6e3e0533717aeb39f"
+    },
+    {
+      "path": "output/admin-narrow-preview.png",
+      "canonical_bytes": 55395,
+      "sha256": "9b95fd54a945e884b44496b8aa0738b182e80738da64166aa8040554ee0fb9ec"
+    },
+    {
+      "path": "output/admin-permissions-preview.png",
+      "canonical_bytes": 55723,
+      "sha256": "2b4abb1c14365893c9bdac15a240e43593b80e487bd633b4a40d2ee90541d785"
+    },
+    {
+      "path": "output/admin-preview-qa.html",
+      "canonical_bytes": 131320,
+      "sha256": "6cb8671207f31a6ce650b904e8f1558d2531beffb39e8c8aeca8b3a22845cce4"
+    },
+    {
+      "path": "output/check-interface-previews.cjs",
+      "canonical_bytes": 7986,
+      "sha256": "775fb9cadf183a2cf793ba06a1d015bc8e9032e900829cea3cd3ea49e886219c"
+    },
+    {
+      "path": "output/design-review.md",
+      "canonical_bytes": 2883,
+      "sha256": "0a765b3534aaa49c85283657c21d965eb6978fa9845d939f47c006c0ffe14281"
+    },
+    {
+      "path": "output/design-spec-assets/admin-backup-unified.png",
+      "canonical_bytes": 97053,
+      "sha256": "8ff0a72bd7c8f20449ffbadc4ee9e1a74efc4d46810b98d5edf785d9b6a1b614"
+    },
+    {
+      "path": "output/design-spec-assets/admin-devices-unified.png",
+      "canonical_bytes": 87626,
+      "sha256": "b9204877e21c8995bfd9fe3111feed61e8a9b16f2696b799b2012975bdc0dc73"
+    },
+    {
+      "path": "output/design-spec-assets/admin-reports-unified.png",
+      "canonical_bytes": 81843,
+      "sha256": "61806d4512e12ebc75c63e91ab9eb30105cb6516b96743b9d3a902900ffb74c1"
+    },
+    {
+      "path": "output/design-spec-assets/architecture.png",
+      "canonical_bytes": 87214,
+      "sha256": "290ba83c8685fbe0202e1ebb148adb3ec94d1d101b379dc7a6dfe27e82fc9477"
+    },
+    {
+      "path": "output/design-spec-assets/chapters.json",
+      "canonical_bytes": 1160,
+      "sha256": "45ed82898f5584be19ae63c5a9e3ce70319f6b195bf3abe29e8c8eab59f027f8"
+    },
+    {
+      "path": "output/design-spec-assets/mini-detail-unified.png",
+      "canonical_bytes": 41159,
+      "sha256": "8071f71be6551612df35142ef67a0c1e1b0ff8de287f7a201ad9ce42e03f0fa9"
+    },
+    {
+      "path": "output/design-spec-assets/mini-devices-unified.png",
+      "canonical_bytes": 55912,
+      "sha256": "7c8a4d34c323ac65e46cf89e8187692ade7af0427e977e00f3442331b2b735fc"
+    },
+    {
+      "path": "output/design-spec-assets/mobile-inventory-unified.png",
+      "canonical_bytes": 41338,
+      "sha256": "af1443dc4a85357f5efadbc2bf6628bd30292136947642c8793c6b83fc17321a"
+    },
+    {
+      "path": "output/design-spec-assets/mobile-unified-narrow.png",
+      "canonical_bytes": 39491,
+      "sha256": "0c49d2b4d53a3b4629cefe43477d0c94b637d3b82b402f06fe71d86b5dd604cf"
+    },
+    {
+      "path": "output/income-dark.png",
+      "canonical_bytes": 88146,
+      "sha256": "d7458bfcc5c24bf9c943b61aff4f06c8a2aa6fe7e79eb51be785704006f49979"
+    },
+    {
+      "path": "output/income-desktop.png",
+      "canonical_bytes": 86491,
+      "sha256": "27c7f82db86b065fd094e6926e4f64e3f7ba14fcc8946e804b87f3b82f395bf1"
+    },
+    {
+      "path": "output/income-narrow.png",
+      "canonical_bytes": 68383,
+      "sha256": "9d59822efb10e71d13e3a8b388f74c4513c690c472b409d24d3a78a525f0fd76"
+    },
+    {
+      "path": "output/income-receipt.png",
+      "canonical_bytes": 81610,
+      "sha256": "7edd7fd49662a3c7a3c0fae1bc6477dc27112f74c2a466a0825206c62ca45ae0"
+    },
+    {
+      "path": "output/mini-detail-preview.png",
+      "canonical_bytes": 60487,
+      "sha256": "f363e74ca8e8676ac8256185af9a57f4890d1135e883cefd732c31392a651bfd"
+    },
+    {
+      "path": "output/mini-list-preview.png",
+      "canonical_bytes": 76717,
+      "sha256": "a76cde6612d3b46af7bf67b7109d79e51a50647b3e3bbbd577ffeb06ed538ba0"
+    },
+    {
+      "path": "output/mini-narrow-preview.png",
+      "canonical_bytes": 64270,
+      "sha256": "7ce53e1c873f4df69976e940b2f12c7b611c1a44e0683e772ea580a6041de79d"
+    },
+    {
+      "path": "output/mini-preview-qa.html",
+      "canonical_bytes": 131058,
+      "sha256": "c0404cc0cb30ea303cc651acfa9384562a2a3bc8e12c2b66dabfd50d0398734a"
+    },
+    {
+      "path": "output/mobile-inventory-dark.png",
+      "canonical_bytes": 80270,
+      "sha256": "412fa304cc620a83ab412c4cad4cc542da6ff988332e7eb9b7eaaa02260a7197"
+    },
+    {
+      "path": "output/mobile-inventory-form-narrow.png",
+      "canonical_bytes": 51486,
+      "sha256": "9a4ef9198ed79699b53363100360505b7dd389e3b4f817a35f3237887b27952a"
+    },
+    {
+      "path": "output/mobile-inventory-home.png",
+      "canonical_bytes": 77213,
+      "sha256": "17f81bc5b16d615f7ff0fd0294aab9aba5214ce2d60ea7a6a70cd86295109692"
+    },
+    {
+      "path": "output/mobile-inventory-scan.png",
+      "canonical_bytes": 66188,
+      "sha256": "c8cac5f3dc821715e522e6ee65c3a05d35cf4efb7eca0dcbb94a8f63d96a9d59"
+    },
+    {
+      "path": "output/mobile-inventory-success.png",
+      "canonical_bytes": 47842,
+      "sha256": "c4669d24128fc1281a8159b32b992918e3ede4843e53a38d4efc9b3593f1fd09"
+    },
+    {
+      "path": "output/reports-customer.png",
+      "canonical_bytes": 68980,
+      "sha256": "2891dd2ef1d4f04b27a841d3708acd23d4c155a88f2d3e8c7d63ea7a1012f382"
+    },
+    {
+      "path": "output/reports-dark.png",
+      "canonical_bytes": 70172,
+      "sha256": "2cc05a2bf6778730ae0fba13e32aa83cf490cf53e32c21b2b2062bd182825e3e"
+    },
+    {
+      "path": "output/reports-device.png",
+      "canonical_bytes": 89593,
+      "sha256": "6c762a9e3c7efacb5d2a31c94ee3eb9fcb2f13974d241d2f36a3d9e77160c611"
+    },
+    {
+      "path": "output/reports-month.png",
+      "canonical_bytes": 63220,
+      "sha256": "6f83c757616c59458e9c5b54554d144b56f7a245be40be224c46614f82eaba19"
+    },
+    {
+      "path": "output/reports-narrow.png",
+      "canonical_bytes": 51384,
+      "sha256": "c6305f5eeab17c67772fb2b5277547c40d773a195b7463a3452f687c95371ae9"
+    },
+    {
+      "path": "output/ui-regional/01-region-overview.png",
+      "canonical_bytes": 1460057,
+      "sha256": "92bb61e2cfc8816f4f462bb9b2fa642b524fa0112a5091500262aba3b479bccb"
+    },
+    {
+      "path": "output/ui-regional/02-device-detail.png",
+      "canonical_bytes": 1459144,
+      "sha256": "9abbb56871062c0211abcc2d0d378e5c5cf4dd44560052302ac0672525688031"
+    },
+    {
+      "path": "output/ui-regional/03-search-empty.png",
+      "canonical_bytes": 1313227,
+      "sha256": "ece53c47820286a34acbcbac2ebd220d985ccb158845efefd1b2120ada5000fd"
+    },
+    {
+      "path": "output/ui-regional/04-offline-detail.png",
+      "canonical_bytes": 1466201,
+      "sha256": "8cad9b4f2ad95996b04c86cc3043efa37372f3d84e0828daec4db3b2b48f966d"
+    },
+    {
+      "path": "output/ui-regional/README.md",
+      "canonical_bytes": 3164,
+      "sha256": "6424664aea6d12b0f8e57a34c1dc8baecd3dda45d2fb1f29bd7e5844aeaf99de"
+    },
+    {
+      "path": "output/ui-regional/interface-contract.md",
+      "canonical_bytes": 3373,
+      "sha256": "b6dc8272921169a9e02c520b9d437776a19bc6893abfd954e36dcb19d589a7a9"
+    },
+    {
+      "path": "output/user-backup-dark.png",
+      "canonical_bytes": 124551,
+      "sha256": "2fa0e40bd955801f038f4ba5104ab1dc047fc67cb29212a38921bcb4d28e3f1d"
+    },
+    {
+      "path": "output/user-backup-destination.png",
+      "canonical_bytes": 107262,
+      "sha256": "3c5e668a8ca3ac56bec19641fbef9b5f0b0119ba06f62af34ed0b3bd974942d1"
+    },
+    {
+      "path": "output/user-backup-disc.png",
+      "canonical_bytes": 123978,
+      "sha256": "6d2e12c3d752c060ef458fbd64e61bca3b10696a8664484013b73b3550fafc44"
+    },
+    {
+      "path": "output/user-backup-home.png",
+      "canonical_bytes": 103538,
+      "sha256": "3bc11fb4115f30a5402266836bbe8a15caf47dd7a6bcaacdd6832d2e69bbf3d3"
+    },
+    {
+      "path": "output/user-backup-modal-narrow.png",
+      "canonical_bytes": 87432,
+      "sha256": "6e0178677d02cb06a8918c85aca26070e1402a8fb96f53eadb3f5f74981f7f9f"
+    },
+    {
+      "path": "output/user-backup-narrow.png",
+      "canonical_bytes": 79719,
+      "sha256": "6e75004629ae31d92c28864eb23b2ef698012d67d61e7de4eef021fca5f9b798"
+    },
+    {
+      "path": "output/user-backup-restore.png",
+      "canonical_bytes": 135491,
+      "sha256": "d3ab150d0e442857441ff9d145bb9d5759a5f092eced9720ae929b79a1d16c7c"
+    },
+    {
+      "path": "output/workflow-admin-dark.png",
+      "canonical_bytes": 102685,
+      "sha256": "16dddf5a17d1d68780859e87ff0555cade8cc17e90e73e5d9c245f90844d4401"
+    },
+    {
+      "path": "output/workflow-admin-narrow.png",
+      "canonical_bytes": 58451,
+      "sha256": "fe885db19a5b8c99164006739e53740109e4c92bc5162e9f6421ee9929c21ed9"
+    },
+    {
+      "path": "output/workflow-authorized-mini.png",
+      "canonical_bytes": 75797,
+      "sha256": "b2f924cb44512170598b1aef0b9d00f875ec01ce4d6ea10ca6519a15baf77f02"
+    },
+    {
+      "path": "output/workflow-contract-review.png",
+      "canonical_bytes": 98245,
+      "sha256": "0edb1b1f459763cba6c16eab9f29030ed128e0722dfc8dee41bdaa440f8045e2"
+    },
+    {
+      "path": "output/workflow-grant-confirmation.png",
+      "canonical_bytes": 61186,
+      "sha256": "6c6e74af0b6026c412895704f288d58373debb14a2343c6c922252756ba47ead"
+    },
+    {
+      "path": "output/workflow-inventory.png",
+      "canonical_bytes": 91874,
+      "sha256": "29ecb41e70bb13c2ab8b093f2e2ef42e782e56acb141babf9bd97e29ca6ee265"
+    },
+    {
+      "path": "output/workflow-mini-narrow.png",
+      "canonical_bytes": 41001,
+      "sha256": "19dda7f4660b1d2a52c21ec541de1b72e20e32865d11552c01cf343fe0c89728"
+    },
+    {
+      "path": "output/workflow-preview-qa.html",
+      "canonical_bytes": 285366,
+      "sha256": "732711c9abff611889f53efe6c301577bd149de147ed0cef5d75f15f6d36bce9"
+    },
+    {
+      "path": "output/workflow-scanner.png",
+      "canonical_bytes": 64094,
+      "sha256": "338ca05699c6d4715f0ea53ebdb88b2e2876504e3cea3cc5a61a90fe46f3f4b9"
+    },
+    {
+      "path": "output/变频器租赁与电机监控平台完整设计说明书及方案策划_V3.0.docx",
+      "canonical_bytes": 3426741,
+      "sha256": "b6c3ffbf367d0724277fed59f17db49188d6fdf139eceeeb45374026142c20d4"
+    },
+    {
+      "path": "output/变频器租赁与电机监控平台完整设计说明书及方案策划_V3.0.pdf",
+      "canonical_bytes": 2244649,
+      "sha256": "8211229a9de37ae7d57c94704c1b49024095acbb79d46483e8bc8885bf345af1"
+    },
+    {
+      "path": "output/海南省电机监控与小程序远程控制建设方案_V2.0.docx",
+      "canonical_bytes": 7411612,
+      "sha256": "114ff4a0f111efb51ed8bc0bcf734b5c1828cae59a16e767ca2ec8dd8769c3b6"
+    },
+    {
+      "path": "output/海南省电机监控系统一期建设方案.docx",
+      "canonical_bytes": 7391243,
+      "sha256": "5efb50e0696d94c4ee210cd0e8284b2dd1b8b1944f7f818a398381d9a6a64f33"
+    },
+    {
+      "path": "package.json",
+      "canonical_bytes": 586,
+      "sha256": "8bb24b77d17f12fb62c39202000e3c0e560e8de5f084ab8a1300cb6a96ece355"
+    },
+    {
+      "path": "polish_design_spec.py",
+      "canonical_bytes": 1018,
+      "sha256": "254b8931e8d58dc609d0df0d975947aabdef488bb0da2c9e390206fd776c1da3"
+    },
+    {
+      "path": "prototype/README.md",
+      "canonical_bytes": 1448,
+      "sha256": "a478e059080b264f041d9401f42c22251b99d2636f6a11c7899d9f63651375dd"
+    },
+    {
+      "path": "prototype/build_workflow_preview.py",
+      "canonical_bytes": 2741,
+      "sha256": "96551c2340cb10df0bccc78dc342e64bc3c6bebf32fa27870436fc248f3afba5"
+    },
+    {
+      "path": "prototype/check-income.cjs",
+      "canonical_bytes": 4699,
+      "sha256": "ad083f61b020d5a0f18444b8bbe275e3449d0b9fb54a81838582185d6b43cd35"
+    },
+    {
+      "path": "prototype/check-mobile-inventory.cjs",
+      "canonical_bytes": 5671,
+      "sha256": "59e2c73c3f762f990cdc6a3f220e22d541e25adddab975ca6c8330facebf3e30"
+    },
+    {
+      "path": "prototype/check-reports.cjs",
+      "canonical_bytes": 4902,
+      "sha256": "53953d2169481b1450c3c3721e5cc1f8755b6b2cf665d676eb407b395daa13f5"
+    },
+    {
+      "path": "prototype/check-user-backup.cjs",
+      "canonical_bytes": 4900,
+      "sha256": "41ee92432b72fcd1aa9b8f1ff8193fff477a7caa86c9bb024e362a42c550fe39"
+    },
+    {
+      "path": "prototype/check-workflow.cjs",
+      "canonical_bytes": 10663,
+      "sha256": "06bc6c229e502994ee050463b2f4321c03a42048c1162b6ef859d8a0e09ace50"
+    },
+    {
+      "path": "prototype/income-controller.inc.js",
+      "canonical_bytes": 5328,
+      "sha256": "b2b7b7ef7a2ba75faf3fe3347cd06f86854bb8a4de7d68135dae8ae65b8f2c03"
+    },
+    {
+      "path": "prototype/income-model.test.cjs",
+      "canonical_bytes": 2681,
+      "sha256": "71ab57d91593c8fee1853e4e8fe028531536d216aed56e65a17d304babfcc5f6"
+    },
+    {
+      "path": "prototype/mobile-inventory-controller.inc.js",
+      "canonical_bytes": 11270,
+      "sha256": "f7cf6f90b3f52c314647e96be46e45a4bb36fa4566325b630e96e73f3e40a03d"
+    },
+    {
+      "path": "prototype/mobile-inventory-model.test.cjs",
+      "canonical_bytes": 1940,
+      "sha256": "ff6e92e1a63b1657303ab432d82cdbeaeaa4b745eae69e8bad71c147d845cd18"
+    },
+    {
+      "path": "prototype/previews/inverter-admin-preview.html",
+      "canonical_bytes": 40005,
+      "sha256": "4bdc15f0e96143fa9f662601ada80acf0cc15085608fd78a7f9d0de8b195d761"
+    },
+    {
+      "path": "prototype/previews/inverter-mini-preview.html",
+      "canonical_bytes": 39385,
+      "sha256": "be5c4d5c8c326613104d52baea4fcfd28d1c1ed6778763b087289eb60f3332a0"
+    },
+    {
+      "path": "prototype/previews/inverter-rental-workflow.html",
+      "canonical_bytes": 162453,
+      "sha256": "5dff2b0173abfce35a191bff30a74fcc34550639e3b58e3905757d5af0b4a205"
+    },
+    {
+      "path": "prototype/reports-controller.inc.js",
+      "canonical_bytes": 5491,
+      "sha256": "49d1d66cb1662c1eadad06b09448dffc18b0f523c3889953d8bb2e742625b14c"
+    },
+    {
+      "path": "prototype/reports-model.test.cjs",
+      "canonical_bytes": 1973,
+      "sha256": "9b95b8ef9c0de19875517eaa063097f4e0d7e96a95b7d922ad1be566d9596c44"
+    },
+    {
+      "path": "prototype/sms-interface-contract.json",
+      "canonical_bytes": 882,
+      "sha256": "8405b2668904a07f822413c5fe487c810206e3ad0921b6e0aab2671669735ce0"
+    },
+    {
+      "path": "prototype/unified-theme.css",
+      "canonical_bytes": 1093,
+      "sha256": "0ad8e4e29a8f3ab0484861146c3d28b59315836a5f22e4806e4b55310133daf2"
+    },
+    {
+      "path": "prototype/update_income_forms.py",
+      "canonical_bytes": 1928,
+      "sha256": "77cc7e9a5efaf414a67d6935f5e624274dc23e07f0ddc94f9821d00906645022"
+    },
+    {
+      "path": "prototype/user-backup-controller.inc.js",
+      "canonical_bytes": 11170,
+      "sha256": "c53c95cfae3cc4f429b50d2d9cfe24e9da8d5b68c5eceb3eb3b9cd585789e9ad"
+    },
+    {
+      "path": "prototype/user-backup-model.js",
+      "canonical_bytes": 5957,
+      "sha256": "bdf91350939a9b22572b9a70c05c8ab17a6c096778f99a8c3ace7f1dd95e9b5d"
+    },
+    {
+      "path": "prototype/user-backup-model.test.cjs",
+      "canonical_bytes": 3401,
+      "sha256": "d262fbcb773d98bca3aa964bbe50d40339dd8dc502e091787836d70e5f632d5d"
+    },
+    {
+      "path": "prototype/workflow-controller.js",
+      "canonical_bytes": 54397,
+      "sha256": "9eaaa025bcc7df5aca2750bf72c5ca747a09d2d5b00d25772fb78050acb27faf"
+    },
+    {
+      "path": "prototype/workflow-extra.css",
+      "canonical_bytes": 14907,
+      "sha256": "3b2e94d5dc4f0cc9130962059e2f7f14fab51acde0c98424e15276e34c660c40"
+    },
+    {
+      "path": "prototype/workflow-model.js",
+      "canonical_bytes": 17725,
+      "sha256": "4e5e74225c49c43c7495a371f4634325f830f2d9cc22fac0d75502670fd0c54a"
+    },
+    {
+      "path": "prototype/workflow-model.test.cjs",
+      "canonical_bytes": 5033,
+      "sha256": "85ebe9c4720118fa16b846f441290039a78ce5e8dd6c5edb1a171e98c596eb5e"
+    },
+    {
+      "path": "prototype/workflow-shell.html",
+      "canonical_bytes": 916,
+      "sha256": "f262704551ed247d9f429675092d8f043bd905a343aa3c6384bce68d13eaa89f"
+    },
+    {
+      "path": "reference/README.md",
+      "canonical_bytes": 748,
+      "sha256": "aba96a78e4ee34ca74876a30f37fd27568c2582ffa59e46e7d5e0416b5f489a3"
+    },
+    {
+      "path": "reference/preview.mjs",
+      "canonical_bytes": 976,
+      "sha256": "3406b379ab64eb9333cd31dfd00bd01da1e7d1f568335bb6a3123c05da60510c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/.dockerignore",
+      "canonical_bytes": 974,
+      "sha256": "99f9ad03f72e48eaa87a895d6896c2e2cd5d22bb3f7a52da2201a4f237265f83"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/.env.example",
+      "canonical_bytes": 1220,
+      "sha256": "87fc4b203cd8ad61e8453341a9855588920ba188e2d1ee753bf436a425773ddb"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/.gitignore",
+      "canonical_bytes": 1143,
+      "sha256": "20680fb3cc476be41a924d05a239a41dab8a63a949819fc7f4c2f53713d3c1ba"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/Dockerfile",
+      "canonical_bytes": 3483,
+      "sha256": "800f78f39243947d6a22cff7648ada3adc6867bb69f2bfd801ec5ed4bf7d728c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/Makefile",
+      "canonical_bytes": 10186,
+      "sha256": "334995254fd9c73784d48fb460dc426381a7e029044f26d4b1876a8a704c0d16"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/QUICK_START.md",
+      "canonical_bytes": 11631,
+      "sha256": "9bed74c98dc50626024f09a053f4966481d10f272d2a29882fb40e80eab1f07a"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/README.md",
+      "canonical_bytes": 43335,
+      "sha256": "6e3682c3e0e97e53eaaec6ba837db3795751c0b2b31cfaaf2529fd97c23835ff"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/cmd/consumer/main.go",
+      "canonical_bytes": 4531,
+      "sha256": "016b957f37ea6e3f4ec6bc50d4175f5bad85951c49da1ed68f17028b23f8d2e5"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/cmd/producer/main.go",
+      "canonical_bytes": 6518,
+      "sha256": "7ef0b75806c9044c6a7e0971cb52e5d40e53f36c63185b50bb5da053aca34241"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/cmd/web/main.go",
+      "canonical_bytes": 12758,
+      "sha256": "440210843e691dfe51dbfc74dd490166ea409cdaa1ebc0c65c35f531a6676ae8"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/cmd/websocket/main.go",
+      "canonical_bytes": 11346,
+      "sha256": "eac657a7558680d9244e01d24a878383f9265c81ea6e6d32be9f9d3aab5091b8"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/configs/development.yaml",
+      "canonical_bytes": 3899,
+      "sha256": "90634a2bb3fd0970b5259c85ac52e170da17d92e7a087711155b26a282443a9d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/configs/grafana/kafka-consumer-dashboard.json",
+      "canonical_bytes": 14512,
+      "sha256": "d2d8c6084aeecfc10747a0e7ac8d1501e6cd24365174d1ff6ae3af07c86ee5b9"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/configs/production.yaml",
+      "canonical_bytes": 3328,
+      "sha256": "a5a8fe1b683806bad34132c24183396fbbcf8aecd338db73192ec4674164a640"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/configs/testing.yaml",
+      "canonical_bytes": 3451,
+      "sha256": "6be057221fbbda8c655b631a026c7308cdd169831e2a99f1f6bd0cb57b8e7bdc"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/deployments/prometheus/prometheus.yml",
+      "canonical_bytes": 1427,
+      "sha256": "64a9fdab1205b23e2e13575433ec139324048baba99b67da8e3ad5d83bfe3677"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docker-compose.test.yml",
+      "canonical_bytes": 3633,
+      "sha256": "56dc7572cbcc296b489d7313f36f7f07d7bb66cf647cb3086edb987ae8e76d7d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docker-compose.yml",
+      "canonical_bytes": 5888,
+      "sha256": "f292d18be1391c42f8f2c75a2312dfc29ff274ffbd1a3ff4681aa58af506128d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docker-examples.md",
+      "canonical_bytes": 5999,
+      "sha256": "fc4a999d2e4e25c34615b36a28ce6dd5d5eac2737bd012be87018cd67800ec14"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/dockerignore.txt",
+      "canonical_bytes": 531,
+      "sha256": "0ecf7a44111aea71231d76d63d4fabd7b77817982e62f469f020dd189db6db13"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/API_REFERENCE.md",
+      "canonical_bytes": 10372,
+      "sha256": "b60687d7efe3cf0e8673e6a826f6f074df195414a7e3a00e3087f4fa44eab662"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/DEPLOYMENT_GUIDE.md",
+      "canonical_bytes": 9206,
+      "sha256": "9cb9f3d2f719338782cc702dcd676835347ee1bedf2e137b6855bb5884c7ff6f"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/MIDDLEWARE_DEPLOYMENT_GUIDE.md",
+      "canonical_bytes": 10070,
+      "sha256": "8a4d466beeb2a4103403e85dc6f1f6a97086c504542cf619c5eecc9661b0bc98"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/OPERATIONS_MANUAL.md",
+      "canonical_bytes": 11411,
+      "sha256": "8c5ed85ff18e04c776edcf34a8ae3d552c0c86503ddbaa62ddfda681317567e0"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/step-by-step/1.1.md",
+      "canonical_bytes": 28910,
+      "sha256": "993c3c07291e65fd428939dacb0a4a7744a9ba5ff4478214a76d923e5d48b09f"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/step-by-step/1.2.md",
+      "canonical_bytes": 11820,
+      "sha256": "28522e515d6924063713f25741261d6b0171fe4fe9f1eca43f0225aedb7b750d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/step-by-step/1.3.md",
+      "canonical_bytes": 20800,
+      "sha256": "44e3553228354cbc5b5e90b5974cba3d97872f8ef8c3714397e73d6ea62494c1"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/step-by-step/2.1.md",
+      "canonical_bytes": 35021,
+      "sha256": "d9d2ce064f306ab28bf5f226dbf900ab6d522d6041dd461736346a7e87a622c4"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/step-by-step/2.2.md",
+      "canonical_bytes": 11375,
+      "sha256": "7d92bca8ad6a45c44cb200362fc2eec52b3eb66ab6573570710a060e95bc6e60"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/docs/step-by-step/3.1.md",
+      "canonical_bytes": 29562,
+      "sha256": "30f6cb9666cec4cbda2e1d48aeda8de732b5c1cda2cf233366b8627b3d5374ec"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/go.mod",
+      "canonical_bytes": 3217,
+      "sha256": "d0885683747681611fffb86ae1e6ae17f524a2cd9ae933646f924058388d9e80"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/config.go",
+      "canonical_bytes": 13684,
+      "sha256": "37b5d0129ea983c5035a70c44150734ce7d13a412e777fe747b6b852b53abb1e"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/custom_validators.go",
+      "canonical_bytes": 8555,
+      "sha256": "5580f32da1bcb50c32e1c3f7888f52ef54a301ff7e046ebf3d8cce53bd4d26cc"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/defaults.go",
+      "canonical_bytes": 5616,
+      "sha256": "f63976a7bd9fdd403e1bb2379bb027ad80f47f36aca36cbf47b43273a61056a5"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/environment.go",
+      "canonical_bytes": 9621,
+      "sha256": "521e019315ef29c51f1009eaeaa1302161f16333b21d5bf6c340bad4d3ea957f"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/errors.go",
+      "canonical_bytes": 8087,
+      "sha256": "26662cb2de9da940098521b7b1a4b4e0f956a620bdef69f78689d0e067d2a137"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/loader.go",
+      "canonical_bytes": 21929,
+      "sha256": "f3c12bd1aa592affa5fe45a5843d29032f3a96f0f450526f0c85f12a107f2aa4"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/types.go",
+      "canonical_bytes": 3237,
+      "sha256": "c9b4ad49adbea0153ed6058f68f671a1f18cf7d3c000228315c910cbe6616895"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/validator.go",
+      "canonical_bytes": 14591,
+      "sha256": "e873d2032c78a0e035f459d111c2f879828385e77e7a09852273d12279d9b7bf"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/config/watcher.go",
+      "canonical_bytes": 1548,
+      "sha256": "3952b03cd1ad0e997fdab002b05935108b4823d60e024b3802c686b0b00be561"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/alert.go",
+      "canonical_bytes": 13255,
+      "sha256": "557a5302b8d87c5abc652a134a35eb46fd181d97850121f3603b6d2635f1c7d9"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/alert_manager.go",
+      "canonical_bytes": 13501,
+      "sha256": "c4f8f2e3a60bc5faa27fd08a5006ffe4224b02ca15afda00e8388a349ead16c0"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/common.go",
+      "canonical_bytes": 4771,
+      "sha256": "ea471230db71f311a57e29eef92f6f4aead5deeb4ae1baad2e13578250cf2f2b"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/device.go",
+      "canonical_bytes": 7470,
+      "sha256": "a0f8830a340c9bec81fa6750563cbb6099e9943f567c3ffa610844328485191a"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/interfaces.go",
+      "canonical_bytes": 6448,
+      "sha256": "9df7cd1406dc0c48c4622412af45244cedc385fe697dda407d64cc41346730c1"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/message.go",
+      "canonical_bytes": 10957,
+      "sha256": "716054eb52981c1a74e858ec62d4342bc4963204c5b0cbaebb1210bcf7ca0953"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/routing.go",
+      "canonical_bytes": 15631,
+      "sha256": "06568bc6f450b6d2c7f85203ee53f47e05fbb14bf132a23a7b2233a4c5d67014"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/sensor.go",
+      "canonical_bytes": 12516,
+      "sha256": "d9c9fba3ee05d5c6e28a86d4c3293e65880da7f0acfa49b88b67e464bc23a36a"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/models/validation_system_new.go",
+      "canonical_bytes": 14415,
+      "sha256": "95b049e0413c098c0063d53bc02b5c613c5bd6c0bcf9e8abd37e8fd5a2963126"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/batch_processor.go",
+      "canonical_bytes": 13660,
+      "sha256": "a270c16eb72b92e6c11da2853c6bc3df7062d5a2b591a5c1f800c857eeaf1bf0"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/config_watcher.go",
+      "canonical_bytes": 12399,
+      "sha256": "ad812b72202d42d9aa3e4ed7b430e1eaf1e62898e0edeb117f24307c881aa226"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/connection_pool.go",
+      "canonical_bytes": 15325,
+      "sha256": "4c551a77319df4450b3a653c6927a341bdbe4234e68e0ce84452cadae3b639dd"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/device_manager.go",
+      "canonical_bytes": 12745,
+      "sha256": "19d9ef872636f5feec7603390ecfbfae2264ee0abba574458ee19eee01368adc"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/device_simulator.go",
+      "canonical_bytes": 13853,
+      "sha256": "802021e4276f5ac3372480f21e5ff6979b510c0d2a3f92e84a7d1e29981c7fca"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/enhanced_producer_service.go",
+      "canonical_bytes": 13600,
+      "sha256": "0bc3862b1cd27e096ef82a97027c518cf2ad77f0b687e5aec9bc9e5644441059"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/error_handling.go",
+      "canonical_bytes": 6391,
+      "sha256": "66703bd4817fe31489aa024efeada360cce5abe5a1c6d5e2fd419f785301cf1c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/flow_control.go",
+      "canonical_bytes": 8093,
+      "sha256": "bc42613756fddca217b648cd462cdd3dfaa483f717826705fae59d21bcc5391c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/health_monitor.go",
+      "canonical_bytes": 14407,
+      "sha256": "e7228155c784be61bd997aa504c4479a0e69f43bd4a602357ab35d36e0a5d003"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/kafka_producer.go",
+      "canonical_bytes": 10747,
+      "sha256": "542176db591174bac59dc1aa09f194688d2a54f92d0c8b64323ec65c5be4df1d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/metrics.go",
+      "canonical_bytes": 13610,
+      "sha256": "3033c8861fac63224fdfd443059d5d39ec6d0b09ad2ff862db2c6288201d60f0"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/partitioner.go",
+      "canonical_bytes": 2969,
+      "sha256": "8eb0a4113efd95e409b1ccde606a58704b8e355ae53608ee438f48b222826a2c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/performance_optimizer.go",
+      "canonical_bytes": 7940,
+      "sha256": "9cc040c1ce62397b6da6cfb3ced4a2d93f20ff0c13ad478ed9b40d796967dd20"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/producer_service.go",
+      "canonical_bytes": 9243,
+      "sha256": "a4bede29411782c3d650b712e49142579c06a18f83fe0029fd2b9f37d965eeb5"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/smart_data_generator.go",
+      "canonical_bytes": 9949,
+      "sha256": "19f88a0b6c84ec935db8755a776848619b9a56b25954f8be047b08fd40a845be"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/producer/worker_pool.go",
+      "canonical_bytes": 12182,
+      "sha256": "0cefd621aa589b7ba8d1e8d43fac08e4f97d1594b9a06ae10dcd68b4a4c2e8f9"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/config_manager.go",
+      "canonical_bytes": 12696,
+      "sha256": "e437bbfe28107e394ced7de60fe9457c65428ee8c61c7574acfcb1dd0473ea4d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/consumer_group_handler.go",
+      "canonical_bytes": 15206,
+      "sha256": "cf5a36dfd2b52d3a2b24cd2eae606794172af33f8c75d5bf8989fad7ed521e61"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/consumer_service.go",
+      "canonical_bytes": 17751,
+      "sha256": "9e7348640625aa524c60ba8e4fc38b6155637561deba6917a7f60469712fb563"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/error_handler.go",
+      "canonical_bytes": 12363,
+      "sha256": "00f08a9c0d8fa3127abf550d8aeecacf654c9adebf0ef5ed999c51a477999740"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/kafka_consumer.go",
+      "canonical_bytes": 9042,
+      "sha256": "b0f1caeb2de46f6d13f45805cf78200f58c2556752fd30f91fb28cede279f082"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/message_processor.go",
+      "canonical_bytes": 13711,
+      "sha256": "5246c8b4f62f0fab1d8b9ba0d1e211917a661d1da06e5e73c4298db07ddc4313"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/prometheus_metrics.go",
+      "canonical_bytes": 11097,
+      "sha256": "8925953bff3318b572a28a348b0bc1ac2b629f4194d184c48508913b0153508e"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/consumer/websocket_processor.go",
+      "canonical_bytes": 7236,
+      "sha256": "2554acafe36fe0bf20c144bf1723c40b5e0f4cced295ba3117429aa7dc2dabfc"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/websocket/client.go",
+      "canonical_bytes": 11565,
+      "sha256": "978ba66adbfddd11ebb41ac682cc9d7f5b8fb04464134637d69091ee7fa75e3f"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/websocket/data_pusher.go",
+      "canonical_bytes": 11931,
+      "sha256": "bc7ea0a60c5f7b8f8a7a345d1c8d0bac55e8e7d97dcc797d720a83a2e359cac8"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/websocket/errors.go",
+      "canonical_bytes": 1523,
+      "sha256": "3a9e3e50579f94ce8a56442135b7129251a94a4b6843b179e0f1c97f9887dd71"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/websocket/hub.go",
+      "canonical_bytes": 14209,
+      "sha256": "a164671fb2664db41bc9575a3e5cd5fa00410fad95bedbebb30da6a083e031fa"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/websocket/message.go",
+      "canonical_bytes": 11689,
+      "sha256": "3957b4a0898fffc9684f23f77504e9bf0d30e0eb1bdbbd38e0bb2440de8315c6"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/internal/services/websocket/server.go",
+      "canonical_bytes": 11397,
+      "sha256": "3c7317a9808a29a31008196ae31d3d440ff8e28167eba63de88dafb5ac2072a1"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/k8s/configmap.yaml",
+      "canonical_bytes": 2000,
+      "sha256": "ddfc2c6f445150e3aed44425637db996a22cf82a7ad47d731291ad19ce1a8666"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/k8s/deployment.yaml",
+      "canonical_bytes": 3911,
+      "sha256": "f6dfa36054d633cba6ed50c8e32f68b906a13519e8fbdf455882cf58f1ca28a5"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/k8s/hpa.yaml",
+      "canonical_bytes": 1090,
+      "sha256": "b1ae35d6d672c727940ef925927ae29b02120a6fb56267cf954b0b6d74389690"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/k8s/namespace.yaml",
+      "canonical_bytes": 160,
+      "sha256": "3cd4f76dae444bf9bba666ae2e89a426fd47a6f0292b4f57cb4fe744fb863f6c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/k8s/secret.yaml",
+      "canonical_bytes": 700,
+      "sha256": "00a82d0dbb944dfe2e8f82ac05e971cb118ede25e27026240821eb496ad2433f"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/k8s/service.yaml",
+      "canonical_bytes": 1004,
+      "sha256": "85f6803947f88ad5b09edadd5af79464d949754e181779a077834d57a28f5d63"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/k8s/serviceaccount.yaml",
+      "canonical_bytes": 887,
+      "sha256": "fe38911dd137e31b125f55632fb91022fb630ab4f97d9db3e03bc6f2325d90b1"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/monitoring/grafana-dashboard.json",
+      "canonical_bytes": 7368,
+      "sha256": "a9e0bce7c2991d20765f8e0a8c622958d21fa2439b7f70359db42368fdae658f"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/monitoring/iot_producer_rules.yml",
+      "canonical_bytes": 3768,
+      "sha256": "cdbbc35662cdb1db10430f544d0b999d073547d488a826c370c709dddac39527"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/monitoring/prometheus-config.yaml",
+      "canonical_bytes": 2177,
+      "sha256": "73420c3932d6da9f20f07ba6fcd47b3b78852df512b841aca3c32944944b726e"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/scripts/deploy_middleware.sh",
+      "canonical_bytes": 11154,
+      "sha256": "5c5f77820b66b779dc6206e0e8073c24c49081996cfa67ee3c2112b5addd044d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/scripts/full_deployment.sh",
+      "canonical_bytes": 9476,
+      "sha256": "92b4984eae77f3c47812decb6813a6002c9826403aa3493a319e31aca86a7617"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/scripts/init-db.sql",
+      "canonical_bytes": 3912,
+      "sha256": "001a298a11e93015d944d09fe1e6335a0f4ac2fa0acea192665e97cf1892aeb4"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/scripts/start_consumer.sh",
+      "canonical_bytes": 237,
+      "sha256": "52adce764c61a7596aed11416ca14d8b128225850284af65f6d84db8a1ec1461"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/scripts/test-docker-build.sh",
+      "canonical_bytes": 3548,
+      "sha256": "96076e4e4f752f87e7355e858304782f3e0e59bd9c0f6d8aae317b2d551b8500"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/scripts/update_config.sh",
+      "canonical_bytes": 8781,
+      "sha256": "ee407ddb7f3056f7da78e38b412ae3be77a266f1bf47d0f8344cbf39ea5eb2db"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/status.html",
+      "canonical_bytes": 3738,
+      "sha256": "5a4d4a72933b5b23bef35614c6344831ccd91b43cb457a5086fa66937fec55b0"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/test-chartjs.html",
+      "canonical_bytes": 5133,
+      "sha256": "3c3afa184c52e27b48a293cdd0a393bf9deb08802eec553cff35d59f9ddfa68b"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/test-websocket.html",
+      "canonical_bytes": 6212,
+      "sha256": "6f0b7a5b1c61b730e981469c4d170392b980a7c067da02bf35a33d58ec9d07dc"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/test-ws-client.html",
+      "canonical_bytes": 12113,
+      "sha256": "7de91960475ff71971e244b7a0259236fb29b238f56dc6788dead746df1a8ba1"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/config/config_test.go",
+      "canonical_bytes": 8582,
+      "sha256": "0c964514779247f477bc43d075106d83adc7f8176427f925879d45410ac57f41"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/consumer/prometheus_metrics_test.go",
+      "canonical_bytes": 15029,
+      "sha256": "6dcee8bd6d9c2dc82734474fe774173d55dfd1eb94b2e725d77cad9ef7cddf43"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/consumer/websocket_integration_test.go",
+      "canonical_bytes": 10102,
+      "sha256": "3a9fbc807d668c49e35998ebc4fb1371b238b4fcd5966b7a3892020ba49d9bf2"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/e2e/end_to_end_test.go",
+      "canonical_bytes": 10979,
+      "sha256": "0559733c1f2ff6be60c2d67d5d8f5b5304d3792ff67b1ad19e4b3f8f72833a48"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/alert_manager_test.go",
+      "canonical_bytes": 10984,
+      "sha256": "75381ab99c2b2cebb95787c6ca27a18b92e40f9f62c52e9dc11baa713458967d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/alert_test.go",
+      "canonical_bytes": 17740,
+      "sha256": "fc1eae9204f8c13ad6ba4968c6519af4e13ff8d42ff21ccf45d2af0caafd88e1"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/common_test.go",
+      "canonical_bytes": 7348,
+      "sha256": "4b9047beed85c7115e88873b89818cd77b49e8db616fe5cfff8321bf931c50e7"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/device_test.go",
+      "canonical_bytes": 8634,
+      "sha256": "18153770fcdd30739a7a5c04e308fa335501f53a062109bbc9319db2a998c40a"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/message_test.go",
+      "canonical_bytes": 17737,
+      "sha256": "a8cca5ec9784f18bd06c78e73a401c4ee5ae9a20a1eb1bb7c6c43fb66539188c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/routing_test.go",
+      "canonical_bytes": 16860,
+      "sha256": "b72f0eb62309927bbd7ec879d3b6622d1ce3e76e124c8483ef34cdaed6060b8d"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/sensor_test.go",
+      "canonical_bytes": 11987,
+      "sha256": "dbbda1aa0c7257176ae270aef32e3034420fa8fcb8c0604f0334a9da961de33c"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/models/validation_system_test.go",
+      "canonical_bytes": 9720,
+      "sha256": "2b713bc2c25cf70b65da6aa323d863cf62ce1e5d26bb9254509e042697039571"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/batch_processor_test.go",
+      "canonical_bytes": 12902,
+      "sha256": "62f1c58962183fc29a7aef1dcdd707d658769431752910f1cb0bbf74abcd2076"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/benchmark_test.go",
+      "canonical_bytes": 5649,
+      "sha256": "065ffba8a202b100736e7b7171ca186e1df9b5d0a0d44c963d698b79669a55b4"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/config_watcher_test.go",
+      "canonical_bytes": 13064,
+      "sha256": "397c3c4b563461329703556eec85cc01ce48942b720fd5eddc8b01e422b1d3dd"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/enhanced_producer_service_test.go",
+      "canonical_bytes": 14162,
+      "sha256": "00a36832d8638d2d0d652c8826ceefe9c33e8e8e003f8a8f5729de85c34bd212"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/error_handling_test.go",
+      "canonical_bytes": 9268,
+      "sha256": "22180f1c07e89574c61c6d481cb745de8ea83f72f450bda7ade862dc43249050"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/fixed_components_test.go",
+      "canonical_bytes": 8861,
+      "sha256": "75eb62c93f07f61477cca7dbd704d247c71cae4279aa6e83663b33c0920de88a"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/flow_control_test.go",
+      "canonical_bytes": 9502,
+      "sha256": "be16badbebb97f17e666020809c1ee5cb8afb14f6ae63c65550bc2cf37520cc0"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/health_monitor_test.go",
+      "canonical_bytes": 13044,
+      "sha256": "2d35d8fae155a0ecc22e57442d42c4756cc72365406026f6be55e9212bbd2110"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/integration_test.go",
+      "canonical_bytes": 6714,
+      "sha256": "ed571fd95cf653cf7aa427ade1b8856682197f4d2657d20bba09cb06d5384767"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/metrics_test.go",
+      "canonical_bytes": 6826,
+      "sha256": "83ae41f9922f304212127865aac9bc010f779a570ee1acc7b74d6581e98e5154"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/partitioner_test.go",
+      "canonical_bytes": 11562,
+      "sha256": "16893986072d6188ee5e7e60e2ee3b9c3b5e407a3f52abca9936ef5e8dfb5fab"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/performance_optimizer_test.go",
+      "canonical_bytes": 11414,
+      "sha256": "6979fed1dd6ce8d6a753d3ae0212b4701b38f9eba7b824d7c8a75b8712874021"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/producer_test.go",
+      "canonical_bytes": 12000,
+      "sha256": "15824192ba9b2b7040c93de4e87836a48ff070fb7f0d66f7a3770a7a06e7ff21"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/simple_third_stage_test.go",
+      "canonical_bytes": 7343,
+      "sha256": "c51bf1e5f9caeeb3b88b3131c8facffd6d5bfe017601cb10debad297c3719eae"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/smart_data_generator_test.go",
+      "canonical_bytes": 9372,
+      "sha256": "393431dcd46404ff6fe45690a53d9eb001d0bafb5a43036924bc94bffe6c7bb8"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/standalone_core_test.go",
+      "canonical_bytes": 13255,
+      "sha256": "f7d3f1f076d90bf5552ed517d9dbcfc9b9e8cbf0ae5e4799c45f07834c68da56"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/test_results_summary.md",
+      "canonical_bytes": 6661,
+      "sha256": "bc2feec814b0129787d3fdd7703e4a2d7b08947e0d98c3564a6c6cdebcd1dd18"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/worker_pool_test.go",
+      "canonical_bytes": 10604,
+      "sha256": "a967fb596eb7f3d80e5ad2cce87ffd84021d46738b0319de715c91ea0460131f"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/producer/working_components_test.go",
+      "canonical_bytes": 8150,
+      "sha256": "7d7d2b1229683e6d98948885b8ba03bfe7e8a7cec854b931cc7d71196ac76fef"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/tests/unit/producer_test.go",
+      "canonical_bytes": 2384,
+      "sha256": "e06447a95c30af39f5b9519466a5e13c392e4cc1d5085fd2a613733948b43934"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/css/dashboard.css",
+      "canonical_bytes": 10310,
+      "sha256": "82d7f027fb1ea2166a418b1a88969d2e5adcfbfafdc33d3cc15941217e090e45"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/css/main.css",
+      "canonical_bytes": 2990,
+      "sha256": "a87b902b78440cbc9f93d8e6936fc3be6925a9f5e876d40a0a8d6ff201f8c255"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/charts.js",
+      "canonical_bytes": 15119,
+      "sha256": "48ec4368451002f665dd38f2480f2d8f83d4f14f38dd7b3a8e519d5c12101c50"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/dashboard.js",
+      "canonical_bytes": 18994,
+      "sha256": "de9495c556a627eae18624ac40cde132860c4b527e3cf53b73a1516c45d2dde0"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/echarts-aggregated.js",
+      "canonical_bytes": 12238,
+      "sha256": "fd594e9a5add054b95a76ed87915f3ca95e1630d2c7a5d8a2ab50b8d11d95a73"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/echarts-charts.js",
+      "canonical_bytes": 14795,
+      "sha256": "49162c0629f5c0d1739cab3b97f0c791fd3c4b5cf14869e9a0cee68aed48a5ca"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/echarts-heatmap.js",
+      "canonical_bytes": 12358,
+      "sha256": "0b2fdf29465ba78ce84ecb3987d5185645f1e2d22f3eb629038e5ba96723b817"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/echarts-selector.js",
+      "canonical_bytes": 10847,
+      "sha256": "e94aa7ed578362ef3da8015c990bf2253eeda9c858220c46dd3b0cf7023c4501"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/main.js",
+      "canonical_bytes": 4411,
+      "sha256": "6b61456c60759ca357c9ed645cdc417a3b99df2dca9bed6119c71d2855afbe89"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/js/websocket-client.js",
+      "canonical_bytes": 13177,
+      "sha256": "a3206f97f2e42d872d673fe5ae3647c4c771b382fb820b006de0fafc74ab7892"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/libs/chart-test.js",
+      "canonical_bytes": 1024,
+      "sha256": "96e94466ae404933fa71f5fb70b2d24fd811895a942de950ffa8bec0ead31fbf"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/static/libs/chart.min.js",
+      "canonical_bytes": 181743,
+      "sha256": "e291265fadaf120d33b1d00721e8907a0360b843515dca71920f5849f40c7c95"
+    },
+    {
+      "path": "reference/simplied-iot-monitoring-go-main/web/templates/index.html",
+      "canonical_bytes": 10345,
+      "sha256": "fb73d9479b685f6ec92e5e688b612a3cf3b17843da37f96cbe66d4c630e40cb2"
+    },
+    {
+      "path": "refine_design_spec.py",
+      "canonical_bytes": 1478,
+      "sha256": "4aae94f4defe65fa8a0e6441bdc8ad8c3325552255e89247610873fd602f000e"
+    },
+    {
+      "path": "requirements.txt",
+      "canonical_bytes": 147,
+      "sha256": "043d34f09b4c86af71ca276cb89257b8e41b139c85814be88edb8f2c5001cfda"
+    },
+    {
+      "path": "tools/run-tests.cjs",
+      "canonical_bytes": 1295,
+      "sha256": "e3e7474851b0457f51564c3d8634133437f0561cc76c0d55f6846f57bf2a7760"
+    },
+    {
+      "path": "tools/test-runtime.cjs",
+      "canonical_bytes": 1509,
+      "sha256": "d869fdf329338acea36ebc9a170263a41e58c45727d2382f2ee734b005e7b23a"
+    },
+    {
+      "path": "tools/verify-manifest.py",
+      "canonical_bytes": 1607,
+      "sha256": "baa2fb8631fd5a2fa6bc873ada529adb680c85e1ff2945bb7ca1294057131b3b"
+    }
+  ]
+}
